@@ -10,17 +10,19 @@
 
 <body>
 
-  <!-- PAGE 1 : CARTE + SIDEBAR -->
-  <div id="page-map" class="page-section">
-
-    <!-- SIDEBAR -->
+<!-- SIDEBAR -->
     <div id="sidebar">
       <div>
         <div class="sidebar-title">BioTIME</div>
         <div class="sidebar-subtitle">Dataset</div>
       </div>
 
-      <div class="filter-card">
+      <div class="sidebar-nav">
+        <span class="nav-link active" data-target="page-map">Home</span>
+        <span class="nav-link" data-target="page-2">Dataset overview</span>
+      </div>
+
+      <div class="filter-card map-only">
         <div class="filter-header">
           <div class="filter-label">Realm</div>
         </div>
@@ -34,7 +36,7 @@
         </div>
       </div>
 
-      <div class="filter-card">
+      <div class="filter-card map-only">
         <div class="filter-header">
           <div class="filter-label">Protected areas</div>
         </div>
@@ -46,7 +48,7 @@
         </div>
       </div>
 
-      <div class="filter-card">
+      <div class="filter-card map-only">
         <div class="filter-header">
           <div class="filter-label">Duration (years)</div>
         </div>
@@ -57,32 +59,37 @@
       </div>
     </div>
 
-    <!-- MAP -->
-    <div id="map-container">
-      <div id="tooltip"></div>
-      <div id="legend-duration"></div>
+  <div id="main" class = "content">
+    <!-- PAGE 1 : CARTE + SIDEBAR -->
+    <div id="page-map" class="page-section">
 
-      <div id="zoom-controls">
-        <div class="zoom-btn" id="zoom-in">+</div>
-        <div class="zoom-btn" id="zoom-out">−</div>
+      <!-- MAP -->
+      <div id="map-container">
+        <div id="tooltip"></div>
+        <div id="legend-duration"></div>
+
+        <div id="zoom-controls">
+          <div class="zoom-btn" id="zoom-in">+</div>
+          <div class="zoom-btn" id="zoom-out">−</div>
+        </div>
+
+        <!-- ARROW BUTTON FOR NEXT PAGE -->
+        <button id="next-page-btn">↓</button>
       </div>
 
-      <!-- ARROW BUTTON FOR NEXT PAGE -->
-      <button id="next-page-btn">↓</button>
     </div>
 
-  </div>
+    <!-- PAGE 2 : OVERVIEW / GRAPHIQUES -->
+    <div id="page-2" class="page-section">
+      <h1>Dataset overview</h1>
+      <p>
+        Ici tu pourras afficher des graphiques globaux sur le dataset :
+        nombre d'études par realm, distribution des durées, répartition géographique, etc.
+      </p>
 
-  <!-- PAGE 2 : OVERVIEW / GRAPHIQUES -->
-  <div id="page-overview" class="page-section">
-    <h1>Dataset overview</h1>
-    <p>
-      Ici tu pourras afficher des graphiques globaux sur le dataset :
-      nombre d'études par realm, distribution des durées, répartition géographique, etc.
-    </p>
-
-    <div id="overview-charts">
-      <!-- Conteneur pour tes futurs graphiques -->
+      <div id="overview-charts">
+        <!-- Conteneur pour tes futurs graphiques -->
+      </div>
     </div>
   </div>
 
