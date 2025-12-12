@@ -220,7 +220,16 @@ function updatePoints() {
     .attr("stroke-width", 0.4)
     .on("mouseover", handleMouseOver)
     .on("mousemove", handleMouseMove)
-    .on("mouseout", handleMouseOut);
+    .on("mouseout", handleMouseOut)
+    .on("click", (event, d) => {
+    // optionnel : mémoriser l’étude cliquée
+    ctx.selectedStudy = d;
+
+    // scroll vers la page Studies
+    document
+      .getElementById("page-3")
+      ?.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
 
   // ENTER + UPDATE: positionner correctement
   entered.merge(points)
