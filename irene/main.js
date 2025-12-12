@@ -56,6 +56,7 @@ function createViz() {
   // Zoom buttons (+ / -)
   setupZoomButtons();
   setupPageNavigation();
+  setupSidebarNav();
 
   // Load data
   loadData();
@@ -257,10 +258,58 @@ function setupPageNavigation() {
   const btn = document.getElementById("next-page-btn");
   if (!btn) return;
 
+  const order = ["page-map", "page-2", "page-3"];
+
   btn.addEventListener("click", () => {
-    const target = document.getElementById("page-overview");
-    if (target) {
-      target.scrollIntoView({ behavior: "smooth" });
+    const y = window.scrollY + window.innerHeight * 0.4;
+
+    // trouve la section la plus "proche" du viewport
+    let currentIdx = 0;
+    for (let i = 0; i < order.length; i++) {
+      const el = document.getElementById(order[i]);
+      if (!el) continue;
+      if (el.offsetTop <= y) currentIdx = i;
     }
+
+    const nextId = order[Math.min(currentIdx + 1, order.length - 1)];
+    document.getElementById(nextId)?.scrollIntoView({ behavior: "smooth", block: "start" });
   });
 }
+
+
+
+function setupSidebarNav() {
+  const buttons = Array.from(document.querySelectorAll(".nav-link"));
+  const sections = buttons
+    .map(b => document.getElementById(b.dataset.target))
+    .filter(Boolean);
+
+  // click -> scroll
+  buttons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.getElementById(btn.dataset.target)
+        ?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  });
+
+  // scroll -> active state
+  const observer = new IntersectionObserver((entries) => {
+    const visible = entries
+      .filter(e => e.isIntersecting)
+      .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+    if (!visible) return;
+
+    document.body.classList.toggle("map-filters-hidden", visible.target.id !== "page-map");
+
+    buttons.forEach(b => b.classList.remove("active"));
+    const activeBtn = buttons.find(b => b.dataset.target === visible.target.id);
+    if (activeBtn) activeBtn.classList.add("active");
+  }, {
+    threshold: [0.35, 0.55, 0.75]
+  });
+
+  sections.forEach(sec => observer.observe(sec));
+}
+
+
