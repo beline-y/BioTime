@@ -170,7 +170,7 @@ svg {
 }
 
 /* Tooltip */
-#tooltip {
+#tooltip,#tooltip-detail{
   position: absolute;
   pointer-events: none;
   background: #ffffff;
@@ -206,13 +206,13 @@ svg {
 }
 
 /* Tooltip content */
-#tooltip .tt-title{
+.tt-title{
   font-weight: 700;
   font-size: 13px;
   margin-bottom: 8px;
 }
 
-#tooltip .tt-row{
+.tt-row{
   display: flex;
   align-items: baseline;
   justify-content: space-between;
@@ -221,20 +221,20 @@ svg {
   line-height: 1.2;
 }
 
-#tooltip .tt-k{
+.tt-k{
   color: var(--text-muted);
   font-weight: 600;
   white-space: nowrap;
 }
 
-#tooltip .tt-v{
+.tt-v{
   color: var(--text-main);
   font-weight: 600;
   text-align: right;
 }
 
 /* Bonus: un mini “glass” look */
-#tooltip{
+#tooltip, #tooltip-detail {
   backdrop-filter: blur(6px);
 }
 
@@ -422,6 +422,25 @@ svg {
   padding: 24px 32px;
   flex-direction: column;
   gap: 16px;
+}
+
+
+.study-layout {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+    height: 500px;
+}
+
+/* Map container page 3 */
+#map-container-p3 {
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: radial-gradient(circle at top, #29407b 0, #030924 60%);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
 }
 
 #overview-charts { overflow: hidden; }

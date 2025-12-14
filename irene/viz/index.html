@@ -49,6 +49,7 @@
         </div>
       </div>
 
+      <!-- SIDEBAR page 3 -->
       <div id="study-details-aside" class="filter-card study-only" style="display: none;">
           <div class="filter-header">
             <div class="filter-label">Selected Study</div>
@@ -63,6 +64,19 @@
           <div id="study-info-sidebar" class="filter-body">
             <p style="font-size: 0.85em; color: #666;">Select a study on the map or via the dropdown.</p>
           </div>
+      </div>
+
+      <div id="year-slider-container" class="filter-card study-only" style="display: none; margin-top: 10px;">
+        <div class="filter-header">
+            <div class="filter-label">Timeline: <span id="current-year-display" style="color: var(--accent); font-weight: bold;">-</span></div>
+        </div>
+        <div class="filter-body">
+            <input type="range" id="year-slider" min="0" max="100" value="0" step="1" style="width: 100%;">
+            <div style="display: flex; justify-content: space-between; font-size: 10px; color: var(--text-muted); margin-top: 5px;">
+                <span id="year-min">-</span>
+                <span id="year-max">-</span>
+            </div>
+        </div>
       </div>
 
     </div>
