@@ -23,6 +23,9 @@ const ctx = {
   tooltip3: null,
   playInterval: null,
   zoomDetail: null,
+  availableStudyIds: [],
+  studyFiles: [],
+  measurementsCache: {}
 };
 
 // Main entry point
@@ -189,12 +192,16 @@ function setupTools() {
 function loadData() {
   Promise.all([
     d3.json("../data/world-110m.json"),
-    d3.json("../data/studies.json")
+    d3.json("../data/studies.json"),
+    d3.csv("../data/study_list.csv")
   ])
     .then(function (values) {
       ctx.world = values[0];
       ctx.studies = values[1];
+      ctx.availableStudyIds = values[2].map(d => +d.STUDY_ID);
+      ctx.studyFiles = values[2];
       console.log(ctx.studies)
+
       drawBaseMap();
       setupFilterListeners();
       updatePoints();
@@ -965,101 +972,138 @@ function populateStudySelector() {
 function displayStudyDetails(d) {
     if(!d) return;
 
-    // 1. Mise à jour visuelle de la petite carte
-    d3.selectAll(".study-dot-p3")
-        .attr("r", 3)
-        .attr("stroke", "#333");
+    // Remplissage de la sidebar avec l'ID utilisé dans votre HTML
+    const sidebar = d3.select("#study-info-sidebar");
     
-    d3.select("#dot-" + d.study_id)
-        .attr("r", 8)
-        .attr("stroke", "orange")
-        .attr("stroke-width", 2)
-        .raise(); // Met le point au dessus des autres
+    sidebar.html(`
 
-    // 2. Remplissage du panneau latéral avec un style "joli"
-    const content = d3.select("#study-info-content");
-    content.html(`
-        <div class="detail-header">
-            <span class="badge">${d.realm}</span>
-            <h4>ID: ${d.study_id}</h4>
-        </div>
-        <div class="detail-grid">
+        <div class="detail-grid" style="margin-top: 15px; display: grid; grid-template-columns: 1fr; gap: 8px; font-size: 0.9em;">
+            <div class="detail-item"><strong>Realm:</strong> ${d.realm} years</div>
             <div class="detail-item"><strong>Duration:</strong> ${d.duration} years</div>
-            <div class="detail-item"><strong>Start:</strong> ${d.start_year}</div>
-            <div class="detail-item"><strong>End:</strong> ${d.end_year}</div>
+            <div class="detail-item"><strong>Years:</strong> ${d.start_year} – ${d.end_year}</div>
+            <div class="detail-item"><strong>Taxa:</strong> ${d.taxa || 'N/A'}</div>
             <div class="detail-item"><strong>Protected:</strong> ${d.protected_area === "TRUE" ? "✅ Yes" : "❌ No"}</div>
         </div>
-        <div class="detail-footer">
+        <div class="detail-footer" style="margin-top: 15px; font-size: 0.8em; color: #666; border-top: 1px solid #eee; padding-top: 10px;">
             <strong>Location:</strong> Lat ${d.lat.toFixed(2)}, Lon ${d.lon.toFixed(2)}
         </div>
     `);
 }
 
 function initPage3() {
-  renderSecondMap();
-  setupStudySelector();
-}
-
-function renderSecondMap() {
-    // Utilisation de l'ID correct
     const container = d3.select("#map-container-p3");
     if (container.empty()) return;
+    container.selectAll("svg").remove(); 
 
     const width = container.node().getBoundingClientRect().width || 800;
     const height = 500;
 
-    const svg3 = container.append("svg")
+    ctx.svgDetail = container.append("svg")
         .attr("width", width)
         .attr("height", height)
         .attr("class", "map-svg-p3")
-        .style("background", "radial-gradient(circle at top, #29407b 0, #030924 60%)") // Même fond que P1
+        .style("background", "radial-gradient(circle at top, #29407b 0, #030924 60%)")
         .style("border-radius", "18px");
 
-    const projection3 = d3.geoMercator()
+    // Création du groupe principal qui recevra les transformations de zoom
+    ctx.gDetail = ctx.svgDetail.append("g");
+    ctx.gMeasurements = ctx.gDetail.append("g").attr("id", "measurements-layer");
+
+    ctx.projectionDetail = d3.geoMercator()
         .scale(width / 6.5)
         .translate([width / 2, height / 1.5]);
 
-    const path3 = d3.geoPath().projection(projection3);
+    ctx.pathDetail = d3.geoPath().projection(ctx.projectionDetail);
 
-    const g = svg3.append("g");
+    // Ajout du comportement de zoom D3
+    ctx.zoomDetail = d3.zoom()
+        .scaleExtent([1, 1000]) // Permet un zoom très profond pour les petites zones
+        .on("zoom", (event) => {
+            ctx.gDetail.attr("transform", event.transform);
+            // Optionnel : garder les points à une taille lisible lors du zoom
+            ctx.gMeasurements.selectAll(".measure-dot")
+                .attr("stroke-width", 1.5 / event.transform.k);
+        });
 
-    // Dessin du fond de carte
+    ctx.svgDetail.call(ctx.zoomDetail);
+
+    // Fond de carte
     const land = topojson.feature(ctx.world, ctx.world.objects.countries);
-    g.append("path")
+    ctx.gDetail.append("path")
         .datum(land)
-        .attr("d", path3)
-        .attr("fill", "#e0dbe7ff") // Même couleur que page 1
+        .attr("class", "land-p3")
+        .attr("d", ctx.pathDetail)
+        .attr("fill", "#e0dbe7ff")
         .attr("stroke", "#aaa")
         .attr("stroke-width", 0.5);
 
-    // Échelle de couleur identique à la page 1
-    const minDur = d3.min(ctx.studies, d => d.duration);
-    const maxDur = d3.max(ctx.studies, d => d.duration);
-    const colorScale = d3.scaleLinear().domain([minDur, maxDur]).range(["lightblue", "darkblue"]);
+    setupStudySelector();
+    setupZoomButtonsP3(); // Nouvelle fonction pour les boutons
+}
 
-    // Points
-    g.append("g")
-        .selectAll("circle")
-        .data(ctx.studies)
-        .enter()
-        .append("circle")
-        .attr("class", "dot-p3")
-        .attr("id", d => "p3-dot-" + d.study_id)
-        .attr("cx", d => projection3([d.lon, d.lat])[0])
-        .attr("cy", d => projection3([d.lon, d.lat])[1])
-        .attr("r", 3)
-        .attr("fill", d => colorScale(d.duration))
-        .attr("stroke", "white")
-        .attr("stroke-width", 0.5)
-        .attr("cursor", "pointer")
-        .on("click", (event, d) => updateStudySelection(d.study_id));
+function renderSecondMap() {
+  const container = d3.select("#map-container-p3");
+  if (container.empty()) return;
+
+  // Filtrer les données pour ne garder que celles du CSV
+  const filteredData = ctx.studies.filter(d => ctx.availableStudyIds.includes(+d.study_id));
+  console.log("length filtered data:", filteredData.length);
+
+  const width = container.node().getBoundingClientRect().width || 800;
+  const height = 500;
+
+  const svg3 = container.append("svg")
+    .attr("width", width)
+    .attr("height", height)
+    .attr("class", "map-svg-p3")
+    .style("background", "radial-gradient(circle at top, #29407b 0, #030924 60%)")
+    .style("border-radius", "18px");
+
+  const projection3 = d3.geoMercator()
+    .scale(width / 6.5)
+    .translate([width / 2, height / 1.5]);
+
+  const path3 = d3.geoPath().projection(projection3);
+  const g = svg3.append("g");
+
+  // Fond de carte
+  g.append("path")
+    .datum(topojson.feature(ctx.world, ctx.world.objects.countries))
+    .attr("d", path3)
+    .attr("fill", "#e0dbe7ff")
+    .attr("stroke", "#aaa");
+
+  const minDur = d3.min(ctx.studies, d => d.duration);
+  const maxDur = d3.max(ctx.studies, d => d.duration);
+  const colorScale = d3.scaleLinear().domain([minDur, maxDur]).range(["lightblue", "darkblue"]);
+
+  // On n'affiche QUE les points disponibles dans le CSV
+  g.append("g")
+    .selectAll("circle")
+    .data(filteredData) 
+    .enter()
+    .append("circle")
+    .attr("class", "dot-p3")
+    .attr("id", d => "p3-dot-" + d.study_id)
+    .attr("cx", d => projection3([d.lon, d.lat])[0])
+    .attr("cy", d => projection3([d.lon, d.lat])[1])
+    .attr("r", 4) // Un peu plus gros pour les voir
+    .attr("fill", d => colorScale(d.duration))
+    .attr("stroke", "white")
+    .attr("stroke-width", 1)
+    .on("click", (event, d) => updateStudySelection(d.study_id));
 }
 
 function setupStudySelector() {
   const selector = d3.select("#study-selector");
   
+  // Filtrer et trier les études
+  const availableData = ctx.studies
+    .filter(d => ctx.availableStudyIds.includes(+d.study_id))
+    .sort((a, b) => a.study_id - b.study_id);
+
   selector.selectAll("option.opt")
-    .data(ctx.studies.sort((a,b) => a.study_id - b.study_id))
+    .data(availableData)
     .enter()
     .append("option")
     .attr("value", d => d.study_id)
@@ -1072,32 +1116,141 @@ function setupStudySelector() {
 
 function updateStudySelection(studyId) {
   const d = ctx.studies.find(s => s.study_id == studyId);
-  if (!d) return;
+  const fileInfo = ctx.studyFiles.find(f => +f.STUDY_ID == +studyId);
+  
+  if (!d || !fileInfo) return;
 
-  // Update dropdown
+  // 1. Mettre à jour le menu déroulant
   d3.select("#study-selector").property("value", studyId);
+  
+  // 2. Afficher les métadonnées dans la sidebar (Appel de la fonction corrigée ci-dessous)
+  displayStudyDetails(d);
 
-  // Update Map Visuelle
-  d3.selectAll(".dot-p3")
-    .attr("r", 3)
-    .attr("stroke", "white")
-    .attr("stroke-width", 0.5);
+  // 3. Chargement des mesures (CSV) pour la carte de détail
+  loadStudyMeasurements(studyId).then(measurements => {
+    console.log(`Données prêtes pour affichage : ${measurements.length} lignes`);
+    updateStudyMap(measurements);
+  });
+}
 
-  d3.select("#p3-dot-" + studyId)
-    .attr("r", 8)
-    .attr("stroke", "#ff4757")
-    .attr("stroke-width", 2)
-    .raise();
+//Charge les mesures spécifiques (abondances) pour une étude donnée
+function loadStudyMeasurements(studyId) {
+    console.log(`Chargement des mesures pour l'étude ID: ${studyId}`);
+    
+    // 1. Vérifier le cache
+    if (ctx.measurementsCache[studyId]) {
+        return Promise.resolve(ctx.measurementsCache[studyId]);
+    }
+    
+    // 2. Trouver le chemin du fichier dans les données chargées au démarrage
+    const fileInfo = ctx.studyFiles.find(f => +f.STUDY_ID === +studyId);
+    
+    if (!fileInfo) {
+        console.error(`Aucun chemin de fichier trouvé pour l'étude ${studyId}`);
+        return Promise.reject("File not found");
+    }
 
-  // Update Sidebar Info
-  const sidebar = d3.select("#study-info-sidebar");
-  sidebar.html(`
-    <div style="font-weight:bold; color:#4338ca; margin-bottom:10px;">STUDY ${d.study_id}</div>
-    <div style="font-size:0.9em; line-height:1.6;">
-      <b>Realm:</b> ${d.realm}<br>
-      <b>Duration:</b> ${d.duration} yrs<br>
-      <b>Samples:</b> ${d.start_year} — ${d.end_year}<br>
-      <b>Status:</b> ${d.protected_area === "TRUE" ? "Protected" : "Standard"}
-    </div>
-  `);
+    // 3. Charger le CSV (chemin relatif à votre dossier data)
+    return d3.csv("../" + fileInfo.FILE_PATH, function(d) {
+        return {
+            ABUNDANCE: +d.ABUNDANCE,
+            LATITUDE: +d.LATITUDE,
+            LONGITUDE: +d.LONGITUDE,
+            YEAR: +d.YEAR,
+            valid_name: d.valid_name,
+            STUDY_ID: +d.STUDY_ID,
+            ID_ALL_RAW_DATA: d.ID_ALL_RAW_DATA
+        };
+    }).then(function(data) {
+        // Filtrage des données invalides
+        const studyData = data.filter(d => 
+            d !== null && 
+            !isNaN(d.ABUNDANCE) && 
+            !isNaN(d.YEAR)
+        );
+
+        if (studyData.length === 0) {
+            console.warn(`Aucune donnée valide trouvée pour l'étude ${studyId}.`);
+        }
+        
+        // Stockage en cache et retour
+        ctx.measurementsCache[studyId] = studyData;
+        return studyData; 
+    }).catch(function(error) {
+        console.error(`Erreur CSV étude ${studyId}:`, error);
+        return [];
+    });
+}
+function updateStudyMap(measurements) {
+    if (!measurements || measurements.length === 0) return;
+
+    // 1. Calcul des limites géométriques des données
+    // On crée un objet GeoJSON factice pour utiliser d3.geoPath().bounds()
+    const pointsGeo = {
+        type: "FeatureCollection",
+        features: measurements.map(d => ({
+            type: "Feature",
+            geometry: { type: "Point", coordinates: [d.LONGITUDE, d.LATITUDE] }
+        }))
+    };
+
+    // Calculer les limites sur l'écran avec la projection actuelle
+    const bounds = ctx.pathDetail.bounds(pointsGeo);
+    const dx = bounds[1][0] - bounds[0][0];
+    const dy = bounds[1][1] - bounds[0][1];
+    const x = (bounds[0][0] + bounds[1][0]) / 2;
+    const y = (bounds[0][1] + bounds[1][1]) / 2;
+
+    // Calculer l'échelle nécessaire pour que ça rentre, avec une marge (0.8)
+    const svgW = +ctx.svgDetail.attr("width");
+    const svgH = +ctx.svgDetail.attr("height");
+    const scale = 0.8 / Math.max(dx / svgW, dy / svgH);
+    
+    // Appliquer la transformation de zoom fluide
+    const transform = d3.zoomIdentity
+        .translate(svgW / 2, svgH / 2)
+        .scale(scale)
+        .translate(-x, -y);
+
+    ctx.svgDetail.transition().duration(750).call(ctx.zoomDetail.transform, transform);
+
+    // 2. Échelles de couleur (inchangées)
+    const extentAbundance = d3.extent(measurements, d => d.ABUNDANCE);
+    const colorScale = d3.scaleLog()
+        .domain([Math.max(0.1, extentAbundance[0]), extentAbundance[1]])
+        .range(["#00ffcc", "#ff0066"])
+        .interpolate(d3.interpolateHcl);
+
+    // 3. Dessin des points (inchangé, mais utilisez ctx.gMeasurements)
+    const years = [...new Set(measurements.map(d => d.YEAR))].sort();
+    const filteredData = measurements.filter(d => d.YEAR === years[0]);
+
+    const dots = ctx.gMeasurements.selectAll(".measure-dot")
+        .data(filteredData, d => d.ID_ALL_RAW_DATA);
+
+    dots.exit().remove();
+
+    dots.enter()
+        .append("circle")
+        .attr("class", "measure-dot")
+        .merge(dots)
+        .attr("cx", d => ctx.projectionDetail([d.LONGITUDE, d.LATITUDE])[0])
+        .attr("cy", d => ctx.projectionDetail([d.LONGITUDE, d.LATITUDE])[1])
+        .attr("fill", "none")
+        .attr("stroke", d => colorScale(d.ABUNDANCE))
+        .attr("stroke-width", 2 / scale) // Ajuste l'épaisseur selon le zoom
+        .attr("r", 5 / Math.sqrt(scale)) // Optionnel : réduit la taille visuelle si on est très zoomé
+        .transition().duration(750);
+}
+
+function setupZoomButtonsP3() {
+    d3.select("#zoom-in-p3").on("click", () => {
+        ctx.svgDetail.transition().duration(300).call(ctx.zoomDetail.scaleBy, 1.5);
+    });
+    d3.select("#zoom-out-p3").on("click", () => {
+        ctx.svgDetail.transition().duration(300).call(ctx.zoomDetail.scaleBy, 1/1.5);
+    });
+    d3.select("#zoom-reset-p3").on("click", () => {
+        ctx.svgDetail.transition().duration(500).call(ctx.zoomDetail.transform, d3.zoomIdentity);
+    });
 }
