@@ -266,30 +266,6 @@ svg {
   background: #f1f5f9;
 }
 
-/* Zoom buttons page 3 */
-.zoom-btn-p3 {
-  width: 32px;
-  height: 32px;
-  border-radius: 999px;
-  border: 1px solid var(--border);
-  background: var(--panel-bg);
-  box-shadow: var(--shadow-soft);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-size: 18px;
-  line-height: 0;
-}
-
-.zoom-btn-p3:hover {
-    background: #f1f5f9;
-}
-
-#zoom-reset-p3 {
-    font-size: 18px;
-    margin-top: 5px;
-}
 
 #tool-controls {
   position: absolute;
@@ -448,22 +424,44 @@ svg {
   gap: 16px;
 }
 
+#overview-charts { overflow: hidden; }
 
-.study-layout {
-    display: flex;
-    gap: 20px;
-    margin-top: 20px;
-    height: 500px;
+.kpi-bar{
+  width: 100%;
+  padding: 15px 100px;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  gap: 1px;
 }
 
-/* Map container page 3 */
-#map-container-p3 {
-    flex: 1;
-    width: 100%;
-    height: 100%;
-    position: relative;
-    background: radial-gradient(circle at top, #29407b 0, #030924 60%);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
+.kpi{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1;
 }
 
+.kpi .value{
+  font-size: 50px;      /* ajuste */
+  font-weight: 300;
+  color: #1f2a37;
+  letter-spacing: 1px;
+}
+
+.kpi .label{
+  margin-top: 14px;
+  font-size: 20px;      /* ajuste */
+  font-weight: 700;
+  color: #111827;
+}
+
+#page-2{
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+#phylo-panel, #timeline-panel{
+  width: 100%;
+}
