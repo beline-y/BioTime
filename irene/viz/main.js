@@ -68,6 +68,8 @@ function createViz() {
   ctx.gTools = ctx.g.append("g").attr("id", "toolG");
   ctx.gPoints = ctx.g.append("g");
 
+  ctx.overlay = container.append("div"); //overlay group to display selection details
+  
   // Mercator projection 
   ctx.projection = d3.geoMercator()
     .scale((ctx.WIDTH / 2 / Math.PI) * 1.2)   // fills width, a bit extra for immersion
@@ -105,6 +107,7 @@ function createViz() {
   // Zoom buttons (+ / -)
   setupZoomButtons();
   setupTools();
+  setupSelectionFigures();
   setupPageNavigation();
   setupSidebarNav();
 
@@ -200,6 +203,69 @@ function setupTools() {
                                .y(d => d[1]);
 
   ctx.pathPoints = [];
+}
+
+function setupSelectionFigures() {
+  // setting up container div                                         
+  ctx.overlay.attr("id", "overlay-container")
+  ctx.overlay.style("width", (0.33 * ctx.WIDTH) + "px") 
+             .style("height", (0.9 * ctx.HEIGHT) + "px")
+             .style("position", "absolute")
+             .style("overflow", "hidden")
+             .style("transform", `translateX(${ctx.WIDTH}px)`)
+             .style("right", `10px`)
+             .style("top", `${0.05 * ctx.HEIGHT}px`);
+
+  //adding button similar to close buttons                                        
+  button = ctx.overlay.append("div")
+  button.attr("class", "tool-btn")
+        .attr("id", "close")
+  button.style("position", "absolute")
+        .style("top", "0px")
+        .style("left", "0px");
+        
+  button.append("img").attr("src", "..//icons//close_icon_64px.png")
+                      .attr("width", "25px");
+
+  button.on("click", closeSelectionFigures);
+                                                    
+
+  let sideWin = ctx.overlay.append("svg").attr("width", 0.33 * ctx.WIDTH)
+                                         .attr("height", 0.9 * ctx.HEIGHT);
+  sideWin.style("display", "block")
+         .style("position", "right");
+                                        
+  ctx.sideSVG1 = sideWin.append("svg");
+  ctx.sideSVG1.attr("id","sidesvg1")
+              .attr("x", 48)
+              .attr("y", 0)
+              .attr("width", sideWin.attr("width") - 48)
+              .attr("height", 0.48 * sideWin.attr("height"));
+
+  ctx.sideSVG1.append("rect").attr("x", 0)
+                             .attr("y", 0)
+                             .attr("width", sideWin.attr("width") - 48)
+                             .attr("height", 0.48 * sideWin.attr("height"))
+                             .attr("fill", "white")
+                             .attr("rx", 16)
+                             .attr("ry", 16);
+
+  ctx.sideSVG2 = sideWin.append("svg");
+  ctx.sideSVG2.attr("id","sidesvg2")
+              .attr("x", 48)
+              .attr("y", 0.5 * sideWin.attr("height"))
+              .attr("width", sideWin.attr("width") - 48)
+              .attr("height", 0.48 * sideWin.attr("height"));
+
+
+  ctx.sideSVG2.append("rect").attr("x", 0)
+                             .attr("y", 0)
+                             .attr("width", sideWin.attr("width") - 48)
+                             .attr("height", 0.48 * sideWin.attr("height"))
+                             .attr("fill", "white")
+                             .attr("rx", 16)
+                             .attr("ry", 16);
+
 }
 
 // Load world + studies
@@ -490,9 +556,6 @@ function setupSidebarNav() {
 
 // fonctions de contrôle des outils
 
-
-
-
 function mouseDownFree() {
     console.log("freeeedoooom")
 
@@ -521,8 +584,9 @@ function mouseUpFree() {
 
   let path = d3.select("path#currentfree");
   path.attr("d", path.attr("d") + "Z") //close the path when mouse is released
-  bboxToView(path.node().getBBox());
+  bboxToView(path.node().getBBox(), 0.6);
 
+  drawSelectionFigures(path);
   // do stuff to choose the studies to display, call function to draw the graphs
 
   path.remove();
@@ -561,22 +625,25 @@ function mouseUpRect() {
     console.log("rect mouseup")
     ctx.gTools.on("mousemove", null);
     let rect = d3.select("rect#currentrect");    
-    bboxToView(rect.node().getBBox());
+    bboxToView(rect.node().getBBox(), 0.6);
+
+    drawSelectionFigures(rect);
+
     rect.remove();
 }
 
 
-function bboxToView(bbox) {
-    //updates the view to fit to the bounding box
-
+function bboxToView(bbox, ratio) {
+    //updates the view to fit 60% of the screen to the bounding box in the leftmost ratio of the svg
+    ctx.lastFocusedBbox = bbox;
     console.log(bbox);
     ctx.tempProj = ctx.proj;
 
-    const scaleFactor = Math.min((ctx.WIDTH * 0.9) / bbox.width,
+    const scaleFactor = Math.min((ctx.WIDTH * 0.6) / bbox.width,
                                  (ctx.HEIGHT * 0.9) / bbox.height)
     
-    const xTranslation = ctx.WIDTH / 2 - scaleFactor * (bbox.x + bbox.width/2) 
-    const yTranslation = ctx.HEIGHT / 2 - scaleFactor * (bbox.y + bbox.height/2)
+    const xTranslation = 0.5 * ratio * ctx.WIDTH - scaleFactor * (bbox.x + bbox.width*0.5) 
+    const yTranslation = 0.5 * ctx.HEIGHT - scaleFactor * (bbox.y + bbox.height*0.5)
 
     const focus = d3.zoomIdentity.translate(xTranslation, yTranslation)
                                  .scale(scaleFactor);
@@ -585,6 +652,35 @@ function bboxToView(bbox) {
            .duration(300)
            .call(ctx.zoom.transform, focus)
 }
+
+function drawSelectionFigures(shape) {
+
+  //test if points are inside the drawn selection
+  function selectionFilter(coordinates) {
+    point = ctx.projection(coordinates)
+    return shape.node().isPointInFill({x:point[0], y:point[1]})
+  }
+
+  // show side graphs as as map overlay
+  ctx.overlay.transition().duration(200)
+                          .style("transform", "translateX(0px)");
+                          
+  zoneData = d3.filter(ctx.studies, (d) => selectionFilter([d.lon, d.lat]) )
+
+  console.log(zoneData.length);
+
+  let habitatCount = d3.rollup(zoneData, (d) => d.habitat);
+  console.log(habitatCount);
+}
+
+function closeSelectionFigures() {
+  ctx.overlay.transition().duration(200)
+                          .style("transform", `translateX(${ctx.WIDTH}px)`);
+
+  bboxToView(ctx.lastFocusedBbox, 1) // set the view to focus the last selection in the middle of the screen
+}
+
+
 function resetMapZoom() {
   if (!ctx.svg || !ctx.zoom) return;
 
@@ -593,8 +689,6 @@ function resetMapZoom() {
     .duration(0)
     .call(ctx.zoom.transform, d3.zoomIdentity);
 }
-
-
 
 function truncateLabel(text, d) {
   const w = d.x1 - d.x0;
@@ -612,7 +706,6 @@ function truncateLabel(text, d) {
   return text.slice(0, maxChars - 1) + "…";
 }
 
-
 function tileByDepth(node, x0, y0, x1, y1) {
   // depth 0 = root
   // depth 1 = grands groupes → empilés en hauteur
@@ -622,9 +715,6 @@ function tileByDepth(node, x0, y0, x1, y1) {
   // le reste = layout standard
   return d3.treemapBinary(node, x0, y0, x1, y1);
 }
-
-
-
 
 // --- Treemap: phylogenetic hierarchy (JSON) ---
 /*function createPhyloTreemap() {
@@ -949,8 +1039,6 @@ function createPhyloTreemap() {
   });
 }
 
-
-
 function renderKPIBar(stats) {
   // stats: [{value:708,label:"studies"}, ...]
   const bar = d3.select("#kpi-bar");
@@ -970,11 +1058,6 @@ function renderKPIBar(stats) {
     .attr("class", "label")
     .text(d => d.label);
 }
-
-
-
-
-
 
 function createStudyTimeline(meta) {
   const host = d3.select("#timeline-panel");
