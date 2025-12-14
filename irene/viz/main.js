@@ -38,9 +38,9 @@ function createViz() {
   ctx.g = ctx.svg.append("g").attr("id", "transformG");
   
   ctx.gMap = ctx.g.append("g");
-  ctx.gPoints = ctx.g.append("g");
   ctx.gTools = ctx.g.append("g").attr("id", "toolG");
-
+  ctx.gPoints = ctx.g.append("g");
+  
   // Mercator projection 
   ctx.projection = d3.geoMercator()
     .scale((ctx.WIDTH / 2 / Math.PI) * 1.2)   // fills width, a bit extra for immersion
@@ -506,7 +506,9 @@ function bboxToView(bbox) {
 
     ctx.svg.transition()
            .duration(300)
-           .call(ctx.zoom.transform, focus)   
+           .call(ctx.zoom.transform, focus)
+}
+
 function resetMapZoom() {
   if (!ctx.svg || !ctx.zoom) return;
 
@@ -857,3 +859,4 @@ function createStudyTimeline(meta) {
       .text(r);
   });
 }
+
