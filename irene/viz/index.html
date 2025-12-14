@@ -48,16 +48,6 @@
           </label>
         </div>
       </div>
-
-      <div class="filter-card map-only">
-        <div class="filter-header">
-          <div class="filter-label">Duration (years)</div>
-        </div>
-        <div class="filter-body">
-          <input id="duration-min" type="number" value="1" min="1" step="1" placeholder="Min">
-          <input id="duration-max" type="number" value="100" min="1" step="1" placeholder="Max" style="margin-top:4px;">
-        </div>
-      </div>
     </div>
 
   <div id="main" class = "content">
@@ -82,15 +72,10 @@
 
     <!-- PAGE 2 : OVERVIEW / GRAPHIQUES -->
     <div id="page-2" class="page-section">
-      <h1>Dataset overview</h1>
-      <p>
-        Ici tu pourras afficher des graphiques globaux sur le dataset :
-        nombre d'études par realm, distribution des durées, répartition géographique, etc.
-      </p>
-
-      <div id="overview-charts">
-        <!-- Conteneur pour tes futurs graphiques -->
-      </div>
+      <!--<h1>Dataset overview</h1>-->
+      <div id="kpi-bar" class="kpi-bar"></div>
+      <div id="phylo-panel"></div>
+      <div id="timeline-panel"></div>
     </div>
 
     <!-- PAGE 3 : STUDIES OVERVIEW -->
