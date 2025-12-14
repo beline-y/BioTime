@@ -584,10 +584,9 @@ function bboxToView(bbox) {
     ctx.svg.transition()
            .duration(300)
            .call(ctx.zoom.transform, focus)
-}
-
            .call(ctx.zoom.transform, focus)   
 }
+
 function resetMapZoom() {
   if (!ctx.svg || !ctx.zoom) return;
 
@@ -1888,3 +1887,4 @@ function createAbundanceChart(measurements) {
   svg.append("text").attr("x", margin.left).attr("y", height - 5).style("font-size", "10px").style("fill", "#8899a6").text(yearsExtent[0]);
   svg.append("text").attr("x", width - margin.right).attr("y", height - 5).attr("text-anchor", "end").style("font-size", "10px").style("fill", "#8899a6").text(yearsExtent[1]);
 }
+
