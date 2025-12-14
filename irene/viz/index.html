@@ -48,6 +48,16 @@
           </label>
         </div>
       </div>
+
+      <div id="study-details-aside" class="filter-card study-only" style="display: none;">
+          <div class="filter-header">
+            <div class="filter-label">Selected Study</div>
+          </div>
+          <div id="study-info-sidebar" class="filter-body">
+            <p style="font-size: 0.85em; color: #666;">Select a study on the map or via the dropdown.</p>
+          </div>
+      </div>
+
     </div>
 
   <div id="main" class = "content">
@@ -95,17 +105,16 @@
 
     <!-- PAGE 3 : STUDIES OVERVIEW -->
     <div id="page-3" class="page-section">
-      <h1>Studies overview</h1>
-      <p>
-        Graphiques de Béline
-      </p>
-
-      <div id="overview-charts">
-        <!-- Conteneur pour tes futurs graphiques -->
+      <div class="page-header">
+        <h1>Study Explorer</h1>
+        <select id="study-selector">
+            <option value="">Select a study ID...</option>
+        </select>
+      </div>
+      <div class="study-layout">
+          <div id="map-container-p3"></div>
       </div>
     </div>
-  </div>
-
   <!-- Dependencies -->
   <script src="https://d3js.org/d3.v7.min.js"></script>
   <script src="https://unpkg.com/topojson-client@3"></script>
