@@ -40,6 +40,7 @@ body {
 /* Sidebar — width matches LEFT_OFFSET = 260 in main.js */
 #sidebar {
   width: 260px;
+  height: 100vh;
   padding: 18px 16px;
   border-right: 1px solid rgba(223, 228, 234, 0.6);
   background: linear-gradient(180deg, #f9fafb 0%, #f5f7fb 100%);
@@ -204,17 +205,47 @@ svg {
   color: var(--text-muted);
 }
 
+/* Tooltip content */
+#tooltip .tt-title{
+  font-weight: 700;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+#tooltip .tt-row{
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 6px;
+  line-height: 1.2;
+}
+
+#tooltip .tt-k{
+  color: var(--text-muted);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+#tooltip .tt-v{
+  color: var(--text-main);
+  font-weight: 600;
+  text-align: right;
+}
+
+/* Bonus: un mini “glass” look */
+#tooltip{
+  backdrop-filter: blur(6px);
+}
 
 /* Zoom buttons */
 #zoom-controls {
-  position: absolute;
-  right: 16px;
-  top: 16px;
   display: flex;
   flex-direction: column;
   gap: 6px;
-  z-index: 5;
+  margin-top: 6px; /* espace entre lasso et zoom */
 }
+
 
 .zoom-btn {
   width: 32px;
@@ -234,6 +265,57 @@ svg {
 .zoom-btn:hover {
   background: #f1f5f9;
 }
+
+
+#tool-controls {
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 5;
+}
+
+.tool-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--panel-bg);
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 0;
+}
+
+.tool-btn:hover {
+  background: #f1f5f9;
+}
+
+.tool-btn img {
+  transform : scale(0.5);
+}
+
+.tool-btn[aria-pressed="true"] {
+  border: 2px solid var(--accent);
+  background: var(--accent-soft);
+
+}
+
+.control-label {
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 2px;
+  margin-left: 1px;
+}
+
 
 .checkbox-row {
   display: flex;

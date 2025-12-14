@@ -47,9 +47,10 @@ function createViz() {
   ctx.g = ctx.svg.append("g").attr("id", "transformG");
   
   ctx.gMap = ctx.g.append("g");
+  
   ctx.gTools = ctx.g.append("g").attr("id", "toolG");
   ctx.gPoints = ctx.g.append("g");
-  
+
   // Mercator projection 
   ctx.projection = d3.geoMercator()
     .scale((ctx.WIDTH / 2 / Math.PI) * 1.2)   // fills width, a bit extra for immersion
@@ -108,6 +109,7 @@ function createViz() {
 function setupZoomButtons() {
   const zoomInBtn = d3.select("#zoom-in");
   const zoomOutBtn = d3.select("#zoom-out");
+  const zoomResetBtn = d3.select("#zoom-reset")
 
   zoomInBtn.on("click", function () {
     ctx.svg
@@ -121,6 +123,16 @@ function setupZoomButtons() {
       .transition()
       .duration(300)
       .call(ctx.zoom.scaleBy, 1 / 1.4);
+  });
+
+  zoomResetBtn.on("click", function () {
+    ctx.svg
+      .transition()
+      .duration(300)
+      .call(
+        ctx.zoom.transform,
+        d3.zoomIdentity
+      );
   });
 }
 
@@ -269,13 +281,18 @@ function setupFilterListeners() {
 }
 
 function handleMouseOver(event, d) {
+  const prot = String(d.protected_area).toUpperCase() === "TRUE" ? "Yes" : "No";
+
   ctx.tooltip
     .style("opacity", 1)
     .html(`
-      <div id="tooltip-title">Study ${d.study_id}</div>
-      <div id="tooltip-preview">
-        graph preview
-      </div>
+      <div class="tt-title">Study ${d.study_id}</div>
+
+      <div class="tt-row"><span class="tt-k">Realm</span><span class="tt-v">${d.realm}</span></div>
+      <div class="tt-row"><span class="tt-k">Taxa</span><span class="tt-v">${d.taxa}</span></div>
+      <div class="tt-row"><span class="tt-k">Habitat</span><span class="tt-v">${d.habitat}</span></div>
+      <div class="tt-row"><span class="tt-k">Years</span><span class="tt-v">${d.start_year}–${d.end_year}</span></div>
+      <div class="tt-row"><span class="tt-k">Protected</span><span class="tt-v">${prot}</span></div>
     `);
 }
 
@@ -527,9 +544,7 @@ function bboxToView(bbox) {
 
     ctx.svg.transition()
            .duration(300)
-           .call(ctx.zoom.transform, focus)
-}
-
+           .call(ctx.zoom.transform, focus)   
 function resetMapZoom() {
   if (!ctx.svg || !ctx.zoom) return;
 
@@ -537,7 +552,7 @@ function resetMapZoom() {
     .transition()
     .duration(0)
     .call(ctx.zoom.transform, d3.zoomIdentity);
-}
+}}
 
 
 

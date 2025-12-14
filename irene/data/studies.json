@@ -13,7 +13,8 @@
     "duration": 13,
     "number_species": 25,
     "number_samples": 164,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "woody plants"
   },
   {
     "study_id": 18,
@@ -29,7 +30,8 @@
     "duration": 51,
     "number_species": 98,
     "number_samples": 542,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "sagebrush steppe plants"
   },
   {
     "study_id": 33,
@@ -45,7 +47,8 @@
     "duration": 18,
     "number_species": 170,
     "number_samples": 692,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "phytoplankton"
   },
   {
     "study_id": 39,
@@ -61,7 +64,8 @@
     "duration": 46,
     "number_species": 36,
     "number_samples": 45,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "birds"
   },
   {
     "study_id": 41,
@@ -77,7 +81,8 @@
     "duration": 18,
     "number_species": 56,
     "number_samples": 10,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "birds"
   },
   {
     "study_id": 45,
@@ -93,7 +98,8 @@
     "duration": 14,
     "number_species": 364,
     "number_samples": 1535,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "tropical reef fish"
   },
   {
     "study_id": 46,
@@ -109,7 +115,8 @@
     "duration": 52,
     "number_species": 29,
     "number_samples": 47,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "breeding bird pairs"
   },
   {
     "study_id": 47,
@@ -125,7 +132,8 @@
     "duration": 26,
     "number_species": 13,
     "number_samples": 35,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "ducks"
   },
   {
     "study_id": 51,
@@ -141,7 +149,8 @@
     "duration": 14,
     "number_species": 4,
     "number_samples": 14,
-    "abundance_type": "MeanCount"
+    "abundance_type": "MeanCount",
+    "organisms": "tetraonid birds"
   },
   {
     "study_id": 52,
@@ -157,7 +166,8 @@
     "duration": 13,
     "number_species": 3,
     "number_samples": 13,
-    "abundance_type": "MeanCount"
+    "abundance_type": "MeanCount",
+    "organisms": "small land carnivores"
   },
   {
     "study_id": 53,
@@ -173,7 +183,8 @@
     "duration": 11,
     "number_species": 5,
     "number_samples": 10,
-    "abundance_type": "MeanCount"
+    "abundance_type": "MeanCount",
+    "organisms": "small mammals"
   },
   {
     "study_id": 54,
@@ -189,7 +200,8 @@
     "duration": 33,
     "number_species": 18,
     "number_samples": 8823,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "land snails"
   },
   {
     "study_id": 56,
@@ -205,7 +217,8 @@
     "duration": 31,
     "number_species": 31,
     "number_samples": 2098,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "small mammals"
   },
   {
     "study_id": 58,
@@ -221,7 +234,8 @@
     "duration": 18,
     "number_species": 31,
     "number_samples": 173,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "birds"
   },
   {
     "study_id": 59,
@@ -237,7 +251,8 @@
     "duration": 26,
     "number_species": 29,
     "number_samples": 52,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "rodents"
   },
   {
     "study_id": 60,
@@ -253,7 +268,8 @@
     "duration": 34,
     "number_species": 323,
     "number_samples": 8,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "tropical woody plants"
   },
   {
     "study_id": 67,
@@ -269,7 +285,8 @@
     "duration": 24,
     "number_species": 65,
     "number_samples": 4680,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "waterbirds"
   },
   {
     "study_id": 68,
@@ -285,7 +302,8 @@
     "duration": 13,
     "number_species": 15,
     "number_samples": 2569,
-    "abundance_type": "Presence/Absence"
+    "abundance_type": "Presence/Absence",
+    "organisms": "copepods"
   },
   {
     "study_id": 69,
@@ -301,7 +319,8 @@
     "duration": 10,
     "number_species": 26,
     "number_samples": 4663,
-    "abundance_type": "Presence/Absence"
+    "abundance_type": "Presence/Absence",
+    "organisms": "seabirds"
   },
   {
     "study_id": 75,
@@ -317,7 +336,8 @@
     "duration": 3,
     "number_species": 300,
     "number_samples": 336,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Zooplankton"
   },
   {
     "study_id": 76,
@@ -333,7 +353,8 @@
     "duration": 5,
     "number_species": 212,
     "number_samples": 59,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "benthic animals"
   },
   {
     "study_id": 77,
@@ -349,7 +370,8 @@
     "duration": 4,
     "number_species": 16,
     "number_samples": 703,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "seabirds"
   },
   {
     "study_id": 78,
@@ -365,7 +387,8 @@
     "duration": 26,
     "number_species": 65,
     "number_samples": 4680,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "macrozoobenthos"
   },
   {
     "study_id": 81,
@@ -381,7 +404,8 @@
     "duration": 14,
     "number_species": 9,
     "number_samples": 507,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "cetaceans"
   },
   {
     "study_id": 86,
@@ -397,7 +421,8 @@
     "duration": 23,
     "number_species": 616,
     "number_samples": 4838,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Phytoplankton"
   },
   {
     "study_id": 87,
@@ -413,7 +438,8 @@
     "duration": 9,
     "number_species": 108,
     "number_samples": 477,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Phytoplankton"
   },
   {
     "study_id": 90,
@@ -429,7 +455,8 @@
     "duration": 10,
     "number_species": 66,
     "number_samples": 512,
-    "abundance_type": "Presence/Absence"
+    "abundance_type": "Presence/Absence",
+    "organisms": "zooplankton"
   },
   {
     "study_id": 91,
@@ -445,7 +472,8 @@
     "duration": 8,
     "number_species": 68,
     "number_samples": 60,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "birds"
   },
   {
     "study_id": 96,
@@ -461,7 +489,8 @@
     "duration": 5,
     "number_species": 100,
     "number_samples": 104,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "zooplankton"
   },
   {
     "study_id": 97,
@@ -477,7 +506,8 @@
     "duration": 53,
     "number_species": 392,
     "number_samples": 840,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "zooplankton"
   },
   {
     "study_id": 98,
@@ -493,7 +523,8 @@
     "duration": 2,
     "number_species": 241,
     "number_samples": 24,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "zoobenthos"
   },
   {
     "study_id": 108,
@@ -509,7 +540,8 @@
     "duration": 26,
     "number_species": 110,
     "number_samples": 66557,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "birds"
   },
   {
     "study_id": 110,
@@ -525,7 +557,8 @@
     "duration": 47,
     "number_species": 4064,
     "number_samples": 52279,
-    "abundance_type": "Presence/Absence"
+    "abundance_type": "Presence/Absence",
+    "organisms": "Benthos"
   },
   {
     "study_id": 113,
@@ -541,7 +574,8 @@
     "duration": 35,
     "number_species": 1983,
     "number_samples": 2328,
-    "abundance_type": "Presence/Absence"
+    "abundance_type": "Presence/Absence",
+    "organisms": "marine invertebrates + fish"
   },
   {
     "study_id": 117,
@@ -557,7 +591,8 @@
     "duration": 48,
     "number_species": 156,
     "number_samples": 1467,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Starfish"
   },
   {
     "study_id": 119,
@@ -573,7 +608,8 @@
     "duration": 41,
     "number_species": 231,
     "number_samples": 13960,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Fish"
   },
   {
     "study_id": 120,
@@ -589,7 +625,8 @@
     "duration": 7,
     "number_species": 258,
     "number_samples": 934,
-    "abundance_type": "Presence/Absence"
+    "abundance_type": "Presence/Absence",
+    "organisms": "tropical algae"
   },
   {
     "study_id": 121,
@@ -605,7 +642,8 @@
     "duration": 11,
     "number_species": 148,
     "number_samples": 11476,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "reef fish"
   },
   {
     "study_id": 122,
@@ -621,7 +659,8 @@
     "duration": 4,
     "number_species": 204,
     "number_samples": 1873,
-    "abundance_type": "Presence/Absence"
+    "abundance_type": "Presence/Absence",
+    "organisms": "corals"
   },
   {
     "study_id": 123,
@@ -637,7 +676,8 @@
     "duration": 10,
     "number_species": 144,
     "number_samples": 1750,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "fish and some molluscs/other inverts"
   },
   {
     "study_id": 124,
@@ -653,7 +693,8 @@
     "duration": 7,
     "number_species": 595,
     "number_samples": 1146,
-    "abundance_type": "Presence/Absence"
+    "abundance_type": "Presence/Absence",
+    "organisms": "marine invertebrates & marine plants"
   },
   {
     "study_id": 125,
@@ -669,7 +710,8 @@
     "duration": 13,
     "number_species": 101,
     "number_samples": 2190,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "fish"
   },
   {
     "study_id": 126,
@@ -685,7 +727,8 @@
     "duration": 8,
     "number_species": 438,
     "number_samples": 478,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "fish"
   },
   {
     "study_id": 127,
@@ -701,7 +744,8 @@
     "duration": 10,
     "number_species": 48,
     "number_samples": 599,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "fish"
   },
   {
     "study_id": 128,
@@ -717,7 +761,8 @@
     "duration": 5,
     "number_species": 341,
     "number_samples": 1348,
-    "abundance_type": "Presence/Absence"
+    "abundance_type": "Presence/Absence",
+    "organisms": "Zooplankton"
   },
   {
     "study_id": 129,
@@ -733,7 +778,8 @@
     "duration": 5,
     "number_species": 2535,
     "number_samples": 852,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Marine invertebrates"
   },
   {
     "study_id": 133,
@@ -749,7 +795,8 @@
     "duration": 8,
     "number_species": 118,
     "number_samples": 119,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Copepods"
   },
   {
     "study_id": 135,
@@ -765,7 +812,8 @@
     "duration": 15,
     "number_species": 151,
     "number_samples": 2097,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "mostly fish + a few invertebrates"
   },
   {
     "study_id": 142,
@@ -781,7 +829,8 @@
     "duration": 6,
     "number_species": 188,
     "number_samples": 276,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "fish"
   },
   {
     "study_id": 147,
@@ -797,7 +846,8 @@
     "duration": 130,
     "number_species": 599,
     "number_samples": 561,
-    "abundance_type": "Presence/Absence"
+    "abundance_type": "Presence/Absence",
+    "organisms": "Bryozoa"
   },
   {
     "study_id": 148,
@@ -813,7 +863,8 @@
     "duration": 42,
     "number_species": 430,
     "number_samples": 28800,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "Fish"
   },
   {
     "study_id": 150,
@@ -829,7 +880,8 @@
     "duration": 8,
     "number_species": 44,
     "number_samples": 141,
-    "abundance_type": "Presence/Absence"
+    "abundance_type": "Presence/Absence",
+    "organisms": "Marine invertebrates"
   },
   {
     "study_id": 152,
@@ -845,7 +897,8 @@
     "duration": 26,
     "number_species": 155,
     "number_samples": 508,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Zooplankton"
   },
   {
     "study_id": 162,
@@ -861,7 +914,8 @@
     "duration": 15,
     "number_species": 5360,
     "number_samples": 7028,
-    "abundance_type": "Presence/Absence"
+    "abundance_type": "Presence/Absence",
+    "organisms": "Benthos"
   },
   {
     "study_id": 163,
@@ -877,7 +931,8 @@
     "duration": 12,
     "number_species": 352,
     "number_samples": 11050,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "mainly benthos"
   },
   {
     "study_id": 164,
@@ -893,7 +948,8 @@
     "duration": 6,
     "number_species": 94,
     "number_samples": 238,
-    "abundance_type": "Presence/Absence"
+    "abundance_type": "Presence/Absence",
+    "organisms": "Sessile marine invertebrates"
   },
   {
     "study_id": 166,
@@ -909,7 +965,8 @@
     "duration": 28,
     "number_species": 213,
     "number_samples": 56446,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "pelagic seabirds"
   },
   {
     "study_id": 169,
@@ -925,7 +982,8 @@
     "duration": 20,
     "number_species": 184,
     "number_samples": 28462,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "mostly seabirds + some marine mammals"
   },
   {
     "study_id": 171,
@@ -941,7 +999,8 @@
     "duration": 21,
     "number_species": 28,
     "number_samples": 2377,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Marine mammals + a few turtles"
   },
   {
     "study_id": 172,
@@ -957,7 +1016,8 @@
     "duration": 12,
     "number_species": 47,
     "number_samples": 37985,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Cetaceans. seabirds + turtles"
   },
   {
     "study_id": 173,
@@ -973,7 +1033,8 @@
     "duration": 17,
     "number_species": 674,
     "number_samples": 1103,
-    "abundance_type": "Presence/Absence"
+    "abundance_type": "Presence/Absence",
+    "organisms": "Marine invertebrates"
   },
   {
     "study_id": 176,
@@ -989,7 +1050,8 @@
     "duration": 13,
     "number_species": 317,
     "number_samples": 2214,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Phytoplankton + zooplankton (and some plants - changed taxa from /plants)"
   },
   {
     "study_id": 178,
@@ -1005,7 +1067,8 @@
     "duration": 45,
     "number_species": 475,
     "number_samples": 8068,
-    "abundance_type": "Presence/Absence"
+    "abundance_type": "Presence/Absence",
+    "organisms": "mostly fish + some marine invertebrates"
   },
   {
     "study_id": 180,
@@ -1021,7 +1084,8 @@
     "duration": 26,
     "number_species": 273,
     "number_samples": 46528,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Groundfish"
   },
   {
     "study_id": 182,
@@ -1037,7 +1101,8 @@
     "duration": 22,
     "number_species": 33,
     "number_samples": 5787,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Chromista. fish + marine invertebrates"
   },
   {
     "study_id": 183,
@@ -1053,7 +1118,8 @@
     "duration": 13,
     "number_species": 16,
     "number_samples": 4475,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Marine invertebrates"
   },
   {
     "study_id": 184,
@@ -1069,7 +1135,8 @@
     "duration": 5,
     "number_species": 306,
     "number_samples": 685,
-    "abundance_type": "Presence/Absence"
+    "abundance_type": "Presence/Absence",
+    "organisms": "marine invertebrates + some fish"
   },
   {
     "study_id": 186,
@@ -1085,7 +1152,8 @@
     "duration": 4,
     "number_species": 4036,
     "number_samples": 1647,
-    "abundance_type": "Presence/Absence"
+    "abundance_type": "Presence/Absence",
+    "organisms": "Benthos"
   },
   {
     "study_id": 187,
@@ -1101,7 +1169,8 @@
     "duration": 16,
     "number_species": 4306,
     "number_samples": 2180,
-    "abundance_type": "Presence/Absence"
+    "abundance_type": "Presence/Absence",
+    "organisms": "Benthos"
   },
   {
     "study_id": 189,
@@ -1117,7 +1186,8 @@
     "duration": 10,
     "number_species": 254,
     "number_samples": 1522,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Fish"
   },
   {
     "study_id": 190,
@@ -1133,7 +1203,8 @@
     "duration": 10,
     "number_species": 247,
     "number_samples": 2039,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Fish"
   },
   {
     "study_id": 192,
@@ -1149,7 +1220,8 @@
     "duration": 49,
     "number_species": 6,
     "number_samples": 3897,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Whales"
   },
   {
     "study_id": 194,
@@ -1165,7 +1237,8 @@
     "duration": 11,
     "number_species": 572,
     "number_samples": 870,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Moths"
   },
   {
     "study_id": 195,
@@ -1181,7 +1254,8 @@
     "duration": 30,
     "number_species": 383,
     "number_samples": 12893,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Breeding birds"
   },
   {
     "study_id": 196,
@@ -1197,7 +1271,8 @@
     "duration": 37,
     "number_species": 252,
     "number_samples": 8219,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Benthos and marine invertebrates"
   },
   {
     "study_id": 199,
@@ -1213,7 +1288,8 @@
     "duration": 4,
     "number_species": 630,
     "number_samples": 116,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Fish"
   },
   {
     "study_id": 201,
@@ -1229,7 +1305,8 @@
     "duration": 14,
     "number_species": 825,
     "number_samples": 4,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Tropical forest trees"
   },
   {
     "study_id": 202,
@@ -1245,7 +1322,8 @@
     "duration": 13,
     "number_species": 75,
     "number_samples": 3,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Tropical forest trees"
   },
   {
     "study_id": 204,
@@ -1261,7 +1339,8 @@
     "duration": 26,
     "number_species": 339,
     "number_samples": 1049,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Macrobenthos"
   },
   {
     "study_id": 211,
@@ -1277,7 +1356,8 @@
     "duration": 8,
     "number_species": 127,
     "number_samples": 109,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Fish"
   },
   {
     "study_id": 212,
@@ -1293,7 +1373,8 @@
     "duration": 8,
     "number_species": 522,
     "number_samples": 1134,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Fish"
   },
   {
     "study_id": 213,
@@ -1309,7 +1390,8 @@
     "duration": 61,
     "number_species": 1021,
     "number_samples": 35639,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Benthos and fish"
   },
   {
     "study_id": 214,
@@ -1325,7 +1407,8 @@
     "duration": 101,
     "number_species": 39,
     "number_samples": 14565,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Trees"
   },
   {
     "study_id": 217,
@@ -1341,7 +1424,8 @@
     "duration": 15,
     "number_species": 265,
     "number_samples": 43839,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Land birds"
   },
   {
     "study_id": 221,
@@ -1357,7 +1441,8 @@
     "duration": 34,
     "number_species": 52,
     "number_samples": 195,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Boreal vegetation"
   },
   {
     "study_id": 224,
@@ -1373,7 +1458,8 @@
     "duration": 11,
     "number_species": 50,
     "number_samples": 1582,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Shrub"
   },
   {
     "study_id": 225,
@@ -1389,7 +1475,8 @@
     "duration": 12,
     "number_species": 274,
     "number_samples": 4865,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Birds"
   },
   {
     "study_id": 226,
@@ -1405,7 +1492,8 @@
     "duration": 3,
     "number_species": 213,
     "number_samples": 3256,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Birds"
   },
   {
     "study_id": 227,
@@ -1421,7 +1509,8 @@
     "duration": 4,
     "number_species": 107,
     "number_samples": 371,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Demersal Fish"
   },
   {
     "study_id": 228,
@@ -1437,7 +1526,8 @@
     "duration": 4,
     "number_species": 760,
     "number_samples": 407,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Benthos"
   },
   {
     "study_id": 229,
@@ -1453,7 +1543,8 @@
     "duration": 26,
     "number_species": 69,
     "number_samples": 754,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Fish"
   },
   {
     "study_id": 230,
@@ -1469,7 +1560,8 @@
     "duration": 3,
     "number_species": 59,
     "number_samples": 122,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Macrophytes"
   },
   {
     "study_id": 233,
@@ -1485,7 +1577,8 @@
     "duration": 3,
     "number_species": 47,
     "number_samples": 577,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Trees"
   },
   {
     "study_id": 235,
@@ -1501,7 +1594,8 @@
     "duration": 20,
     "number_species": 19,
     "number_samples": 527,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Trees"
   },
   {
     "study_id": 236,
@@ -1517,7 +1611,8 @@
     "duration": 12,
     "number_species": 19,
     "number_samples": 129,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Fish"
   },
   {
     "study_id": 237,
@@ -1533,7 +1628,8 @@
     "duration": 19,
     "number_species": 89,
     "number_samples": 811,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Zooplanton"
   },
   {
     "study_id": 238,
@@ -1549,7 +1645,8 @@
     "duration": 20,
     "number_species": 32,
     "number_samples": 731,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Zooplanton"
   },
   {
     "study_id": 239,
@@ -1565,7 +1662,8 @@
     "duration": 3,
     "number_species": 122,
     "number_samples": 1377,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Woodland vegetation"
   },
   {
     "study_id": 240,
@@ -1581,7 +1679,8 @@
     "duration": 13,
     "number_species": 167,
     "number_samples": 2882,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Woodland vegetation"
   },
   {
     "study_id": 241,
@@ -1597,7 +1696,8 @@
     "duration": 14,
     "number_species": 269,
     "number_samples": 4,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Woody plants"
   },
   {
     "study_id": 242,
@@ -1613,7 +1713,8 @@
     "duration": 9,
     "number_species": 12,
     "number_samples": 298,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Understory vascular plants (tree seedlings herbs and shrubs)"
   },
   {
     "study_id": 243,
@@ -1629,7 +1730,8 @@
     "duration": 23,
     "number_species": 51,
     "number_samples": 2640,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Dune vegetation"
   },
   {
     "study_id": 245,
@@ -1645,7 +1747,8 @@
     "duration": 4,
     "number_species": 49,
     "number_samples": 415,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Diadromous fishes"
   },
   {
     "study_id": 246,
@@ -1661,7 +1764,8 @@
     "duration": 15,
     "number_species": 335,
     "number_samples": 339,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Marine fish"
   },
   {
     "study_id": 248,
@@ -1677,7 +1781,8 @@
     "duration": 13,
     "number_species": 95,
     "number_samples": 78,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Grassland plants"
   },
   {
     "study_id": 252,
@@ -1693,7 +1798,8 @@
     "duration": 13,
     "number_species": 48,
     "number_samples": 627,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Fish"
   },
   {
     "study_id": 255,
@@ -1709,7 +1815,8 @@
     "duration": 15,
     "number_species": 22,
     "number_samples": 395,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Trees"
   },
   {
     "study_id": 257,
@@ -1725,7 +1832,8 @@
     "duration": 4,
     "number_species": 19,
     "number_samples": 122,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Zooplanton"
   },
   {
     "study_id": 270,
@@ -1741,7 +1849,8 @@
     "duration": 4,
     "number_species": 19,
     "number_samples": 4,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Vascular plants - Tracheophyta"
   },
   {
     "study_id": 271,
@@ -1757,7 +1866,8 @@
     "duration": 15,
     "number_species": 62,
     "number_samples": 1122,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Chondrichthyes and Osteichthyes"
   },
   {
     "study_id": 272,
@@ -1773,7 +1883,8 @@
     "duration": 15,
     "number_species": 36,
     "number_samples": 578,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Echinodermata Cnidaria Mollusca Annelida Chordata Porifera"
   },
   {
     "study_id": 273,
@@ -1789,7 +1900,8 @@
     "duration": 15,
     "number_species": 26,
     "number_samples": 561,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Echinodermata Mollusca Arthropoda Cnidaria"
   },
   {
     "study_id": 274,
@@ -1805,7 +1917,8 @@
     "duration": 15,
     "number_species": 132,
     "number_samples": 581,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "Cnidaria Chordata Arthropoda Rhodophyta Ectoprocta Phaeophyta Entoprocta Chlorophyta Mollusc"
   },
   {
     "study_id": 275,
@@ -1821,7 +1934,8 @@
     "duration": 6,
     "number_species": 19,
     "number_samples": 99,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Terrestrial reptiles"
   },
   {
     "study_id": 276,
@@ -1837,7 +1951,8 @@
     "duration": 96,
     "number_species": 32,
     "number_samples": 3,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Gastropods"
   },
   {
     "study_id": 278,
@@ -1853,7 +1968,8 @@
     "duration": 45,
     "number_species": 278,
     "number_samples": 5511,
-    "abundance_type": "Presence/Absence"
+    "abundance_type": "Presence/Absence",
+    "organisms": "Fish"
   },
   {
     "study_id": 282,
@@ -1869,7 +1985,8 @@
     "duration": 4,
     "number_species": 209,
     "number_samples": 189,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Zooplankton"
   },
   {
     "study_id": 283,
@@ -1885,7 +2002,8 @@
     "duration": 2,
     "number_species": 176,
     "number_samples": 167,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "Zooplankton"
   },
   {
     "study_id": 284,
@@ -1901,7 +2019,8 @@
     "duration": 15,
     "number_species": 136,
     "number_samples": 1339,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "mostly fish + a few invertebrates"
   },
   {
     "study_id": 285,
@@ -1917,7 +2036,8 @@
     "duration": 18,
     "number_species": 206,
     "number_samples": 534,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "mostly fish + a few invertebrates"
   },
   {
     "study_id": 286,
@@ -1933,7 +2053,8 @@
     "duration": 10,
     "number_species": 29,
     "number_samples": 678,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "fish and some molluscs/other inverts"
   },
   {
     "study_id": 287,
@@ -1949,7 +2070,8 @@
     "duration": 9,
     "number_species": 82,
     "number_samples": 493,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "fish & marine invertebrates"
   },
   {
     "study_id": 288,
@@ -1965,7 +2087,8 @@
     "duration": 37,
     "number_species": 195,
     "number_samples": 6783,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Fish"
   },
   {
     "study_id": 289,
@@ -1981,7 +2104,8 @@
     "duration": 16,
     "number_species": 68,
     "number_samples": 189,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "Fish"
   },
   {
     "study_id": 292,
@@ -1997,7 +2121,8 @@
     "duration": 18,
     "number_species": 836,
     "number_samples": 1881,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "fish"
   },
   {
     "study_id": 294,
@@ -2013,7 +2138,8 @@
     "duration": 11,
     "number_species": 273,
     "number_samples": 469,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "butterflies"
   },
   {
     "study_id": 295,
@@ -2029,7 +2155,8 @@
     "duration": 9,
     "number_species": 449,
     "number_samples": 1078,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "reef fish"
   },
   {
     "study_id": 296,
@@ -2045,7 +2172,8 @@
     "duration": 9,
     "number_species": 406,
     "number_samples": 1077,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "invertebrates and some cryptic fish"
   },
   {
     "study_id": 298,
@@ -2061,7 +2189,8 @@
     "duration": 70,
     "number_species": 144,
     "number_samples": 56,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "herbaceous plants"
   },
   {
     "study_id": 299,
@@ -2077,7 +2206,8 @@
     "duration": 101,
     "number_species": 54,
     "number_samples": 6,
-    "abundance_type": "Presence/Absence"
+    "abundance_type": "Presence/Absence",
+    "organisms": "butterflies"
   },
   {
     "study_id": 300,
@@ -2093,7 +2223,8 @@
     "duration": 25,
     "number_species": 21,
     "number_samples": 33104,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "insects"
   },
   {
     "study_id": 302,
@@ -2109,7 +2240,8 @@
     "duration": 10,
     "number_species": 151,
     "number_samples": 768,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Trees"
   },
   {
     "study_id": 303,
@@ -2125,7 +2257,8 @@
     "duration": 9,
     "number_species": 88,
     "number_samples": 150,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Trees"
   },
   {
     "study_id": 304,
@@ -2141,7 +2274,8 @@
     "duration": 31,
     "number_species": 418,
     "number_samples": 126,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Seasonally apparent vascular plants (i.e. annuals and seasonally apparent geophytes have been excluded)"
   },
   {
     "study_id": 305,
@@ -2157,7 +2291,8 @@
     "duration": 15,
     "number_species": 4,
     "number_samples": 15,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "salamanders"
   },
   {
     "study_id": 306,
@@ -2173,7 +2308,8 @@
     "duration": 18,
     "number_species": 3,
     "number_samples": 16,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "turtles"
   },
   {
     "study_id": 310,
@@ -2189,7 +2325,8 @@
     "duration": 11,
     "number_species": 554,
     "number_samples": 1038,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Microplankton"
   },
   {
     "study_id": 311,
@@ -2205,7 +2342,8 @@
     "duration": 33,
     "number_species": 15,
     "number_samples": 847,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Small mammals"
   },
   {
     "study_id": 312,
@@ -2221,7 +2359,8 @@
     "duration": 26,
     "number_species": 13,
     "number_samples": 9,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Large herbivores"
   },
   {
     "study_id": 313,
@@ -2237,7 +2376,8 @@
     "duration": 18,
     "number_species": 61,
     "number_samples": 1409,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Grasshoppers"
   },
   {
     "study_id": 314,
@@ -2253,7 +2393,8 @@
     "duration": 3,
     "number_species": 6,
     "number_samples": 110,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Small mammals"
   },
   {
     "study_id": 315,
@@ -2269,7 +2410,8 @@
     "duration": 3,
     "number_species": 40,
     "number_samples": 144,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Grasshoppers"
   },
   {
     "study_id": 317,
@@ -2285,7 +2427,8 @@
     "duration": 11,
     "number_species": 4,
     "number_samples": 33,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Mangrove trees"
   },
   {
     "study_id": 319,
@@ -2301,7 +2444,8 @@
     "duration": 15,
     "number_species": 35,
     "number_samples": 14,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Herpetofauna"
   },
   {
     "study_id": 321,
@@ -2317,7 +2461,8 @@
     "duration": 13,
     "number_species": 19,
     "number_samples": 8998,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "small mammals"
   },
   {
     "study_id": 322,
@@ -2333,7 +2478,8 @@
     "duration": 22,
     "number_species": 132,
     "number_samples": 400,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Trees"
   },
   {
     "study_id": 323,
@@ -2349,7 +2495,8 @@
     "duration": 4,
     "number_species": 4,
     "number_samples": 18,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Lizards"
   },
   {
     "study_id": 324,
@@ -2365,7 +2512,8 @@
     "duration": 5,
     "number_species": 60,
     "number_samples": 65,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Saplings"
   },
   {
     "study_id": 325,
@@ -2381,7 +2529,8 @@
     "duration": 5,
     "number_species": 91,
     "number_samples": 79,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Small trees"
   },
   {
     "study_id": 326,
@@ -2397,7 +2546,8 @@
     "duration": 5,
     "number_species": 139,
     "number_samples": 32,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Trees"
   },
   {
     "study_id": 327,
@@ -2413,7 +2563,8 @@
     "duration": 17,
     "number_species": 10,
     "number_samples": 1564,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Small mammals"
   },
   {
     "study_id": 328,
@@ -2429,7 +2580,8 @@
     "duration": 30,
     "number_species": 10,
     "number_samples": 30,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Amphibians"
   },
   {
     "study_id": 329,
@@ -2445,7 +2597,8 @@
     "duration": 21,
     "number_species": 102,
     "number_samples": 48,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Trees"
   },
   {
     "study_id": 330,
@@ -2461,7 +2614,8 @@
     "duration": 3,
     "number_species": 99,
     "number_samples": 193,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Zooplankton"
   },
   {
     "study_id": 332,
@@ -2477,7 +2631,8 @@
     "duration": 12,
     "number_species": 14,
     "number_samples": 112,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Stream fish"
   },
   {
     "study_id": 333,
@@ -2493,7 +2648,8 @@
     "duration": 29,
     "number_species": 132,
     "number_samples": 903,
-    "abundance_type": "Presence/Absence"
+    "abundance_type": "Presence/Absence",
+    "organisms": "birds"
   },
   {
     "study_id": 335,
@@ -2509,7 +2665,8 @@
     "duration": 13,
     "number_species": 57,
     "number_samples": 27,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "fish"
   },
   {
     "study_id": 336,
@@ -2525,7 +2682,8 @@
     "duration": 14,
     "number_species": 100,
     "number_samples": 611,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "plants"
   },
   {
     "study_id": 337,
@@ -2541,7 +2699,8 @@
     "duration": 11,
     "number_species": 87,
     "number_samples": 45,
-    "abundance_type": "Presence/Absence"
+    "abundance_type": "Presence/Absence",
+    "organisms": "Birds"
   },
   {
     "study_id": 338,
@@ -2557,7 +2716,8 @@
     "duration": 3,
     "number_species": 29,
     "number_samples": 13,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Fish"
   },
   {
     "study_id": 339,
@@ -2573,7 +2733,8 @@
     "duration": 57,
     "number_species": 39,
     "number_samples": 57,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "birds"
   },
   {
     "study_id": 341,
@@ -2589,7 +2750,8 @@
     "duration": 3,
     "number_species": 64,
     "number_samples": 334,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Anura"
   },
   {
     "study_id": 342,
@@ -2605,7 +2767,8 @@
     "duration": 19,
     "number_species": 69,
     "number_samples": 3,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Trees"
   },
   {
     "study_id": 343,
@@ -2621,7 +2784,8 @@
     "duration": 18,
     "number_species": 81,
     "number_samples": 4,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Trees"
   },
   {
     "study_id": 344,
@@ -2637,7 +2801,8 @@
     "duration": 13,
     "number_species": 65,
     "number_samples": 2,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Trees"
   },
   {
     "study_id": 345,
@@ -2653,7 +2818,8 @@
     "duration": 13,
     "number_species": 48,
     "number_samples": 2,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Trees"
   },
   {
     "study_id": 346,
@@ -2669,7 +2835,8 @@
     "duration": 10,
     "number_species": 130,
     "number_samples": 768,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Trees"
   },
   {
     "study_id": 347,
@@ -2685,7 +2852,8 @@
     "duration": 3,
     "number_species": 58,
     "number_samples": 30,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Zooplankton"
   },
   {
     "study_id": 348,
@@ -2701,7 +2869,8 @@
     "duration": 11,
     "number_species": 13,
     "number_samples": 52,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Bat"
   },
   {
     "study_id": 349,
@@ -2717,7 +2886,8 @@
     "duration": 21,
     "number_species": 140,
     "number_samples": 89,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Polychaeta"
   },
   {
     "study_id": 350,
@@ -2733,7 +2903,8 @@
     "duration": 23,
     "number_species": 50,
     "number_samples": 15,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Epibenthic megafauna"
   },
   {
     "study_id": 351,
@@ -2749,7 +2920,8 @@
     "duration": 16,
     "number_species": 10,
     "number_samples": 37,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Echinodermata"
   },
   {
     "study_id": 352,
@@ -2765,7 +2937,8 @@
     "duration": 4,
     "number_species": 97,
     "number_samples": 120,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Trees"
   },
   {
     "study_id": 353,
@@ -2781,7 +2954,8 @@
     "duration": 7,
     "number_species": 180,
     "number_samples": 2,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Trees"
   },
   {
     "study_id": 355,
@@ -2797,7 +2971,8 @@
     "duration": 33,
     "number_species": 324,
     "number_samples": 44696,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "plants"
   },
   {
     "study_id": 356,
@@ -2813,7 +2988,8 @@
     "duration": 43,
     "number_species": 478,
     "number_samples": 258,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Trees "
   },
   {
     "study_id": 357,
@@ -2829,7 +3005,8 @@
     "duration": 13,
     "number_species": 10,
     "number_samples": 506,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Small mammal"
   },
   {
     "study_id": 358,
@@ -2845,7 +3022,8 @@
     "duration": 16,
     "number_species": 14,
     "number_samples": 16,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Birds"
   },
   {
     "study_id": 359,
@@ -2861,7 +3039,8 @@
     "duration": 13,
     "number_species": 61,
     "number_samples": 487,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Fish"
   },
   {
     "study_id": 360,
@@ -2877,7 +3056,8 @@
     "duration": 40,
     "number_species": 84,
     "number_samples": 277,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "Bird"
   },
   {
     "study_id": 361,
@@ -2893,7 +3073,8 @@
     "duration": 22,
     "number_species": 20,
     "number_samples": 22,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Birds"
   },
   {
     "study_id": 362,
@@ -2909,7 +3090,8 @@
     "duration": 4,
     "number_species": 18,
     "number_samples": 11052,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "small mammals"
   },
   {
     "study_id": 363,
@@ -2925,7 +3107,8 @@
     "duration": 37,
     "number_species": 35,
     "number_samples": 37,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "birds"
   },
   {
     "study_id": 364,
@@ -2941,7 +3124,8 @@
     "duration": 18,
     "number_species": 14,
     "number_samples": 14,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "submersed aquatic plants"
   },
   {
     "study_id": 365,
@@ -2957,7 +3141,8 @@
     "duration": 6,
     "number_species": 44,
     "number_samples": 1477,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "fish"
   },
   {
     "study_id": 366,
@@ -2973,7 +3158,8 @@
     "duration": 25,
     "number_species": 24,
     "number_samples": 342,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "rodents"
   },
   {
     "study_id": 367,
@@ -2989,7 +3175,8 @@
     "duration": 6,
     "number_species": 224,
     "number_samples": 969,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Benthos"
   },
   {
     "study_id": 368,
@@ -3005,7 +3192,8 @@
     "duration": 2,
     "number_species": 12,
     "number_samples": 2,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Benthos"
   },
   {
     "study_id": 369,
@@ -3021,7 +3209,8 @@
     "duration": 6,
     "number_species": 25,
     "number_samples": 29,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Beetles"
   },
   {
     "study_id": 370,
@@ -3037,7 +3226,8 @@
     "duration": 7,
     "number_species": 158,
     "number_samples": 300,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "Macroalgae"
   },
   {
     "study_id": 371,
@@ -3053,7 +3243,8 @@
     "duration": 7,
     "number_species": 167,
     "number_samples": 431,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "Macroalgae"
   },
   {
     "study_id": 372,
@@ -3069,7 +3260,8 @@
     "duration": 9,
     "number_species": 219,
     "number_samples": 1435,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Birds"
   },
   {
     "study_id": 373,
@@ -3085,7 +3277,8 @@
     "duration": 8,
     "number_species": 25,
     "number_samples": 2441,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Mammals"
   },
   {
     "study_id": 374,
@@ -3101,7 +3294,8 @@
     "duration": 11,
     "number_species": 70,
     "number_samples": 13830,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Shorebirds"
   },
   {
     "study_id": 375,
@@ -3117,7 +3311,8 @@
     "duration": 11,
     "number_species": 423,
     "number_samples": 4553,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Beetles"
   },
   {
     "study_id": 376,
@@ -3133,7 +3328,8 @@
     "duration": 5,
     "number_species": 240,
     "number_samples": 1122,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Birds"
   },
   {
     "study_id": 377,
@@ -3149,7 +3345,8 @@
     "duration": 6,
     "number_species": 251,
     "number_samples": 8735,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Birds"
   },
   {
     "study_id": 378,
@@ -3165,7 +3362,8 @@
     "duration": 16,
     "number_species": 42,
     "number_samples": 95,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "intertidal"
   },
   {
     "study_id": 379,
@@ -3181,7 +3379,8 @@
     "duration": 24,
     "number_species": 61,
     "number_samples": 76,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "intertidal"
   },
   {
     "study_id": 381,
@@ -3197,7 +3396,8 @@
     "duration": 7,
     "number_species": 29,
     "number_samples": 7,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Herpetofauna"
   },
   {
     "study_id": 382,
@@ -3213,7 +3413,8 @@
     "duration": 13,
     "number_species": 7,
     "number_samples": 39,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Mammals"
   },
   {
     "study_id": 383,
@@ -3229,7 +3430,8 @@
     "duration": 39,
     "number_species": 9,
     "number_samples": 3,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Trees"
   },
   {
     "study_id": 384,
@@ -3245,7 +3447,8 @@
     "duration": 34,
     "number_species": 14,
     "number_samples": 3,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Trees"
   },
   {
     "study_id": 385,
@@ -3261,7 +3464,8 @@
     "duration": 40,
     "number_species": 5,
     "number_samples": 3,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Trees"
   },
   {
     "study_id": 386,
@@ -3277,7 +3481,8 @@
     "duration": 16,
     "number_species": 6,
     "number_samples": 2,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Trees"
   },
   {
     "study_id": 387,
@@ -3293,7 +3498,8 @@
     "duration": 52,
     "number_species": 4,
     "number_samples": 3,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Trees"
   },
   {
     "study_id": 388,
@@ -3309,7 +3515,8 @@
     "duration": 58,
     "number_species": 5,
     "number_samples": 3,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Trees"
   },
   {
     "study_id": 389,
@@ -3325,7 +3532,8 @@
     "duration": 34,
     "number_species": 20,
     "number_samples": 3,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Trees"
   },
   {
     "study_id": 390,
@@ -3341,7 +3549,8 @@
     "duration": 38,
     "number_species": 8,
     "number_samples": 3,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Trees"
   },
   {
     "study_id": 391,
@@ -3357,7 +3566,8 @@
     "duration": 34,
     "number_species": 6,
     "number_samples": 3,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Trees"
   },
   {
     "study_id": 392,
@@ -3373,7 +3583,8 @@
     "duration": 40,
     "number_species": 10,
     "number_samples": 3,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Trees"
   },
   {
     "study_id": 393,
@@ -3389,7 +3600,8 @@
     "duration": 38,
     "number_species": 15,
     "number_samples": 3,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Trees"
   },
   {
     "study_id": 394,
@@ -3405,7 +3617,8 @@
     "duration": 38,
     "number_species": 10,
     "number_samples": 3,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Trees"
   },
   {
     "study_id": 395,
@@ -3421,7 +3634,8 @@
     "duration": 34,
     "number_species": 9,
     "number_samples": 3,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Trees"
   },
   {
     "study_id": 396,
@@ -3437,7 +3651,8 @@
     "duration": 11,
     "number_species": 22,
     "number_samples": 2,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Trees"
   },
   {
     "study_id": 397,
@@ -3453,7 +3668,8 @@
     "duration": 9,
     "number_species": 6,
     "number_samples": 2,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Trees"
   },
   {
     "study_id": 398,
@@ -3469,7 +3685,8 @@
     "duration": 23,
     "number_species": 16,
     "number_samples": 2,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Trees"
   },
   {
     "study_id": 399,
@@ -3485,7 +3702,8 @@
     "duration": 28,
     "number_species": 8,
     "number_samples": 2,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Trees"
   },
   {
     "study_id": 400,
@@ -3501,7 +3719,8 @@
     "duration": 22,
     "number_species": 9,
     "number_samples": 2,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Trees"
   },
   {
     "study_id": 401,
@@ -3517,7 +3736,8 @@
     "duration": 21,
     "number_species": 11,
     "number_samples": 2,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Trees"
   },
   {
     "study_id": 402,
@@ -3533,7 +3753,8 @@
     "duration": 6,
     "number_species": 74,
     "number_samples": 42,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Freshwater fish"
   },
   {
     "study_id": 403,
@@ -3549,7 +3770,8 @@
     "duration": 7,
     "number_species": 16,
     "number_samples": 62,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Tadpole"
   },
   {
     "study_id": 404,
@@ -3565,7 +3787,8 @@
     "duration": 3,
     "number_species": 54,
     "number_samples": 239,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Grass"
   },
   {
     "study_id": 405,
@@ -3581,7 +3804,8 @@
     "duration": 3,
     "number_species": 36,
     "number_samples": 120,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Grass"
   },
   {
     "study_id": 406,
@@ -3597,7 +3821,8 @@
     "duration": 3,
     "number_species": 117,
     "number_samples": 33,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Grass"
   },
   {
     "study_id": 407,
@@ -3613,7 +3838,8 @@
     "duration": 2,
     "number_species": 15,
     "number_samples": 108,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "fish"
   },
   {
     "study_id": 408,
@@ -3629,7 +3855,8 @@
     "duration": 2,
     "number_species": 18,
     "number_samples": 369,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "turf algae"
   },
   {
     "study_id": 409,
@@ -3645,7 +3872,8 @@
     "duration": 2,
     "number_species": 20,
     "number_samples": 265,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "fish"
   },
   {
     "study_id": 412,
@@ -3661,7 +3889,8 @@
     "duration": 6,
     "number_species": 213,
     "number_samples": 296,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "fish"
   },
   {
     "study_id": 413,
@@ -3677,7 +3906,8 @@
     "duration": 50,
     "number_species": 60,
     "number_samples": 177,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Birds"
   },
   {
     "study_id": 414,
@@ -3693,7 +3923,8 @@
     "duration": 53,
     "number_species": 48,
     "number_samples": 48,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Birds"
   },
   {
     "study_id": 415,
@@ -3709,7 +3940,8 @@
     "duration": 19,
     "number_species": 45,
     "number_samples": 52,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Birds"
   },
   {
     "study_id": 416,
@@ -3725,7 +3957,8 @@
     "duration": 26,
     "number_species": 53,
     "number_samples": 118,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Birds"
   },
   {
     "study_id": 419,
@@ -3741,7 +3974,8 @@
     "duration": 19,
     "number_species": 54,
     "number_samples": 342,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Birds"
   },
   {
     "study_id": 420,
@@ -3757,7 +3991,8 @@
     "duration": 38,
     "number_species": 45,
     "number_samples": 99,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Birds"
   },
   {
     "study_id": 421,
@@ -3773,7 +4008,8 @@
     "duration": 2,
     "number_species": 58,
     "number_samples": 313,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Butterflies"
   },
   {
     "study_id": 422,
@@ -3789,7 +4025,8 @@
     "duration": 6,
     "number_species": 43,
     "number_samples": 23,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Butterflies"
   },
   {
     "study_id": 423,
@@ -3805,7 +4042,8 @@
     "duration": 6,
     "number_species": 46,
     "number_samples": 26,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Butterflies"
   },
   {
     "study_id": 424,
@@ -3821,7 +4059,8 @@
     "duration": 5,
     "number_species": 7,
     "number_samples": 36,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Bumble bees"
   },
   {
     "study_id": 425,
@@ -3837,7 +4076,8 @@
     "duration": 2,
     "number_species": 311,
     "number_samples": 169,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Benthos"
   },
   {
     "study_id": 426,
@@ -3853,7 +4093,8 @@
     "duration": 35,
     "number_species": 64,
     "number_samples": 388,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "Phytoplankton"
   },
   {
     "study_id": 427,
@@ -3869,7 +4110,8 @@
     "duration": 32,
     "number_species": 65,
     "number_samples": 456,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Zooplankton"
   },
   {
     "study_id": 428,
@@ -3885,7 +4127,8 @@
     "duration": 97,
     "number_species": 59,
     "number_samples": 10725,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Mainly fish and some invertebrates"
   },
   {
     "study_id": 430,
@@ -3901,7 +4144,8 @@
     "duration": 32,
     "number_species": 57,
     "number_samples": 9457,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Fish"
   },
   {
     "study_id": 431,
@@ -3917,7 +4161,8 @@
     "duration": 33,
     "number_species": 44,
     "number_samples": 2404,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Fish"
   },
   {
     "study_id": 432,
@@ -3933,7 +4178,8 @@
     "duration": 19,
     "number_species": 36,
     "number_samples": 1354,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Fish"
   },
   {
     "study_id": 433,
@@ -3949,7 +4195,8 @@
     "duration": 20,
     "number_species": 18,
     "number_samples": 643,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Zooplankton"
   },
   {
     "study_id": 434,
@@ -3965,7 +4212,8 @@
     "duration": 10,
     "number_species": 49,
     "number_samples": 61,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Phytoplankton"
   },
   {
     "study_id": 436,
@@ -3981,7 +4229,8 @@
     "duration": 8,
     "number_species": 391,
     "number_samples": 1056,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "fish"
   },
   {
     "study_id": 437,
@@ -3997,7 +4246,8 @@
     "duration": 7,
     "number_species": 188,
     "number_samples": 63,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "fish"
   },
   {
     "study_id": 438,
@@ -4013,7 +4263,8 @@
     "duration": 9,
     "number_species": 582,
     "number_samples": 1097,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "fish"
   },
   {
     "study_id": 439,
@@ -4029,7 +4280,8 @@
     "duration": 13,
     "number_species": 52,
     "number_samples": 13,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "birds"
   },
   {
     "study_id": 440,
@@ -4045,7 +4297,8 @@
     "duration": 13,
     "number_species": 68,
     "number_samples": 13,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "birds"
   },
   {
     "study_id": 441,
@@ -4061,7 +4314,8 @@
     "duration": 13,
     "number_species": 61,
     "number_samples": 13,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "birds"
   },
   {
     "study_id": 442,
@@ -4077,7 +4331,8 @@
     "duration": 6,
     "number_species": 33,
     "number_samples": 6,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "birds"
   },
   {
     "study_id": 443,
@@ -4093,7 +4348,8 @@
     "duration": 4,
     "number_species": 35,
     "number_samples": 4,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "birds"
   },
   {
     "study_id": 444,
@@ -4109,7 +4365,8 @@
     "duration": 5,
     "number_species": 20,
     "number_samples": 5,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "birds of prey"
   },
   {
     "study_id": 445,
@@ -4125,7 +4382,8 @@
     "duration": 3,
     "number_species": 11,
     "number_samples": 3,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "waterfowl"
   },
   {
     "study_id": 446,
@@ -4141,7 +4399,8 @@
     "duration": 5,
     "number_species": 9,
     "number_samples": 5,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "hunting mammals species"
   },
   {
     "study_id": 447,
@@ -4157,7 +4416,8 @@
     "duration": 9,
     "number_species": 10,
     "number_samples": 9,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "small mammals"
   },
   {
     "study_id": 448,
@@ -4173,7 +4433,8 @@
     "duration": 4,
     "number_species": 16,
     "number_samples": 4,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "small mammals"
   },
   {
     "study_id": 449,
@@ -4189,7 +4450,8 @@
     "duration": 10,
     "number_species": 9,
     "number_samples": 10,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "small mammals"
   },
   {
     "study_id": 450,
@@ -4205,7 +4467,8 @@
     "duration": 8,
     "number_species": 26,
     "number_samples": 4,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "benthic and demersal fish "
   },
   {
     "study_id": 451,
@@ -4221,7 +4484,8 @@
     "duration": 8,
     "number_species": 20,
     "number_samples": 4,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "benthic and demersal fish "
   },
   {
     "study_id": 452,
@@ -4237,7 +4501,8 @@
     "duration": 9,
     "number_species": 13,
     "number_samples": 8,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "necton"
   },
   {
     "study_id": 453,
@@ -4253,7 +4518,8 @@
     "duration": 42,
     "number_species": 15,
     "number_samples": 3,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "zooplankton"
   },
   {
     "study_id": 454,
@@ -4269,7 +4535,8 @@
     "duration": 3,
     "number_species": 6,
     "number_samples": 200,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Damselflies"
   },
   {
     "study_id": 455,
@@ -4285,7 +4552,8 @@
     "duration": 3,
     "number_species": 58,
     "number_samples": 9,
-    "abundance_type": "MeanCount"
+    "abundance_type": "MeanCount",
+    "organisms": "Sclereactinian corals"
   },
   {
     "study_id": 456,
@@ -4301,7 +4569,8 @@
     "duration": 8,
     "number_species": 133,
     "number_samples": 6,
-    "abundance_type": "MeanCount"
+    "abundance_type": "MeanCount",
+    "organisms": "Sclereactinian corals"
   },
   {
     "study_id": 457,
@@ -4317,7 +4586,8 @@
     "duration": 12,
     "number_species": 223,
     "number_samples": 35,
-    "abundance_type": "MeanCount"
+    "abundance_type": "MeanCount",
+    "organisms": "Sclereactinian corals"
   },
   {
     "study_id": 466,
@@ -4333,7 +4603,8 @@
     "duration": 23,
     "number_species": 94,
     "number_samples": 1936,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "teleost fishes and elasmobranchs"
   },
   {
     "study_id": 467,
@@ -4349,7 +4620,8 @@
     "duration": 13,
     "number_species": 72,
     "number_samples": 36,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "fish"
   },
   {
     "study_id": 468,
@@ -4365,7 +4637,8 @@
     "duration": 32,
     "number_species": 149,
     "number_samples": 3568,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "benthos, kelp and algae"
   },
   {
     "study_id": 469,
@@ -4381,7 +4654,8 @@
     "duration": 30,
     "number_species": 38,
     "number_samples": 594,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "benthos, kelp and algae"
   },
   {
     "study_id": 471,
@@ -4397,7 +4671,8 @@
     "duration": 10,
     "number_species": 160,
     "number_samples": 7600,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "grasses"
   },
   {
     "study_id": 473,
@@ -4413,7 +4688,8 @@
     "duration": 14,
     "number_species": 95,
     "number_samples": 504,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "grasses"
   },
   {
     "study_id": 475,
@@ -4429,7 +4705,8 @@
     "duration": 13,
     "number_species": 34,
     "number_samples": 12,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "breeding birds"
   },
   {
     "study_id": 476,
@@ -4445,7 +4722,8 @@
     "duration": 5,
     "number_species": 304,
     "number_samples": 210,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Bromeliad invertebrates"
   },
   {
     "study_id": 477,
@@ -4461,7 +4739,8 @@
     "duration": 15,
     "number_species": 41,
     "number_samples": 840,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Epifaunal invertebrates"
   },
   {
     "study_id": 478,
@@ -4477,7 +4756,8 @@
     "duration": 37,
     "number_species": 90,
     "number_samples": 37,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "insects"
   },
   {
     "study_id": 479,
@@ -4493,7 +4773,8 @@
     "duration": 10,
     "number_species": 69,
     "number_samples": 172,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "plants"
   },
   {
     "study_id": 480,
@@ -4509,7 +4790,8 @@
     "duration": 11,
     "number_species": 30,
     "number_samples": 30,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "plants"
   },
   {
     "study_id": 481,
@@ -4525,7 +4807,8 @@
     "duration": 8,
     "number_species": 23,
     "number_samples": 57,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "plants"
   },
   {
     "study_id": 483,
@@ -4541,7 +4824,8 @@
     "duration": 24,
     "number_species": 54,
     "number_samples": 830,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "plants"
   },
   {
     "study_id": 484,
@@ -4557,7 +4841,8 @@
     "duration": 14,
     "number_species": 84,
     "number_samples": 288,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "plants"
   },
   {
     "study_id": 485,
@@ -4573,7 +4858,8 @@
     "duration": 9,
     "number_species": 127,
     "number_samples": 460,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "plants"
   },
   {
     "study_id": 486,
@@ -4589,7 +4875,8 @@
     "duration": 16,
     "number_species": 34,
     "number_samples": 27,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "plants"
   },
   {
     "study_id": 487,
@@ -4605,7 +4892,8 @@
     "duration": 18,
     "number_species": 19,
     "number_samples": 143,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "plants"
   },
   {
     "study_id": 489,
@@ -4621,7 +4909,8 @@
     "duration": 9,
     "number_species": 50,
     "number_samples": 75,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "plants"
   },
   {
     "study_id": 490,
@@ -4637,7 +4926,8 @@
     "duration": 4,
     "number_species": 52,
     "number_samples": 20,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "plants"
   },
   {
     "study_id": 491,
@@ -4653,7 +4943,8 @@
     "duration": 15,
     "number_species": 71,
     "number_samples": 39,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "plants"
   },
   {
     "study_id": 492,
@@ -4669,7 +4960,8 @@
     "duration": 25,
     "number_species": 28,
     "number_samples": 63,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "plants"
   },
   {
     "study_id": 493,
@@ -4685,7 +4977,8 @@
     "duration": 6,
     "number_species": 41,
     "number_samples": 30,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "plants"
   },
   {
     "study_id": 494,
@@ -4701,7 +4994,8 @@
     "duration": 12,
     "number_species": 61,
     "number_samples": 86,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "plants"
   },
   {
     "study_id": 495,
@@ -4717,7 +5011,8 @@
     "duration": 10,
     "number_species": 70,
     "number_samples": 72,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "plants"
   },
   {
     "study_id": 496,
@@ -4733,7 +5028,8 @@
     "duration": 9,
     "number_species": 221,
     "number_samples": 54,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "plants"
   },
   {
     "study_id": 497,
@@ -4749,7 +5045,8 @@
     "duration": 29,
     "number_species": 59,
     "number_samples": 2699,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "plants"
   },
   {
     "study_id": 498,
@@ -4765,7 +5062,8 @@
     "duration": 4,
     "number_species": 45,
     "number_samples": 40,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "plants"
   },
   {
     "study_id": 499,
@@ -4781,7 +5079,8 @@
     "duration": 21,
     "number_species": 212,
     "number_samples": 141,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Macrobenthos"
   },
   {
     "study_id": 500,
@@ -4797,7 +5096,8 @@
     "duration": 12,
     "number_species": 425,
     "number_samples": 362,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Macrobenthos"
   },
   {
     "study_id": 501,
@@ -4813,7 +5113,8 @@
     "duration": 9,
     "number_species": 156,
     "number_samples": 150,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Macrobenthos and fish"
   },
   {
     "study_id": 502,
@@ -4829,7 +5130,8 @@
     "duration": 48,
     "number_species": 12,
     "number_samples": 6042,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "plants"
   },
   {
     "study_id": 503,
@@ -4845,7 +5147,8 @@
     "duration": 2,
     "number_species": 111,
     "number_samples": 2,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "scleractinian corals"
   },
   {
     "study_id": 504,
@@ -4861,7 +5164,8 @@
     "duration": 5,
     "number_species": 67,
     "number_samples": 153,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "coral reef fish"
   },
   {
     "study_id": 505,
@@ -4877,7 +5181,8 @@
     "duration": 23,
     "number_species": 268,
     "number_samples": 694,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "fish and marine invertebrates"
   },
   {
     "study_id": 507,
@@ -4893,7 +5198,8 @@
     "duration": 35,
     "number_species": 41,
     "number_samples": 7068,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "fish and some molluscs/other inverts"
   },
   {
     "study_id": 508,
@@ -4909,7 +5215,8 @@
     "duration": 3,
     "number_species": 43,
     "number_samples": 20,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "plants"
   },
   {
     "study_id": 509,
@@ -4925,7 +5232,8 @@
     "duration": 20,
     "number_species": 215,
     "number_samples": 624,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "plants"
   },
   {
     "study_id": 510,
@@ -4941,7 +5249,8 @@
     "duration": 29,
     "number_species": 104,
     "number_samples": 55,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Butterflies"
   },
   {
     "study_id": 511,
@@ -4957,7 +5266,8 @@
     "duration": 3,
     "number_species": 93,
     "number_samples": 168,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Demersal fish"
   },
   {
     "study_id": 512,
@@ -4973,7 +5283,8 @@
     "duration": 31,
     "number_species": 231,
     "number_samples": 60,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "plants"
   },
   {
     "study_id": 516,
@@ -4989,7 +5300,8 @@
     "duration": 17,
     "number_species": 45,
     "number_samples": 225,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "bats"
   },
   {
     "study_id": 522,
@@ -5005,7 +5317,8 @@
     "duration": 27,
     "number_species": 106,
     "number_samples": 178,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Waterbirds"
   },
   {
     "study_id": 525,
@@ -5021,7 +5334,8 @@
     "duration": 29,
     "number_species": 25,
     "number_samples": 440,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Mangroves"
   },
   {
     "study_id": 526,
@@ -5037,7 +5351,8 @@
     "duration": 8,
     "number_species": 42,
     "number_samples": 16052,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Epibenthic"
   },
   {
     "study_id": 550,
@@ -5053,7 +5368,8 @@
     "duration": 21,
     "number_species": 11,
     "number_samples": 502,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Molluscs"
   },
   {
     "study_id": 551,
@@ -5069,7 +5385,8 @@
     "duration": 21,
     "number_species": 10,
     "number_samples": 874,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Molluscs"
   },
   {
     "study_id": 552,
@@ -5085,7 +5402,8 @@
     "duration": 11,
     "number_species": 55,
     "number_samples": 11189,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Trees"
   },
   {
     "study_id": 553,
@@ -5101,7 +5419,8 @@
     "duration": 12,
     "number_species": 285,
     "number_samples": 29166,
-    "abundance_type": "Presence/Absence"
+    "abundance_type": "Presence/Absence",
+    "organisms": "Understory plants"
   },
   {
     "study_id": 554,
@@ -5117,7 +5436,8 @@
     "duration": 20,
     "number_species": 48,
     "number_samples": 417,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "Coral"
   },
   {
     "study_id": 555,
@@ -5133,7 +5453,8 @@
     "duration": 26,
     "number_species": 20,
     "number_samples": 9389,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Zooplankton"
   },
   {
     "study_id": 556,
@@ -5149,7 +5470,8 @@
     "duration": 5,
     "number_species": 16,
     "number_samples": 3584,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Zooplankton"
   },
   {
     "study_id": 557,
@@ -5165,7 +5487,8 @@
     "duration": 5,
     "number_species": 20,
     "number_samples": 4171,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Zooplankton"
   },
   {
     "study_id": 558,
@@ -5181,7 +5504,8 @@
     "duration": 50,
     "number_species": 16,
     "number_samples": 19474,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Zooplankton"
   },
   {
     "study_id": 559,
@@ -5197,7 +5521,8 @@
     "duration": 50,
     "number_species": 19,
     "number_samples": 22647,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Zooplankton"
   },
   {
     "study_id": 560,
@@ -5213,7 +5538,8 @@
     "duration": 50,
     "number_species": 18,
     "number_samples": 22629,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Zooplankton"
   },
   {
     "study_id": 561,
@@ -5229,7 +5555,8 @@
     "duration": 13,
     "number_species": 16,
     "number_samples": 1084,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Zooplankton"
   },
   {
     "study_id": 562,
@@ -5245,7 +5572,8 @@
     "duration": 17,
     "number_species": 19,
     "number_samples": 1464,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Zooplankton"
   },
   {
     "study_id": 563,
@@ -5261,7 +5589,8 @@
     "duration": 3,
     "number_species": 12,
     "number_samples": 192,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Zooplankton"
   },
   {
     "study_id": 564,
@@ -5277,7 +5606,8 @@
     "duration": 3,
     "number_species": 18,
     "number_samples": 218,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Zooplankton"
   },
   {
     "study_id": 565,
@@ -5293,7 +5623,8 @@
     "duration": 17,
     "number_species": 19,
     "number_samples": 3805,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Zooplankton"
   },
   {
     "study_id": 566,
@@ -5309,7 +5640,8 @@
     "duration": 10,
     "number_species": 59,
     "number_samples": 151,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Collembola"
   },
   {
     "study_id": 567,
@@ -5325,7 +5657,8 @@
     "duration": 2,
     "number_species": 56,
     "number_samples": 78,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Collembola"
   },
   {
     "study_id": 568,
@@ -5341,7 +5674,8 @@
     "duration": 46,
     "number_species": 5,
     "number_samples": 5588,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Trees"
   },
   {
     "study_id": 569,
@@ -5357,7 +5691,8 @@
     "duration": 21,
     "number_species": 131,
     "number_samples": 1395,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Understory vegetation"
   },
   {
     "study_id": 570,
@@ -5373,7 +5708,8 @@
     "duration": 24,
     "number_species": 158,
     "number_samples": 3119,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Carabids"
   },
   {
     "study_id": 571,
@@ -5389,7 +5725,8 @@
     "duration": 13,
     "number_species": 5222,
     "number_samples": 4109,
-    "abundance_type": "Presence/Absence"
+    "abundance_type": "Presence/Absence",
+    "organisms": "Vascular plants"
   },
   {
     "study_id": 573,
@@ -5405,7 +5742,8 @@
     "duration": 21,
     "number_species": 251,
     "number_samples": 24,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Invertebrates"
   },
   {
     "study_id": 574,
@@ -5421,7 +5759,8 @@
     "duration": 48,
     "number_species": 236,
     "number_samples": 49,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Invertebrates"
   },
   {
     "study_id": 575,
@@ -5437,7 +5776,8 @@
     "duration": 33,
     "number_species": 317,
     "number_samples": 32,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Invertebrates"
   },
   {
     "study_id": 576,
@@ -5453,7 +5793,8 @@
     "duration": 10,
     "number_species": 5,
     "number_samples": 30,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "flowering plants"
   },
   {
     "study_id": 577,
@@ -5469,7 +5810,8 @@
     "duration": 31,
     "number_species": 311,
     "number_samples": 2880,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "nan"
   },
   {
     "study_id": 578,
@@ -5485,7 +5827,8 @@
     "duration": 15,
     "number_species": 98,
     "number_samples": 218,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Benthic invertebrates"
   },
   {
     "study_id": 579,
@@ -5501,7 +5844,8 @@
     "duration": 26,
     "number_species": 102,
     "number_samples": 8,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Tropical Reef Fish"
   },
   {
     "study_id": 580,
@@ -5517,7 +5861,8 @@
     "duration": 16,
     "number_species": 47,
     "number_samples": 65,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Calcerous grassland plants"
   },
   {
     "study_id": 581,
@@ -5533,7 +5878,8 @@
     "duration": 7,
     "number_species": 268,
     "number_samples": 766,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "Woody Tree species"
   },
   {
     "study_id": 582,
@@ -5549,7 +5895,8 @@
     "duration": 41,
     "number_species": 360,
     "number_samples": 11289,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "nan"
   },
   {
     "study_id": 583,
@@ -5565,7 +5912,8 @@
     "duration": 13,
     "number_species": 36,
     "number_samples": 901,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "Rocky shore algal communities"
   },
   {
     "study_id": 584,
@@ -5581,7 +5929,8 @@
     "duration": 9,
     "number_species": 71,
     "number_samples": 692,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Rocky Shore Invertebrates"
   },
   {
     "study_id": 585,
@@ -5597,7 +5946,8 @@
     "duration": 8,
     "number_species": 51,
     "number_samples": 3723,
-    "abundance_type": "MeanCount"
+    "abundance_type": "MeanCount",
+    "organisms": "Grasshoppers"
   },
   {
     "study_id": 586,
@@ -5613,7 +5963,8 @@
     "duration": 4,
     "number_species": 236,
     "number_samples": 28,
-    "abundance_type": "MeanCount"
+    "abundance_type": "MeanCount",
+    "organisms": "Arthropods"
   },
   {
     "study_id": 587,
@@ -5629,7 +5980,8 @@
     "duration": 3,
     "number_species": 4,
     "number_samples": 11,
-    "abundance_type": "MeanCount"
+    "abundance_type": "MeanCount",
+    "organisms": "Small field Rodents"
   },
   {
     "study_id": 588,
@@ -5645,7 +5997,8 @@
     "duration": 29,
     "number_species": 22,
     "number_samples": 39581,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Flying Insects"
   },
   {
     "study_id": 589,
@@ -5661,7 +6014,8 @@
     "duration": 24,
     "number_species": 135,
     "number_samples": 968,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "Temperate algae, marine invertebrates and fish."
   },
   {
     "study_id": 590,
@@ -5677,7 +6031,8 @@
     "duration": 59,
     "number_species": 194,
     "number_samples": 18,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Grassland Insects"
   },
   {
     "study_id": 591,
@@ -5693,7 +6048,8 @@
     "duration": 5,
     "number_species": 137,
     "number_samples": 88,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Coral-reef fish"
   },
   {
     "study_id": 592,
@@ -5709,7 +6065,8 @@
     "duration": 25,
     "number_species": 54,
     "number_samples": 2,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Breeding terrestrial birds, few boreal migrants"
   },
   {
     "study_id": 593,
@@ -5725,7 +6082,8 @@
     "duration": 26,
     "number_species": 234,
     "number_samples": 315,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Resident and migrant birds of the Bogota highland plateau"
   },
   {
     "study_id": 594,
@@ -5741,7 +6099,8 @@
     "duration": 13,
     "number_species": 47,
     "number_samples": 10,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Freshwater fish"
   },
   {
     "study_id": 595,
@@ -5757,7 +6116,8 @@
     "duration": 17,
     "number_species": 95,
     "number_samples": 605,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Marine Fish"
   },
   {
     "study_id": 596,
@@ -5773,7 +6133,8 @@
     "duration": 23,
     "number_species": 47,
     "number_samples": 4301,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Butterflies"
   },
   {
     "study_id": 597,
@@ -5789,7 +6150,8 @@
     "duration": 24,
     "number_species": 548,
     "number_samples": 31593,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Moths"
   },
   {
     "study_id": 598,
@@ -5805,7 +6167,8 @@
     "duration": 29,
     "number_species": 17,
     "number_samples": 1181,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "desert mammals"
   },
   {
     "study_id": 599,
@@ -5821,7 +6184,8 @@
     "duration": 29,
     "number_species": 71,
     "number_samples": 1287,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Herpetofauna"
   },
   {
     "study_id": 600,
@@ -5837,7 +6201,8 @@
     "duration": 37,
     "number_species": 26,
     "number_samples": 26,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Wintering waterbirds"
   },
   {
     "study_id": 601,
@@ -5853,7 +6218,8 @@
     "duration": 42,
     "number_species": 62,
     "number_samples": 122,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Wintering waterbirds"
   },
   {
     "study_id": 602,
@@ -5869,7 +6235,8 @@
     "duration": 42,
     "number_species": 76,
     "number_samples": 110,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Wintering waterbirds"
   },
   {
     "study_id": 603,
@@ -5885,7 +6252,8 @@
     "duration": 41,
     "number_species": 33,
     "number_samples": 33,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Wintering waterbirds"
   },
   {
     "study_id": 604,
@@ -5901,7 +6269,8 @@
     "duration": 24,
     "number_species": 651,
     "number_samples": 282,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Moths"
   },
   {
     "study_id": 605,
@@ -5917,7 +6286,8 @@
     "duration": 7,
     "number_species": 71,
     "number_samples": 481,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Arthropods"
   },
   {
     "study_id": 606,
@@ -5933,7 +6303,8 @@
     "duration": 9,
     "number_species": 15,
     "number_samples": 108,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Forest floor ants"
   },
   {
     "study_id": 607,
@@ -5949,7 +6320,8 @@
     "duration": 22,
     "number_species": 31,
     "number_samples": 21,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "vascular plants, mosses"
   },
   {
     "study_id": 608,
@@ -5965,7 +6337,8 @@
     "duration": 22,
     "number_species": 26,
     "number_samples": 33,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "vascular plants, mosses"
   },
   {
     "study_id": 609,
@@ -5981,7 +6354,8 @@
     "duration": 22,
     "number_species": 46,
     "number_samples": 34,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "vascular plants, mosses"
   },
   {
     "study_id": 610,
@@ -5997,7 +6371,8 @@
     "duration": 57,
     "number_species": 9,
     "number_samples": 51,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Breeding waterbirds"
   },
   {
     "study_id": 611,
@@ -6013,7 +6388,8 @@
     "duration": 20,
     "number_species": 11,
     "number_samples": 547,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Freshwater fish"
   },
   {
     "study_id": 612,
@@ -6029,7 +6405,8 @@
     "duration": 13,
     "number_species": 1071,
     "number_samples": 463,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Macromoths"
   },
   {
     "study_id": 613,
@@ -6045,7 +6422,8 @@
     "duration": 3,
     "number_species": 24,
     "number_samples": 3,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Ants"
   },
   {
     "study_id": 614,
@@ -6061,7 +6439,8 @@
     "duration": 28,
     "number_species": 172,
     "number_samples": 10,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Arachnids"
   },
   {
     "study_id": 615,
@@ -6077,7 +6456,8 @@
     "duration": 34,
     "number_species": 258,
     "number_samples": 10,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Coleoptera (beetles)"
   },
   {
     "study_id": 616,
@@ -6093,7 +6473,8 @@
     "duration": 21,
     "number_species": 30,
     "number_samples": 15,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Benthic aquatic invertebrates"
   },
   {
     "study_id": 617,
@@ -6109,7 +6490,8 @@
     "duration": 21,
     "number_species": 40,
     "number_samples": 15,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Benthic aquatic invertebrates"
   },
   {
     "study_id": 618,
@@ -6125,7 +6507,8 @@
     "duration": 20,
     "number_species": 24,
     "number_samples": 15,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Benthic aquatic invertebrates"
   },
   {
     "study_id": 619,
@@ -6141,7 +6524,8 @@
     "duration": 28,
     "number_species": 54,
     "number_samples": 406,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "Vascular plants and moss"
   },
   {
     "study_id": 620,
@@ -6157,7 +6541,8 @@
     "duration": 28,
     "number_species": 40,
     "number_samples": 400,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "Vascular plants and moss"
   },
   {
     "study_id": 621,
@@ -6173,7 +6558,8 @@
     "duration": 28,
     "number_species": 110,
     "number_samples": 309,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "Vascular plants and moss"
   },
   {
     "study_id": 622,
@@ -6189,7 +6575,8 @@
     "duration": 7,
     "number_species": 19,
     "number_samples": 89,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Aquatic invertebrates"
   },
   {
     "study_id": 623,
@@ -6205,7 +6592,8 @@
     "duration": 8,
     "number_species": 30,
     "number_samples": 196,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Aquatic invertebrates"
   },
   {
     "study_id": 624,
@@ -6221,7 +6609,8 @@
     "duration": 27,
     "number_species": 40,
     "number_samples": 301,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Estuary waterbirds"
   },
   {
     "study_id": 625,
@@ -6237,7 +6626,8 @@
     "duration": 21,
     "number_species": 153,
     "number_samples": 252,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Freshwater phytoplankton"
   },
   {
     "study_id": 626,
@@ -6253,7 +6643,8 @@
     "duration": 21,
     "number_species": 101,
     "number_samples": 252,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Freshwater zooplankton"
   },
   {
     "study_id": 627,
@@ -6269,7 +6660,8 @@
     "duration": 91,
     "number_species": 80,
     "number_samples": 50,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "heathland vascular plants"
   },
   {
     "study_id": 628,
@@ -6285,7 +6677,8 @@
     "duration": 16,
     "number_species": 214,
     "number_samples": 40,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Aquatic benthic invertebrates"
   },
   {
     "study_id": 629,
@@ -6301,7 +6694,8 @@
     "duration": 18,
     "number_species": 411,
     "number_samples": 528,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "Forest tree, herb, and moss vegetation"
   },
   {
     "study_id": 630,
@@ -6317,7 +6711,8 @@
     "duration": 17,
     "number_species": 316,
     "number_samples": 4608,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "Forest tree, herb, and moss vegetation"
   },
   {
     "study_id": 631,
@@ -6333,7 +6728,8 @@
     "duration": 17,
     "number_species": 49,
     "number_samples": 93,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Freshwater fish, shrimp, and amphibian larvae"
   },
   {
     "study_id": 632,
@@ -6349,7 +6745,8 @@
     "duration": 6,
     "number_species": 162,
     "number_samples": 408,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Birds"
   },
   {
     "study_id": 633,
@@ -6365,7 +6762,8 @@
     "duration": 4,
     "number_species": 7,
     "number_samples": 1866,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "Seagrass"
   },
   {
     "study_id": 634,
@@ -6381,7 +6779,8 @@
     "duration": 24,
     "number_species": 254,
     "number_samples": 9409,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Birds"
   },
   {
     "study_id": 635,
@@ -6397,7 +6796,8 @@
     "duration": 9,
     "number_species": 20,
     "number_samples": 2455,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Mammals"
   },
   {
     "study_id": 636,
@@ -6413,7 +6813,8 @@
     "duration": 12,
     "number_species": 179,
     "number_samples": 197,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Epilimnetic phytoplankton"
   },
   {
     "study_id": 637,
@@ -6429,7 +6830,8 @@
     "duration": 3,
     "number_species": 59,
     "number_samples": 3,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Epilimnetic phytoplankton"
   },
   {
     "study_id": 638,
@@ -6445,7 +6847,8 @@
     "duration": 33,
     "number_species": 43,
     "number_samples": 413,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Freshwater zooplankton"
   },
   {
     "study_id": 639,
@@ -6461,7 +6864,8 @@
     "duration": 11,
     "number_species": 562,
     "number_samples": 496,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "tropical reef fish"
   },
   {
     "study_id": 640,
@@ -6477,7 +6881,8 @@
     "duration": 8,
     "number_species": 115,
     "number_samples": 929,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "tropical reef fish"
   },
   {
     "study_id": 641,
@@ -6493,7 +6898,8 @@
     "duration": 4,
     "number_species": 39,
     "number_samples": 93,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Freshwater fish"
   },
   {
     "study_id": 642,
@@ -6509,7 +6915,8 @@
     "duration": 8,
     "number_species": 319,
     "number_samples": 3035,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Benthic Invertebrates"
   },
   {
     "study_id": 643,
@@ -6525,7 +6932,8 @@
     "duration": 14,
     "number_species": 205,
     "number_samples": 590,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "Sand Dune Vegetation"
   },
   {
     "study_id": 644,
@@ -6541,7 +6949,8 @@
     "duration": 19,
     "number_species": 75,
     "number_samples": 2594,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Freshwater fish"
   },
   {
     "study_id": 645,
@@ -6557,7 +6966,8 @@
     "duration": 31,
     "number_species": 7,
     "number_samples": 4399,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Trees"
   },
   {
     "study_id": 646,
@@ -6573,7 +6983,8 @@
     "duration": 15,
     "number_species": 13,
     "number_samples": 15,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "nan"
   },
   {
     "study_id": 647,
@@ -6589,7 +7000,8 @@
     "duration": 12,
     "number_species": 201,
     "number_samples": 1169,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "Algae"
   },
   {
     "study_id": 648,
@@ -6605,7 +7017,8 @@
     "duration": 18,
     "number_species": 333,
     "number_samples": 2019,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Bees"
   },
   {
     "study_id": 650,
@@ -6621,7 +7034,8 @@
     "duration": 11,
     "number_species": 35,
     "number_samples": 412,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Bees"
   },
   {
     "study_id": 651,
@@ -6637,7 +7051,8 @@
     "duration": 29,
     "number_species": 85,
     "number_samples": 26,
-    "abundance_type": "MeanCount"
+    "abundance_type": "MeanCount",
+    "organisms": "Tropical reef fish"
   },
   {
     "study_id": 652,
@@ -6653,7 +7068,8 @@
     "duration": 6,
     "number_species": 40,
     "number_samples": 61,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "benthic macro-invertebrates"
   },
   {
     "study_id": 653,
@@ -6669,7 +7085,8 @@
     "duration": 3,
     "number_species": 69,
     "number_samples": 249,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "benthic macro-invertebrates"
   },
   {
     "study_id": 654,
@@ -6685,7 +7102,8 @@
     "duration": 6,
     "number_species": 54,
     "number_samples": 96,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "benthic macro-invertebrates"
   },
   {
     "study_id": 655,
@@ -6701,7 +7119,8 @@
     "duration": 102,
     "number_species": 250,
     "number_samples": 4538,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "terrestrial plants"
   },
   {
     "study_id": 656,
@@ -6717,7 +7136,8 @@
     "duration": 22,
     "number_species": 40,
     "number_samples": 357,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "zooplankton"
   },
   {
     "study_id": 657,
@@ -6733,7 +7153,8 @@
     "duration": 24,
     "number_species": 25,
     "number_samples": 1933,
-    "abundance_type": "Presence/Absence"
+    "abundance_type": "Presence/Absence",
+    "organisms": "nan"
   },
   {
     "study_id": 658,
@@ -6749,7 +7170,8 @@
     "duration": 5,
     "number_species": 52,
     "number_samples": 2187,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "amphibians and reptiles"
   },
   {
     "study_id": 659,
@@ -6765,7 +7187,8 @@
     "duration": 37,
     "number_species": 75,
     "number_samples": 217,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "Dune wetland plants"
   },
   {
     "study_id": 660,
@@ -6781,7 +7204,8 @@
     "duration": 10,
     "number_species": 113,
     "number_samples": 331,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Reef fish"
   },
   {
     "study_id": 661,
@@ -6797,7 +7221,8 @@
     "duration": 4,
     "number_species": 16,
     "number_samples": 27,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Bony fishes"
   },
   {
     "study_id": 662,
@@ -6813,7 +7238,8 @@
     "duration": 2,
     "number_species": 106,
     "number_samples": 118,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "Angiosperms"
   },
   {
     "study_id": 663,
@@ -6829,7 +7255,8 @@
     "duration": 19,
     "number_species": 33,
     "number_samples": 325,
-    "abundance_type": "IndividualCountInt"
+    "abundance_type": "IndividualCountInt",
+    "organisms": "Anuran"
   },
   {
     "study_id": 664,
@@ -6845,7 +7272,8 @@
     "duration": 7,
     "number_species": 7,
     "number_samples": 63,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Batoids"
   },
   {
     "study_id": 665,
@@ -6861,7 +7289,8 @@
     "duration": 2,
     "number_species": 293,
     "number_samples": 29,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "birds"
   },
   {
     "study_id": 666,
@@ -6877,7 +7306,8 @@
     "duration": 4,
     "number_species": 15,
     "number_samples": 111,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Dung Beetles"
   },
   {
     "study_id": 667,
@@ -6893,7 +7323,8 @@
     "duration": 3,
     "number_species": 52,
     "number_samples": 228,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "fish"
   },
   {
     "study_id": 668,
@@ -6909,7 +7340,8 @@
     "duration": 6,
     "number_species": 3,
     "number_samples": 116,
-    "abundance_type": "MeanCount"
+    "abundance_type": "MeanCount",
+    "organisms": "Bats"
   },
   {
     "study_id": 669,
@@ -6925,7 +7357,8 @@
     "duration": 28,
     "number_species": 220,
     "number_samples": 102,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Phytoplankton"
   },
   {
     "study_id": 670,
@@ -6941,7 +7374,8 @@
     "duration": 20,
     "number_species": 109,
     "number_samples": 360,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "Coralligenous substrata"
   },
   {
     "study_id": 671,
@@ -6957,7 +7391,8 @@
     "duration": 48,
     "number_species": 878,
     "number_samples": 223,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "moths"
   },
   {
     "study_id": 672,
@@ -6973,7 +7408,8 @@
     "duration": 3,
     "number_species": 19,
     "number_samples": 47,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "birds"
   },
   {
     "study_id": 673,
@@ -6989,7 +7425,8 @@
     "duration": 3,
     "number_species": 50,
     "number_samples": 148,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "amphibians"
   },
   {
     "study_id": 674,
@@ -7005,7 +7442,8 @@
     "duration": 3,
     "number_species": 42,
     "number_samples": 110,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "reptiles"
   },
   {
     "study_id": 675,
@@ -7021,7 +7459,8 @@
     "duration": 14,
     "number_species": 55,
     "number_samples": 809,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Bats"
   },
   {
     "study_id": 676,
@@ -7037,7 +7476,8 @@
     "duration": 14,
     "number_species": 185,
     "number_samples": 5103,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "birds"
   },
   {
     "study_id": 677,
@@ -7053,7 +7493,8 @@
     "duration": 7,
     "number_species": 9,
     "number_samples": 85,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "amphibians"
   },
   {
     "study_id": 678,
@@ -7069,7 +7510,8 @@
     "duration": 8,
     "number_species": 51,
     "number_samples": 749,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "reptiles"
   },
   {
     "study_id": 679,
@@ -7085,7 +7527,8 @@
     "duration": 5,
     "number_species": 20,
     "number_samples": 257,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "amphibians"
   },
   {
     "study_id": 680,
@@ -7101,7 +7544,8 @@
     "duration": 2,
     "number_species": 69,
     "number_samples": 123,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Butterflies"
   },
   {
     "study_id": 681,
@@ -7117,7 +7561,8 @@
     "duration": 5,
     "number_species": 19,
     "number_samples": 446,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "mammals"
   },
   {
     "study_id": 682,
@@ -7133,7 +7578,8 @@
     "duration": 6,
     "number_species": 114,
     "number_samples": 2327,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "birds"
   },
   {
     "study_id": 683,
@@ -7149,7 +7595,8 @@
     "duration": 6,
     "number_species": 115,
     "number_samples": 1199,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Butterflies"
   },
   {
     "study_id": 684,
@@ -7165,7 +7612,8 @@
     "duration": 13,
     "number_species": 72,
     "number_samples": 10,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "freshwater fish"
   },
   {
     "study_id": 685,
@@ -7181,7 +7629,8 @@
     "duration": 6,
     "number_species": 44,
     "number_samples": 14,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "Plants"
   },
   {
     "study_id": 686,
@@ -7197,7 +7646,8 @@
     "duration": 8,
     "number_species": 101,
     "number_samples": 508,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Reef fish"
   },
   {
     "study_id": 687,
@@ -7213,7 +7663,8 @@
     "duration": 4,
     "number_species": 66,
     "number_samples": 7,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Bony fishes"
   },
   {
     "study_id": 688,
@@ -7229,7 +7680,8 @@
     "duration": 9,
     "number_species": 6,
     "number_samples": 377,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Odonata "
   },
   {
     "study_id": 689,
@@ -7245,7 +7697,8 @@
     "duration": 14,
     "number_species": 9,
     "number_samples": 263,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Small mammals (shrews and rodents)"
   },
   {
     "study_id": 690,
@@ -7261,7 +7714,8 @@
     "duration": 15,
     "number_species": 12,
     "number_samples": 416,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "macroalgae"
   },
   {
     "study_id": 691,
@@ -7277,7 +7731,8 @@
     "duration": 15,
     "number_species": 40,
     "number_samples": 739,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "corals"
   },
   {
     "study_id": 692,
@@ -7293,7 +7748,8 @@
     "duration": 29,
     "number_species": 130,
     "number_samples": 1647,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "reef fish"
   },
   {
     "study_id": 693,
@@ -7309,7 +7765,8 @@
     "duration": 22,
     "number_species": 65,
     "number_samples": 161034,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Frogs"
   },
   {
     "study_id": 694,
@@ -7325,7 +7782,8 @@
     "duration": 12,
     "number_species": 106,
     "number_samples": 753,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Coastal birds (and other birds observed on the beach)"
   },
   {
     "study_id": 695,
@@ -7341,7 +7799,8 @@
     "duration": 9,
     "number_species": 31,
     "number_samples": 42,
-    "abundance_type": "Presence/Absence"
+    "abundance_type": "Presence/Absence",
+    "organisms": "Corals"
   },
   {
     "study_id": 696,
@@ -7357,7 +7816,8 @@
     "duration": 16,
     "number_species": 294,
     "number_samples": 320,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Benthic macroinvertebrate"
   },
   {
     "study_id": 697,
@@ -7373,7 +7833,8 @@
     "duration": 22,
     "number_species": 115,
     "number_samples": 1174,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Terrestrial Birds"
   },
   {
     "study_id": 699,
@@ -7389,7 +7850,8 @@
     "duration": 51,
     "number_species": 26,
     "number_samples": 74,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Tide pool fish"
   },
   {
     "study_id": 700,
@@ -7405,7 +7867,8 @@
     "duration": 34,
     "number_species": 47,
     "number_samples": 217,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Macrophytes"
   },
   {
     "study_id": 701,
@@ -7421,7 +7884,8 @@
     "duration": 34,
     "number_species": 29,
     "number_samples": 448,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Aquatic Snails"
   },
   {
     "study_id": 702,
@@ -7437,7 +7901,8 @@
     "duration": 24,
     "number_species": 281,
     "number_samples": 9389,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "All Birds around Phoenix Arizona"
   },
   {
     "study_id": 703,
@@ -7453,7 +7918,8 @@
     "duration": 24,
     "number_species": 84,
     "number_samples": 23,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "waterbirds"
   },
   {
     "study_id": 704,
@@ -7469,7 +7935,8 @@
     "duration": 27,
     "number_species": 44,
     "number_samples": 26,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "birds"
   },
   {
     "study_id": 705,
@@ -7485,7 +7952,8 @@
     "duration": 23,
     "number_species": 60,
     "number_samples": 18,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "fish"
   },
   {
     "study_id": 706,
@@ -7501,7 +7969,8 @@
     "duration": 13,
     "number_species": 32,
     "number_samples": 12,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "birds"
   },
   {
     "study_id": 707,
@@ -7517,7 +7986,8 @@
     "duration": 25,
     "number_species": 9,
     "number_samples": 25,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "seagulls and terns"
   },
   {
     "study_id": 708,
@@ -7533,7 +8003,8 @@
     "duration": 17,
     "number_species": 10,
     "number_samples": 246,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "reptiles"
   },
   {
     "study_id": 709,
@@ -7549,7 +8020,8 @@
     "duration": 51,
     "number_species": 56,
     "number_samples": 1351,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Birds"
   },
   {
     "study_id": 710,
@@ -7565,7 +8037,8 @@
     "duration": 37,
     "number_species": 62,
     "number_samples": 34,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "waterbirds"
   },
   {
     "study_id": 711,
@@ -7581,7 +8054,8 @@
     "duration": 20,
     "number_species": 40,
     "number_samples": 20,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "birds"
   },
   {
     "study_id": 712,
@@ -7597,7 +8071,8 @@
     "duration": 22,
     "number_species": 20,
     "number_samples": 22,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "birds"
   },
   {
     "study_id": 713,
@@ -7613,7 +8088,8 @@
     "duration": 26,
     "number_species": 36,
     "number_samples": 72,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "Terrestrial plants"
   },
   {
     "study_id": 714,
@@ -7629,7 +8105,8 @@
     "duration": 44,
     "number_species": 8,
     "number_samples": 43,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "small mammals"
   },
   {
     "study_id": 715,
@@ -7645,7 +8122,8 @@
     "duration": 28,
     "number_species": 7,
     "number_samples": 28,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "land birds"
   },
   {
     "study_id": 716,
@@ -7661,7 +8139,8 @@
     "duration": 25,
     "number_species": 54,
     "number_samples": 25,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "waterbirds"
   },
   {
     "study_id": 717,
@@ -7677,7 +8156,8 @@
     "duration": 25,
     "number_species": 7,
     "number_samples": 25,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Woodpeckers"
   },
   {
     "study_id": 719,
@@ -7693,7 +8173,8 @@
     "duration": 26,
     "number_species": 14,
     "number_samples": 26,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "waterbirds"
   },
   {
     "study_id": 720,
@@ -7709,7 +8190,8 @@
     "duration": 25,
     "number_species": 18,
     "number_samples": 25,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "birds"
   },
   {
     "study_id": 721,
@@ -7725,7 +8207,8 @@
     "duration": 5,
     "number_species": 69,
     "number_samples": 15,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Wetland plants"
   },
   {
     "study_id": 722,
@@ -7741,7 +8224,8 @@
     "duration": 4,
     "number_species": 6,
     "number_samples": 4,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Desert plants"
   },
   {
     "study_id": 723,
@@ -7757,7 +8241,8 @@
     "duration": 3,
     "number_species": 4,
     "number_samples": 3,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Desert plants"
   },
   {
     "study_id": 724,
@@ -7773,7 +8258,8 @@
     "duration": 3,
     "number_species": 5,
     "number_samples": 3,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Desert plants"
   },
   {
     "study_id": 725,
@@ -7789,7 +8275,8 @@
     "duration": 7,
     "number_species": 64,
     "number_samples": 70,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Meadow steppe"
   },
   {
     "study_id": 726,
@@ -7805,7 +8292,8 @@
     "duration": 7,
     "number_species": 72,
     "number_samples": 27,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "Fir Forests"
   },
   {
     "study_id": 727,
@@ -7821,7 +8309,8 @@
     "duration": 3,
     "number_species": 29,
     "number_samples": 6,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Wetland plants"
   },
   {
     "study_id": 728,
@@ -7837,7 +8326,8 @@
     "duration": 13,
     "number_species": 44,
     "number_samples": 24,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Wetland plants"
   },
   {
     "study_id": 729,
@@ -7853,7 +8343,8 @@
     "duration": 2,
     "number_species": 51,
     "number_samples": 2,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Mountain tree, shrub, grass"
   },
   {
     "study_id": 730,
@@ -7869,7 +8360,8 @@
     "duration": 2,
     "number_species": 29,
     "number_samples": 8,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "soil macrofauna"
   },
   {
     "study_id": 731,
@@ -7885,7 +8377,8 @@
     "duration": 23,
     "number_species": 15,
     "number_samples": 3994,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "bats"
   },
   {
     "study_id": 732,
@@ -7901,7 +8394,8 @@
     "duration": 22,
     "number_species": 40,
     "number_samples": 4449,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "UK Woodland vegetation"
   },
   {
     "study_id": 733,
@@ -7917,7 +8411,8 @@
     "duration": 23,
     "number_species": 545,
     "number_samples": 969,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Savannas"
   },
   {
     "study_id": 734,
@@ -7933,7 +8428,8 @@
     "duration": 23,
     "number_species": 218,
     "number_samples": 955,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Savannas"
   },
   {
     "study_id": 735,
@@ -7949,7 +8445,8 @@
     "duration": 2,
     "number_species": 92,
     "number_samples": 5,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "soil invertebrates"
   },
   {
     "study_id": 736,
@@ -7965,7 +8462,8 @@
     "duration": 2,
     "number_species": 77,
     "number_samples": 6,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "herbs"
   },
   {
     "study_id": 737,
@@ -7981,7 +8479,8 @@
     "duration": 7,
     "number_species": 100,
     "number_samples": 8,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "shrubs"
   },
   {
     "study_id": 738,
@@ -7997,7 +8496,8 @@
     "duration": 12,
     "number_species": 24,
     "number_samples": 6,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "soil invertebrates"
   },
   {
     "study_id": 739,
@@ -8013,7 +8513,8 @@
     "duration": 4,
     "number_species": 57,
     "number_samples": 8,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Plants"
   },
   {
     "study_id": 740,
@@ -8029,7 +8530,8 @@
     "duration": 5,
     "number_species": 31,
     "number_samples": 6,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "soil invertebrates"
   },
   {
     "study_id": 741,
@@ -8045,7 +8547,8 @@
     "duration": 16,
     "number_species": 74,
     "number_samples": 1369,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "algae"
   },
   {
     "study_id": 742,
@@ -8061,7 +8564,8 @@
     "duration": 10,
     "number_species": 72,
     "number_samples": 9,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "forest plants"
   },
   {
     "study_id": 743,
@@ -8077,7 +8581,8 @@
     "duration": 3,
     "number_species": 22,
     "number_samples": 4,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Herbs under forests"
   },
   {
     "study_id": 744,
@@ -8093,7 +8598,8 @@
     "duration": 3,
     "number_species": 40,
     "number_samples": 4,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Shrubs under forests"
   },
   {
     "study_id": 745,
@@ -8109,7 +8615,8 @@
     "duration": 6,
     "number_species": 66,
     "number_samples": 151,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Birds"
   },
   {
     "study_id": 746,
@@ -8125,7 +8632,8 @@
     "duration": 7,
     "number_species": 58,
     "number_samples": 14,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Vascular herbaceous plant"
   },
   {
     "study_id": 747,
@@ -8141,7 +8649,8 @@
     "duration": 3,
     "number_species": 120,
     "number_samples": 120,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Herbs"
   },
   {
     "study_id": 748,
@@ -8157,7 +8666,8 @@
     "duration": 6,
     "number_species": 89,
     "number_samples": 573,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "zooplankton"
   },
   {
     "study_id": 749,
@@ -8173,7 +8683,8 @@
     "duration": 7,
     "number_species": 27,
     "number_samples": 4,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Shrubs under forest"
   },
   {
     "study_id": 750,
@@ -8189,7 +8700,8 @@
     "duration": 7,
     "number_species": 17,
     "number_samples": 4,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Trees"
   },
   {
     "study_id": 751,
@@ -8205,7 +8717,8 @@
     "duration": 6,
     "number_species": 211,
     "number_samples": 27,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Plants in the herbaceous layer of forests"
   },
   {
     "study_id": 752,
@@ -8221,7 +8734,8 @@
     "duration": 6,
     "number_species": 211,
     "number_samples": 27,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Plants in the shrub layer of forests"
   },
   {
     "study_id": 753,
@@ -8237,7 +8751,8 @@
     "duration": 9,
     "number_species": 402,
     "number_samples": 31,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Trees"
   },
   {
     "study_id": 754,
@@ -8253,7 +8768,8 @@
     "duration": 30,
     "number_species": 154,
     "number_samples": 2139,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Aquatic macroinvertebrates"
   },
   {
     "study_id": 755,
@@ -8269,7 +8785,8 @@
     "duration": 29,
     "number_species": 7,
     "number_samples": 1375,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Amphibians and reptiles"
   },
   {
     "study_id": 756,
@@ -8285,7 +8802,8 @@
     "duration": 18,
     "number_species": 84,
     "number_samples": 391,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Terrestrial birds only"
   },
   {
     "study_id": 761,
@@ -8301,7 +8819,8 @@
     "duration": 5,
     "number_species": 27,
     "number_samples": 12,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Amphibians and reptiles: anurans, lizards, turtles and snakes"
   },
   {
     "study_id": 762,
@@ -8317,7 +8836,8 @@
     "duration": 3,
     "number_species": 25,
     "number_samples": 423,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Anurans"
   },
   {
     "study_id": 763,
@@ -8333,7 +8853,8 @@
     "duration": 3,
     "number_species": 16,
     "number_samples": 101,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Slugs"
   },
   {
     "study_id": 764,
@@ -8349,7 +8870,8 @@
     "duration": 2,
     "number_species": 12,
     "number_samples": 46,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Slugs"
   },
   {
     "study_id": 765,
@@ -8365,7 +8887,8 @@
     "duration": 6,
     "number_species": 42,
     "number_samples": 105,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Benthic macroinvertebrates"
   },
   {
     "study_id": 766,
@@ -8381,7 +8904,8 @@
     "duration": 7,
     "number_species": 46,
     "number_samples": 105,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Benthic macroinvertebrates"
   },
   {
     "study_id": 767,
@@ -8397,7 +8921,8 @@
     "duration": 41,
     "number_species": 24,
     "number_samples": 63,
-    "abundance_type": "MeanCount"
+    "abundance_type": "MeanCount",
+    "organisms": "Zoobenthos"
   },
   {
     "study_id": 768,
@@ -8413,7 +8938,8 @@
     "duration": 17,
     "number_species": 143,
     "number_samples": 3815,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Birds"
   },
   {
     "study_id": 769,
@@ -8429,7 +8955,8 @@
     "duration": 21,
     "number_species": 17,
     "number_samples": 110,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Ciliates"
   },
   {
     "study_id": 770,
@@ -8445,7 +8972,8 @@
     "duration": 4,
     "number_species": 83,
     "number_samples": 52,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "protistan plankton &gt;5 \u00c2\u00b5m in cell size:  diatoms, dinoflagellates, coccolithophores, nanoflagellates, and ciliates. "
   },
   {
     "study_id": 771,
@@ -8461,7 +8989,8 @@
     "duration": 4,
     "number_species": 52,
     "number_samples": 32,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "protistan plankton &gt;5 \u00c2\u00b5m in cell size:  diatoms, dinoflagellates, coccolithophores, nanoflagellates, and ciliates. "
   },
   {
     "study_id": 772,
@@ -8477,7 +9006,8 @@
     "duration": 3,
     "number_species": 28,
     "number_samples": 132,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Anurans"
   },
   {
     "study_id": 773,
@@ -8493,7 +9023,8 @@
     "duration": 3,
     "number_species": 23,
     "number_samples": 94,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Anurans"
   },
   {
     "study_id": 774,
@@ -8509,7 +9040,8 @@
     "duration": 5,
     "number_species": 26,
     "number_samples": 304,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Diatoms"
   },
   {
     "study_id": 775,
@@ -8525,7 +9057,8 @@
     "duration": 5,
     "number_species": 64,
     "number_samples": 175,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Dung beetles (Scarabaeinae)"
   },
   {
     "study_id": 776,
@@ -8541,7 +9074,8 @@
     "duration": 19,
     "number_species": 42,
     "number_samples": 149,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Scarabaeidae"
   },
   {
     "study_id": 777,
@@ -8557,7 +9091,8 @@
     "duration": 2,
     "number_species": 63,
     "number_samples": 40,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Dung beetles"
   },
   {
     "study_id": 778,
@@ -8573,7 +9108,8 @@
     "duration": 5,
     "number_species": 23,
     "number_samples": 304,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Freshwater fish"
   },
   {
     "study_id": 779,
@@ -8589,7 +9125,8 @@
     "duration": 10,
     "number_species": 5,
     "number_samples": 61,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Freshwater fish"
   },
   {
     "study_id": 780,
@@ -8605,7 +9142,8 @@
     "duration": 3,
     "number_species": 53,
     "number_samples": 24,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Freshwater Fish"
   },
   {
     "study_id": 781,
@@ -8621,7 +9159,8 @@
     "duration": 14,
     "number_species": 44,
     "number_samples": 437,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Freshwater fish &amp; crustaceans"
   },
   {
     "study_id": 782,
@@ -8637,7 +9176,8 @@
     "duration": 27,
     "number_species": 46,
     "number_samples": 156,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Freshwater fish"
   },
   {
     "study_id": 783,
@@ -8653,7 +9193,8 @@
     "duration": 17,
     "number_species": 15,
     "number_samples": 394,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Freshwater Fish"
   },
   {
     "study_id": 784,
@@ -8669,7 +9210,8 @@
     "duration": 41,
     "number_species": 34,
     "number_samples": 5281,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Freshwater fish"
   },
   {
     "study_id": 785,
@@ -8685,7 +9227,8 @@
     "duration": 21,
     "number_species": 33,
     "number_samples": 1077,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Freshwater fish"
   },
   {
     "study_id": 786,
@@ -8701,7 +9244,8 @@
     "duration": 61,
     "number_species": 171,
     "number_samples": 397,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "beetles"
   },
   {
     "study_id": 787,
@@ -8717,7 +9261,8 @@
     "duration": 40,
     "number_species": 214,
     "number_samples": 156,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Beetles and spiders"
   },
   {
     "study_id": 788,
@@ -8733,7 +9278,8 @@
     "duration": 30,
     "number_species": 96,
     "number_samples": 821,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "hoverflies"
   },
   {
     "study_id": 789,
@@ -8749,7 +9295,8 @@
     "duration": 22,
     "number_species": 15,
     "number_samples": 38,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Ants"
   },
   {
     "study_id": 790,
@@ -8765,7 +9312,8 @@
     "duration": 30,
     "number_species": 36,
     "number_samples": 12,
-    "abundance_type": "MeanCount"
+    "abundance_type": "MeanCount",
+    "organisms": "carabids"
   },
   {
     "study_id": 791,
@@ -8781,7 +9329,8 @@
     "duration": 64,
     "number_species": 28,
     "number_samples": 29,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "moths"
   },
   {
     "study_id": 792,
@@ -8797,7 +9346,8 @@
     "duration": 12,
     "number_species": 21,
     "number_samples": 19,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "ground beetles"
   },
   {
     "study_id": 793,
@@ -8813,7 +9363,8 @@
     "duration": 2,
     "number_species": 30,
     "number_samples": 12,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Drifting invertebrates"
   },
   {
     "study_id": 794,
@@ -8829,7 +9380,8 @@
     "duration": 2,
     "number_species": 27,
     "number_samples": 13,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Benthic invertebrates"
   },
   {
     "study_id": 795,
@@ -8845,7 +9397,8 @@
     "duration": 5,
     "number_species": 30,
     "number_samples": 304,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Benthic invertebrates"
   },
   {
     "study_id": 796,
@@ -8861,7 +9414,8 @@
     "duration": 9,
     "number_species": 35,
     "number_samples": 1336,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Medium to Large mammals"
   },
   {
     "study_id": 797,
@@ -8877,7 +9431,8 @@
     "duration": 5,
     "number_species": 38,
     "number_samples": 1509,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Medium and Large Mammals"
   },
   {
     "study_id": 798,
@@ -8893,7 +9448,8 @@
     "duration": 9,
     "number_species": 76,
     "number_samples": 1347,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Rocky reef fish"
   },
   {
     "study_id": 799,
@@ -8909,7 +9465,8 @@
     "duration": 7,
     "number_species": 98,
     "number_samples": 85,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Mesozooplankton"
   },
   {
     "study_id": 800,
@@ -8925,7 +9482,8 @@
     "duration": 22,
     "number_species": 130,
     "number_samples": 244,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Mesozooplankton"
   },
   {
     "study_id": 801,
@@ -8941,7 +9499,8 @@
     "duration": 3,
     "number_species": 25,
     "number_samples": 28,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Microzooplankton, phagotrophic protists"
   },
   {
     "study_id": 802,
@@ -8957,7 +9516,8 @@
     "duration": 9,
     "number_species": 99,
     "number_samples": 27,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Mites"
   },
   {
     "study_id": 803,
@@ -8973,7 +9533,8 @@
     "duration": 20,
     "number_species": 69,
     "number_samples": 1208,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Phytoplankton"
   },
   {
     "study_id": 804,
@@ -8989,7 +9550,8 @@
     "duration": 8,
     "number_species": 72,
     "number_samples": 306,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Phytoplankton"
   },
   {
     "study_id": 805,
@@ -9005,7 +9567,8 @@
     "duration": 3,
     "number_species": 36,
     "number_samples": 28,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Protist phytoplankton"
   },
   {
     "study_id": 806,
@@ -9021,7 +9584,8 @@
     "duration": 7,
     "number_species": 35,
     "number_samples": 67,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Protist phytoplankton"
   },
   {
     "study_id": 807,
@@ -9037,7 +9601,8 @@
     "duration": 3,
     "number_species": 33,
     "number_samples": 270,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Reptiles"
   },
   {
     "study_id": 808,
@@ -9053,7 +9618,8 @@
     "duration": 8,
     "number_species": 151,
     "number_samples": 134,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "soft bottom fish community"
   },
   {
     "study_id": 809,
@@ -9069,7 +9635,8 @@
     "duration": 43,
     "number_species": 51,
     "number_samples": 1470,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Woodland Birds"
   },
   {
     "study_id": 810,
@@ -9085,7 +9652,8 @@
     "duration": 4,
     "number_species": 37,
     "number_samples": 99,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Caddisfly"
   },
   {
     "study_id": 811,
@@ -9101,7 +9669,8 @@
     "duration": 2,
     "number_species": 44,
     "number_samples": 47,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Birds"
   },
   {
     "study_id": 812,
@@ -9117,7 +9686,8 @@
     "duration": 32,
     "number_species": 38,
     "number_samples": 23,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Urban birds"
   },
   {
     "study_id": 813,
@@ -9133,7 +9703,8 @@
     "duration": 21,
     "number_species": 180,
     "number_samples": 29,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Terrestrial woody plants"
   },
   {
     "study_id": 814,
@@ -9149,7 +9720,8 @@
     "duration": 13,
     "number_species": 31,
     "number_samples": 85,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Birds"
   },
   {
     "study_id": 815,
@@ -9165,7 +9737,8 @@
     "duration": 2,
     "number_species": 156,
     "number_samples": 44,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Macrobenthos"
   },
   {
     "study_id": 816,
@@ -9181,7 +9754,8 @@
     "duration": 29,
     "number_species": 358,
     "number_samples": 531,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Benthic macroinvertebrates"
   },
   {
     "study_id": 817,
@@ -9197,7 +9771,8 @@
     "duration": 11,
     "number_species": 143,
     "number_samples": 147,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Benthic macroinvertebrates"
   },
   {
     "study_id": 818,
@@ -9213,7 +9788,8 @@
     "duration": 29,
     "number_species": 417,
     "number_samples": 797,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Benthic macroinvertebrates"
   },
   {
     "study_id": 819,
@@ -9229,7 +9805,8 @@
     "duration": 6,
     "number_species": 59,
     "number_samples": 11,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Benthic macroinvertebrates"
   },
   {
     "study_id": 820,
@@ -9245,7 +9822,8 @@
     "duration": 26,
     "number_species": 273,
     "number_samples": 240,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Benthic macroinvertebrates"
   },
   {
     "study_id": 821,
@@ -9261,7 +9839,8 @@
     "duration": 29,
     "number_species": 129,
     "number_samples": 1150,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Freshwater fish"
   },
   {
     "study_id": 822,
@@ -9277,7 +9856,8 @@
     "duration": 11,
     "number_species": 64,
     "number_samples": 33,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Collembola"
   },
   {
     "study_id": 823,
@@ -9293,7 +9873,8 @@
     "duration": 20,
     "number_species": 35,
     "number_samples": 42,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Freshwater fish"
   },
   {
     "study_id": 824,
@@ -9309,7 +9890,8 @@
     "duration": 34,
     "number_species": 55,
     "number_samples": 1382,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Freshwater fish"
   },
   {
     "study_id": 825,
@@ -9325,7 +9907,8 @@
     "duration": 37,
     "number_species": 53,
     "number_samples": 830,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Freshwater fish"
   },
   {
     "study_id": 826,
@@ -9341,7 +9924,8 @@
     "duration": 28,
     "number_species": 57,
     "number_samples": 386,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Freshwater fish"
   },
   {
     "study_id": 827,
@@ -9357,7 +9941,8 @@
     "duration": 28,
     "number_species": 68,
     "number_samples": 1173,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Freshwater fish"
   },
   {
     "study_id": 828,
@@ -9373,7 +9958,8 @@
     "duration": 29,
     "number_species": 61,
     "number_samples": 737,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Freshwater fish"
   },
   {
     "study_id": 829,
@@ -9389,7 +9975,8 @@
     "duration": 16,
     "number_species": 32,
     "number_samples": 74,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Freshwater fish"
   },
   {
     "study_id": 830,
@@ -9405,7 +9992,8 @@
     "duration": 26,
     "number_species": 49,
     "number_samples": 189,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Freshwater fish"
   },
   {
     "study_id": 831,
@@ -9421,7 +10009,8 @@
     "duration": 46,
     "number_species": 96,
     "number_samples": 19176,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Freshwater fish"
   },
   {
     "study_id": 832,
@@ -9437,7 +10026,8 @@
     "duration": 18,
     "number_species": 85,
     "number_samples": 1341,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Freshwater fish"
   },
   {
     "study_id": 833,
@@ -9453,7 +10043,8 @@
     "duration": 19,
     "number_species": 96,
     "number_samples": 3307,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Freshwater fish"
   },
   {
     "study_id": 834,
@@ -9469,7 +10060,8 @@
     "duration": 14,
     "number_species": 61,
     "number_samples": 860,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Bats"
   },
   {
     "study_id": 835,
@@ -9485,7 +10077,8 @@
     "duration": 5,
     "number_species": 52,
     "number_samples": 621,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "nan"
   },
   {
     "study_id": 836,
@@ -9501,7 +10094,8 @@
     "duration": 7,
     "number_species": 19,
     "number_samples": 463,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Terrestrial reptiles and amphibians"
   },
   {
     "study_id": 837,
@@ -9517,7 +10111,8 @@
     "duration": 5,
     "number_species": 583,
     "number_samples": 1731,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Coleoptera"
   },
   {
     "study_id": 838,
@@ -9533,7 +10128,8 @@
     "duration": 6,
     "number_species": 180,
     "number_samples": 428,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Fungi"
   },
   {
     "study_id": 839,
@@ -9549,7 +10145,8 @@
     "duration": 18,
     "number_species": 17,
     "number_samples": 762,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Lizards"
   },
   {
     "study_id": 846,
@@ -9565,7 +10162,8 @@
     "duration": 49,
     "number_species": 68,
     "number_samples": 21539,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Freshwater fish"
   },
   {
     "study_id": 847,
@@ -9581,7 +10179,8 @@
     "duration": 16,
     "number_species": 18,
     "number_samples": 267,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Freshwater fish"
   },
   {
     "study_id": 848,
@@ -9597,7 +10196,8 @@
     "duration": 48,
     "number_species": 62,
     "number_samples": 20312,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Freshwater fish"
   },
   {
     "study_id": 849,
@@ -9613,7 +10213,8 @@
     "duration": 41,
     "number_species": 34,
     "number_samples": 652,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Freshwater fish"
   },
   {
     "study_id": 850,
@@ -9629,7 +10230,8 @@
     "duration": 4,
     "number_species": 1,
     "number_samples": 7,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Freshwater fish"
   },
   {
     "study_id": 851,
@@ -9645,7 +10247,8 @@
     "duration": 18,
     "number_species": 17,
     "number_samples": 618,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Freshwater fish"
   },
   {
     "study_id": 852,
@@ -9661,7 +10264,8 @@
     "duration": 9,
     "number_species": 8,
     "number_samples": 8,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Freshwater fish"
   },
   {
     "study_id": 853,
@@ -9677,7 +10281,8 @@
     "duration": 14,
     "number_species": 14,
     "number_samples": 33,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Freshwater fish"
   },
   {
     "study_id": 854,
@@ -9693,7 +10298,8 @@
     "duration": 9,
     "number_species": 19,
     "number_samples": 75,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Freshwater fish"
   },
   {
     "study_id": 855,
@@ -9709,7 +10315,8 @@
     "duration": 4,
     "number_species": 13,
     "number_samples": 5,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Freshwater fish"
   },
   {
     "study_id": 856,
@@ -9725,7 +10332,8 @@
     "duration": 7,
     "number_species": 8,
     "number_samples": 13,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Freshwater fish"
   },
   {
     "study_id": 857,
@@ -9741,7 +10349,8 @@
     "duration": 31,
     "number_species": 23,
     "number_samples": 110,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Freshwater fish"
   },
   {
     "study_id": 858,
@@ -9757,7 +10366,8 @@
     "duration": 22,
     "number_species": 23,
     "number_samples": 45,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Freshwater fish"
   },
   {
     "study_id": 859,
@@ -9773,7 +10383,8 @@
     "duration": 41,
     "number_species": 47,
     "number_samples": 2122,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Freshwater fish"
   },
   {
     "study_id": 860,
@@ -9789,7 +10400,8 @@
     "duration": 39,
     "number_species": 46,
     "number_samples": 719,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Freshwater fish"
   },
   {
     "study_id": 861,
@@ -9805,7 +10417,8 @@
     "duration": 17,
     "number_species": 26,
     "number_samples": 177,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Freshwater fish"
   },
   {
     "study_id": 862,
@@ -9821,7 +10434,8 @@
     "duration": 4,
     "number_species": 2,
     "number_samples": 10,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Freshwater fish"
   },
   {
     "study_id": 863,
@@ -9837,7 +10451,8 @@
     "duration": 14,
     "number_species": 16,
     "number_samples": 147,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Freshwater fish"
   },
   {
     "study_id": 864,
@@ -9853,7 +10468,8 @@
     "duration": 40,
     "number_species": 34,
     "number_samples": 679,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Freshwater fish"
   },
   {
     "study_id": 865,
@@ -9869,7 +10485,8 @@
     "duration": 36,
     "number_species": 23,
     "number_samples": 38,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Freshwater fish"
   },
   {
     "study_id": 866,
@@ -9885,7 +10502,8 @@
     "duration": 7,
     "number_species": 22,
     "number_samples": 42,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Freshwater fish"
   },
   {
     "study_id": 867,
@@ -9901,7 +10519,8 @@
     "duration": 6,
     "number_species": 11,
     "number_samples": 2,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Trees"
   },
   {
     "study_id": 868,
@@ -9917,7 +10536,8 @@
     "duration": 26,
     "number_species": 14,
     "number_samples": 6,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Trees"
   },
   {
     "study_id": 869,
@@ -9933,7 +10553,8 @@
     "duration": 39,
     "number_species": 70,
     "number_samples": 253,
-    "abundance_type": "MeanCount"
+    "abundance_type": "MeanCount",
+    "organisms": "fish"
   },
   {
     "study_id": 870,
@@ -9949,7 +10570,8 @@
     "duration": 41,
     "number_species": 59,
     "number_samples": 382,
-    "abundance_type": "MeanCount"
+    "abundance_type": "MeanCount",
+    "organisms": "fish"
   },
   {
     "study_id": 871,
@@ -9965,7 +10587,8 @@
     "duration": 39,
     "number_species": 70,
     "number_samples": 309,
-    "abundance_type": "MeanCount"
+    "abundance_type": "MeanCount",
+    "organisms": "fish"
   },
   {
     "study_id": 872,
@@ -9981,7 +10604,8 @@
     "duration": 41,
     "number_species": 8,
     "number_samples": 85,
-    "abundance_type": "MeanCount"
+    "abundance_type": "MeanCount",
+    "organisms": "fish"
   },
   {
     "study_id": 873,
@@ -9997,7 +10621,8 @@
     "duration": 39,
     "number_species": 70,
     "number_samples": 309,
-    "abundance_type": "MeanCount"
+    "abundance_type": "MeanCount",
+    "organisms": "fish"
   },
   {
     "study_id": 874,
@@ -10013,7 +10638,8 @@
     "duration": 41,
     "number_species": 41,
     "number_samples": 304,
-    "abundance_type": "MeanCount"
+    "abundance_type": "MeanCount",
+    "organisms": "fish"
   },
   {
     "study_id": 875,
@@ -10029,7 +10655,8 @@
     "duration": 3,
     "number_species": 63,
     "number_samples": 704,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "marine phytoplankton"
   },
   {
     "study_id": 876,
@@ -10045,7 +10672,8 @@
     "duration": 2,
     "number_species": 55,
     "number_samples": 63,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "marine phytoplankton"
   },
   {
     "study_id": 877,
@@ -10061,7 +10689,8 @@
     "duration": 2,
     "number_species": 235,
     "number_samples": 306,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "marine phytoplankton"
   },
   {
     "study_id": 878,
@@ -10077,7 +10706,8 @@
     "duration": 4,
     "number_species": 161,
     "number_samples": 92,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "marine phytoplankton"
   },
   {
     "study_id": 879,
@@ -10093,7 +10723,8 @@
     "duration": 4,
     "number_species": 45,
     "number_samples": 251,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "marine phytoplankton"
   },
   {
     "study_id": 880,
@@ -10109,7 +10740,8 @@
     "duration": 2,
     "number_species": 162,
     "number_samples": 82,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "marine phytoplankton"
   },
   {
     "study_id": 881,
@@ -10125,7 +10757,8 @@
     "duration": 3,
     "number_species": 94,
     "number_samples": 76,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "marine phytoplankton"
   },
   {
     "study_id": 882,
@@ -10141,7 +10774,8 @@
     "duration": 13,
     "number_species": 178,
     "number_samples": 149,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "marine phytoplankton"
   },
   {
     "study_id": 883,
@@ -10157,7 +10791,8 @@
     "duration": 7,
     "number_species": 302,
     "number_samples": 715,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "marine phytoplankton"
   },
   {
     "study_id": 884,
@@ -10173,7 +10808,8 @@
     "duration": 8,
     "number_species": 343,
     "number_samples": 450,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "marine phytoplankton"
   },
   {
     "study_id": 885,
@@ -10189,7 +10825,8 @@
     "duration": 3,
     "number_species": 207,
     "number_samples": 231,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "marine phytoplankton"
   },
   {
     "study_id": 886,
@@ -10205,7 +10842,8 @@
     "duration": 13,
     "number_species": 137,
     "number_samples": 159,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "marine phytoplankton"
   },
   {
     "study_id": 887,
@@ -10221,7 +10859,8 @@
     "duration": 2,
     "number_species": 146,
     "number_samples": 64,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "marine phytoplankton"
   },
   {
     "study_id": 888,
@@ -10237,7 +10876,8 @@
     "duration": 2,
     "number_species": 143,
     "number_samples": 297,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "marine phytoplankton"
   },
   {
     "study_id": 889,
@@ -10253,7 +10893,8 @@
     "duration": 2,
     "number_species": 13,
     "number_samples": 9,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "marine phytoplankton"
   },
   {
     "study_id": 890,
@@ -10269,7 +10910,8 @@
     "duration": 3,
     "number_species": 113,
     "number_samples": 48,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "marine phytoplankton"
   },
   {
     "study_id": 891,
@@ -10285,7 +10927,8 @@
     "duration": 16,
     "number_species": 127,
     "number_samples": 89,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "marine phytoplankton"
   },
   {
     "study_id": 892,
@@ -10301,7 +10944,8 @@
     "duration": 3,
     "number_species": 138,
     "number_samples": 127,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Zooplankton"
   },
   {
     "study_id": 893,
@@ -10317,7 +10961,8 @@
     "duration": 3,
     "number_species": 63,
     "number_samples": 25,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Zooplankton"
   },
   {
     "study_id": 894,
@@ -10333,7 +10978,8 @@
     "duration": 6,
     "number_species": 127,
     "number_samples": 37,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Zooplankton"
   },
   {
     "study_id": 895,
@@ -10349,7 +10995,8 @@
     "duration": 2,
     "number_species": 6,
     "number_samples": 148,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Zooplankton"
   },
   {
     "study_id": 896,
@@ -10365,7 +11012,8 @@
     "duration": 2,
     "number_species": 27,
     "number_samples": 81,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Zooplankton"
   },
   {
     "study_id": 897,
@@ -10381,7 +11029,8 @@
     "duration": 3,
     "number_species": 55,
     "number_samples": 89,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Zooplankton"
   },
   {
     "study_id": 898,
@@ -10397,7 +11046,8 @@
     "duration": 2,
     "number_species": 28,
     "number_samples": 7,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Zooplankton"
   },
   {
     "study_id": 899,
@@ -10413,7 +11063,8 @@
     "duration": 2,
     "number_species": 13,
     "number_samples": 4,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Zooplankton"
   },
   {
     "study_id": 900,
@@ -10429,7 +11080,8 @@
     "duration": 3,
     "number_species": 52,
     "number_samples": 58,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Zooplankton"
   },
   {
     "study_id": 901,
@@ -10445,7 +11097,8 @@
     "duration": 3,
     "number_species": 83,
     "number_samples": 23,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Zooplankton"
   },
   {
     "study_id": 902,
@@ -10461,7 +11114,8 @@
     "duration": 7,
     "number_species": 5,
     "number_samples": 743,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Zooplankton"
   },
   {
     "study_id": 903,
@@ -10477,7 +11131,8 @@
     "duration": 4,
     "number_species": 313,
     "number_samples": 1116,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Zooplankton"
   },
   {
     "study_id": 904,
@@ -10493,7 +11148,8 @@
     "duration": 13,
     "number_species": 380,
     "number_samples": 395,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Zooplankton"
   },
   {
     "study_id": 905,
@@ -10509,7 +11165,8 @@
     "duration": 5,
     "number_species": 3,
     "number_samples": 208,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Zooplankton"
   },
   {
     "study_id": 906,
@@ -10525,7 +11182,8 @@
     "duration": 7,
     "number_species": 72,
     "number_samples": 227,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Zooplankton"
   },
   {
     "study_id": 907,
@@ -10541,7 +11199,8 @@
     "duration": 2,
     "number_species": 213,
     "number_samples": 56,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Zooplankton"
   },
   {
     "study_id": 908,
@@ -10557,7 +11216,8 @@
     "duration": 2,
     "number_species": 31,
     "number_samples": 6,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Zooplankton"
   },
   {
     "study_id": 380,
@@ -10573,7 +11233,8 @@
     "duration": 10,
     "number_species": 26,
     "number_samples": 10,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Butterflies"
   },
   {
     "study_id": 63,
@@ -10589,7 +11250,8 @@
     "duration": 27,
     "number_species": 9,
     "number_samples": 27,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Butterfdragonflieslies"
   },
   {
     "study_id": 301,
@@ -10605,7 +11267,8 @@
     "duration": 37,
     "number_species": 54,
     "number_samples": 1727,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Acrididae (grasshoppers)"
   },
   {
     "study_id": 234,
@@ -10621,7 +11284,8 @@
     "duration": 41,
     "number_species": 15,
     "number_samples": 9,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Trees"
   },
   {
     "study_id": 57,
@@ -10637,7 +11301,8 @@
     "duration": 41,
     "number_species": 35,
     "number_samples": 184,
-    "abundance_type": "MeanCount"
+    "abundance_type": "MeanCount",
+    "organisms": "fish"
   },
   {
     "study_id": 231,
@@ -10653,7 +11318,8 @@
     "duration": 6,
     "number_species": 122,
     "number_samples": 621,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Fish, Plants, Invertebrates"
   },
   {
     "study_id": 232,
@@ -10669,7 +11335,8 @@
     "duration": 32,
     "number_species": 151,
     "number_samples": 3119,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Fish"
   },
   {
     "study_id": 247,
@@ -10685,7 +11352,8 @@
     "duration": 46,
     "number_species": 34,
     "number_samples": 5357,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Zooplankton"
   },
   {
     "study_id": 249,
@@ -10701,7 +11369,8 @@
     "duration": 16,
     "number_species": 1457,
     "number_samples": 16,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Insects specifically Coleoptera and Lepidoptera"
   },
   {
     "study_id": 253,
@@ -10717,7 +11386,8 @@
     "duration": 40,
     "number_species": 144,
     "number_samples": 2481,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Lake zooplankton"
   },
   {
     "study_id": 254,
@@ -10733,7 +11403,8 @@
     "duration": 26,
     "number_species": 423,
     "number_samples": 776,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Phytoplankton"
   },
   {
     "study_id": 297,
@@ -10749,7 +11420,8 @@
     "duration": 18,
     "number_species": 17,
     "number_samples": 4149,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "invertebrate herbivores and corallivores on Moorea coral reefs"
   },
   {
     "study_id": 334,
@@ -10765,7 +11437,8 @@
     "duration": 19,
     "number_species": 40,
     "number_samples": 240,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "vegetation"
   },
   {
     "study_id": 340,
@@ -10781,7 +11454,8 @@
     "duration": 15,
     "number_species": 105,
     "number_samples": 5817,
-    "abundance_type": "Presence/Absence"
+    "abundance_type": "Presence/Absence",
+    "organisms": "Vegetation"
   },
   {
     "study_id": 354,
@@ -10797,7 +11471,8 @@
     "duration": 10,
     "number_species": 260,
     "number_samples": 4069,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "marine phytoplankton"
   },
   {
     "study_id": 429,
@@ -10813,7 +11488,8 @@
     "duration": 8,
     "number_species": 242,
     "number_samples": 221,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "Scleractinian corals"
   },
   {
     "study_id": 482,
@@ -10829,7 +11505,8 @@
     "duration": 19,
     "number_species": 64,
     "number_samples": 96,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "Arctic tundra vegetation"
   },
   {
     "study_id": 518,
@@ -10845,7 +11522,8 @@
     "duration": 3,
     "number_species": 89,
     "number_samples": 228,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "birds"
   },
   {
     "study_id": 519,
@@ -10861,7 +11539,8 @@
     "duration": 3,
     "number_species": 153,
     "number_samples": 148,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Tropical fish and benthic invertebrates"
   },
   {
     "study_id": 520,
@@ -10877,7 +11556,8 @@
     "duration": 3,
     "number_species": 66,
     "number_samples": 31,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Zooplankton"
   },
   {
     "study_id": 521,
@@ -10893,7 +11573,8 @@
     "duration": 46,
     "number_species": 77,
     "number_samples": 2549,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "All animals observed around waterholes"
   },
   {
     "study_id": 527,
@@ -10909,7 +11590,8 @@
     "duration": 15,
     "number_species": 128,
     "number_samples": 88587,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Seabirds"
   },
   {
     "study_id": 99,
@@ -10925,7 +11607,8 @@
     "duration": 2,
     "number_species": 457,
     "number_samples": 361,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "fish"
   },
   {
     "study_id": 290,
@@ -10941,7 +11624,8 @@
     "duration": 2,
     "number_species": 276,
     "number_samples": 145,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "nan"
   },
   {
     "study_id": 291,
@@ -10957,7 +11641,8 @@
     "duration": 5,
     "number_species": 621,
     "number_samples": 479,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "fish"
   },
   {
     "study_id": 308,
@@ -10973,7 +11658,8 @@
     "duration": 21,
     "number_species": 14,
     "number_samples": 294,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Small mammals"
   },
   {
     "study_id": 435,
@@ -10989,7 +11675,8 @@
     "duration": 12,
     "number_species": 40,
     "number_samples": 322,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Zooplankton"
   },
   {
     "study_id": 458,
@@ -11005,7 +11692,8 @@
     "duration": 4,
     "number_species": 179,
     "number_samples": 176,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "beetles"
   },
   {
     "study_id": 459,
@@ -11021,7 +11709,8 @@
     "duration": 5,
     "number_species": 52,
     "number_samples": 126,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Birds"
   },
   {
     "study_id": 460,
@@ -11037,7 +11726,8 @@
     "duration": 5,
     "number_species": 110,
     "number_samples": 181,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "fungi"
   },
   {
     "study_id": 461,
@@ -11053,7 +11743,8 @@
     "duration": 5,
     "number_species": 26,
     "number_samples": 188,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "lichens"
   },
   {
     "study_id": 462,
@@ -11069,7 +11760,8 @@
     "duration": 5,
     "number_species": 7,
     "number_samples": 43,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "lichens"
   },
   {
     "study_id": 463,
@@ -11085,7 +11777,8 @@
     "duration": 5,
     "number_species": 34,
     "number_samples": 188,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "moss"
   },
   {
     "study_id": 464,
@@ -11101,7 +11794,8 @@
     "duration": 5,
     "number_species": 41,
     "number_samples": 245,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "moss"
   },
   {
     "study_id": 465,
@@ -11117,7 +11811,8 @@
     "duration": 6,
     "number_species": 36,
     "number_samples": 130,
-    "abundance_type": "nan"
+    "abundance_type": "nan",
+    "organisms": "plants"
   },
   {
     "study_id": 909,
@@ -11133,7 +11828,8 @@
     "duration": 3,
     "number_species": 60,
     "number_samples": 48,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Demersal fish"
   },
   {
     "study_id": 191,
@@ -11149,7 +11845,8 @@
     "duration": 23,
     "number_species": 809,
     "number_samples": 2822,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Marine invertebrates"
   },
   {
     "study_id": 200,
@@ -11165,7 +11862,8 @@
     "duration": 34,
     "number_species": 1716,
     "number_samples": 2798,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Marine invertebrates"
   },
   {
     "study_id": 910,
@@ -11181,7 +11879,8 @@
     "duration": 10,
     "number_species": 382,
     "number_samples": 857,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Marine invertebrates"
   },
   {
     "study_id": 911,
@@ -11197,7 +11896,8 @@
     "duration": 17,
     "number_species": 835,
     "number_samples": 516,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Marine invertebrates"
   },
   {
     "study_id": 912,
@@ -11213,7 +11913,8 @@
     "duration": 12,
     "number_species": 434,
     "number_samples": 119,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Marine invertebrates"
   },
   {
     "study_id": 913,
@@ -11229,7 +11930,8 @@
     "duration": 14,
     "number_species": 578,
     "number_samples": 80,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Marine invertebrates"
   },
   {
     "study_id": 914,
@@ -11245,7 +11947,8 @@
     "duration": 20,
     "number_species": 146,
     "number_samples": 76,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Marine invertebrates"
   },
   {
     "study_id": 915,
@@ -11261,7 +11964,8 @@
     "duration": 14,
     "number_species": 90,
     "number_samples": 21,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Marine invertebrates"
   },
   {
     "study_id": 916,
@@ -11277,7 +11981,8 @@
     "duration": 4,
     "number_species": 113,
     "number_samples": 55,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Macrobenthos and fish"
   },
   {
     "study_id": 917,
@@ -11293,7 +11998,8 @@
     "duration": 6,
     "number_species": 326,
     "number_samples": 1090,
-    "abundance_type": "Count"
+    "abundance_type": "Count",
+    "organisms": "Benthos"
   },
   {
     "study_id": 918,
@@ -11309,7 +12015,8 @@
     "duration": 18,
     "number_species": 90,
     "number_samples": 4399,
-    "abundance_type": "Density"
+    "abundance_type": "Density",
+    "organisms": "Freshwater fish"
   },
   {
     "study_id": 515,
@@ -11325,6 +12032,7 @@
     "duration": 3,
     "number_species": 43,
     "number_samples": 452,
-    "abundance_type": "MeanCount"
+    "abundance_type": "MeanCount",
+    "organisms": "bats"
   }
 ]
