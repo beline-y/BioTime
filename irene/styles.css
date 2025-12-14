@@ -235,6 +235,47 @@ svg {
   background: #f1f5f9;
 }
 
+
+#tool-controls {
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 5;
+}
+
+.tool-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--panel-bg);
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 0;
+}
+
+.tool-btn:hover {
+  background: #f1f5f9;
+}
+
+.tool-btn img {
+  transform : scale(0.5);
+}
+
+.tool-btn[aria-pressed="true"] {
+  border: 2px solid var(--accent);
+  background: var(--accent-soft);
+
+}
+
+
 .checkbox-row {
   display: flex;
   align-items: center;
