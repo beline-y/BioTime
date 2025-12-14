@@ -427,12 +427,6 @@ svg {
 
 
 .study-layout {
-    display: flex;
-    gap: 20px;
-    margin-top: 20px;
-    height: 500px;
-}
-
     flex: 1 1 auto;
     display: flex;
     width: 100%;
