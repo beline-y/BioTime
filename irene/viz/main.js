@@ -13,7 +13,16 @@ const ctx = {
   studies: [],
   world: null,
   tooltip: null,
-  selected_tool:"move" 
+  selected_tool:"move",
+
+  // Éléments Page 3 (Détail)
+  svgDetail: null,
+  gDetail: null,
+  projectionDetail: null,
+  pathDetail: null,
+  tooltip3: null,
+  playInterval: null,
+  zoomDetail: null,
 };
 
 // Main entry point
@@ -179,6 +188,9 @@ function loadData() {
       updatePoints();
       createPhyloTreemap();
       createStudyTimeline(ctx.studies)
+
+      //page 3 
+      initPage3();
 
     })
     .catch(function (err) {
@@ -397,6 +409,15 @@ function setupSidebarNav() {
       .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
 
     if (!visible) return;
+
+    //Sidebar page 3
+    const isMapPage = visible.target.id === "page-map";
+    const isStudyPage = visible.target.id === "page-3";
+    // Toggle des classes pour cacher/montrer les éléments
+    document.body.classList.toggle("map-filters-hidden", !isMapPage);
+    // Affichage conditionnel des éléments de la sidebar
+    d3.selectAll(".map-only").style("display", isMapPage ? "flex" : "none");
+    d3.select("#study-details-aside").style("display", isStudyPage ? "flex" : "none");
 
     document.body.classList.toggle("map-filters-hidden", visible.target.id !== "page-map");
 
@@ -860,3 +881,208 @@ function createStudyTimeline(meta) {
   });
 }
 
+function drawStudyPageMap() {
+    const container = d3.select("#map-container-page3");
+    const width = container.node().getBoundingClientRect().width || 600;
+    const height = 400;
+
+    const svg = container.append("svg")
+        .attr("width", width)
+        .attr("height", height);
+
+    ctx.projection3 = d3.geoMercator()
+        .scale(width / 6.5)
+        .translate([width / 2, height / 1.5]);
+
+    const path3 = d3.geoPath().projection(ctx.projection3);
+    const g = svg.append("g");
+    
+    // Dessin du fond de carte (exactement la même couleur)
+    const land = topojson.feature(ctx.world, ctx.world.objects.countries);
+    g.append("path")
+        .datum(land)
+        .attr("d", path3)
+        .attr("fill", "#e0dbe7ff") // Même couleur que page 1
+        .attr("stroke", "#aaa")
+        .attr("stroke-width", 0.5);
+
+    // Dessin des points
+    ctx.gPoints3 = g.append("g");
+    
+    const minDuration = d3.min(ctx.studies, d => d.duration);
+    const maxDuration = d3.max(ctx.studies, d => d.duration);
+    const colorScale = d3.scaleLinear().domain([minDuration, maxDuration]).range(["lightblue", "darkblue"]);
+
+    ctx.gPoints3.selectAll("circle")
+        .data(ctx.studies)
+        .enter()
+        .append("circle")
+        .attr("class", "study-dot-p3")
+        .attr("cx", d => ctx.projection3([d.lon, d.lat])[0])
+        .attr("cy", d => ctx.projection3([d.lon, d.lat])[1])
+        .attr("r", 3)
+        .attr("fill", d => colorScale(d.duration))
+        .attr("stroke", "#333")
+        .attr("stroke-width", 0.2)
+        .attr("id", d => "dot-" + d.study_id);
+}
+
+function populateStudySelector() {
+    const selector = d3.select("#study-selector");
+    
+    // On trie les études par ID pour s'y retrouver
+    const sortedStudies = [...ctx.studies].sort((a,b) => a.study_id - b.study_id);
+
+    selector.selectAll("option.study-opt")
+        .data(sortedStudies)
+        .enter()
+        .append("option")
+        .attr("value", d => d.study_id)
+        .text(d => `Study ${d.study_id} - ${d.realm}`);
+
+    selector.on("change", function() {
+        const selectedId = d3.select(this).property("value");
+        const studyData = ctx.studies.find(d => d.study_id == selectedId);
+        displayStudyDetails(studyData);
+    });
+}
+
+function displayStudyDetails(d) {
+    if(!d) return;
+
+    // 1. Mise à jour visuelle de la petite carte
+    d3.selectAll(".study-dot-p3")
+        .attr("r", 3)
+        .attr("stroke", "#333");
+    
+    d3.select("#dot-" + d.study_id)
+        .attr("r", 8)
+        .attr("stroke", "orange")
+        .attr("stroke-width", 2)
+        .raise(); // Met le point au dessus des autres
+
+    // 2. Remplissage du panneau latéral avec un style "joli"
+    const content = d3.select("#study-info-content");
+    content.html(`
+        <div class="detail-header">
+            <span class="badge">${d.realm}</span>
+            <h4>ID: ${d.study_id}</h4>
+        </div>
+        <div class="detail-grid">
+            <div class="detail-item"><strong>Duration:</strong> ${d.duration} years</div>
+            <div class="detail-item"><strong>Start:</strong> ${d.start_year}</div>
+            <div class="detail-item"><strong>End:</strong> ${d.end_year}</div>
+            <div class="detail-item"><strong>Protected:</strong> ${d.protected_area === "TRUE" ? "✅ Yes" : "❌ No"}</div>
+        </div>
+        <div class="detail-footer">
+            <strong>Location:</strong> Lat ${d.lat.toFixed(2)}, Lon ${d.lon.toFixed(2)}
+        </div>
+    `);
+}
+
+function initPage3() {
+  renderSecondMap();
+  setupStudySelector();
+}
+
+function renderSecondMap() {
+    // Utilisation de l'ID correct
+    const container = d3.select("#map-container-p3");
+    if (container.empty()) return;
+
+    const width = container.node().getBoundingClientRect().width || 800;
+    const height = 500;
+
+    const svg3 = container.append("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .attr("class", "map-svg-p3")
+        .style("background", "radial-gradient(circle at top, #29407b 0, #030924 60%)") // Même fond que P1
+        .style("border-radius", "18px");
+
+    const projection3 = d3.geoMercator()
+        .scale(width / 6.5)
+        .translate([width / 2, height / 1.5]);
+
+    const path3 = d3.geoPath().projection(projection3);
+
+    const g = svg3.append("g");
+
+    // Dessin du fond de carte
+    const land = topojson.feature(ctx.world, ctx.world.objects.countries);
+    g.append("path")
+        .datum(land)
+        .attr("d", path3)
+        .attr("fill", "#e0dbe7ff") // Même couleur que page 1
+        .attr("stroke", "#aaa")
+        .attr("stroke-width", 0.5);
+
+    // Échelle de couleur identique à la page 1
+    const minDur = d3.min(ctx.studies, d => d.duration);
+    const maxDur = d3.max(ctx.studies, d => d.duration);
+    const colorScale = d3.scaleLinear().domain([minDur, maxDur]).range(["lightblue", "darkblue"]);
+
+    // Points
+    g.append("g")
+        .selectAll("circle")
+        .data(ctx.studies)
+        .enter()
+        .append("circle")
+        .attr("class", "dot-p3")
+        .attr("id", d => "p3-dot-" + d.study_id)
+        .attr("cx", d => projection3([d.lon, d.lat])[0])
+        .attr("cy", d => projection3([d.lon, d.lat])[1])
+        .attr("r", 3)
+        .attr("fill", d => colorScale(d.duration))
+        .attr("stroke", "white")
+        .attr("stroke-width", 0.5)
+        .attr("cursor", "pointer")
+        .on("click", (event, d) => updateStudySelection(d.study_id));
+}
+
+function setupStudySelector() {
+  const selector = d3.select("#study-selector");
+  
+  selector.selectAll("option.opt")
+    .data(ctx.studies.sort((a,b) => a.study_id - b.study_id))
+    .enter()
+    .append("option")
+    .attr("value", d => d.study_id)
+    .text(d => `Study ${d.study_id}`);
+
+  selector.on("change", function() {
+    updateStudySelection(this.value);
+  });
+}
+
+function updateStudySelection(studyId) {
+  const d = ctx.studies.find(s => s.study_id == studyId);
+  if (!d) return;
+
+  // Update dropdown
+  d3.select("#study-selector").property("value", studyId);
+
+  // Update Map Visuelle
+  d3.selectAll(".dot-p3")
+    .attr("r", 3)
+    .attr("stroke", "white")
+    .attr("stroke-width", 0.5);
+
+  d3.select("#p3-dot-" + studyId)
+    .attr("r", 8)
+    .attr("stroke", "#ff4757")
+    .attr("stroke-width", 2)
+    .raise();
+
+  // Update Sidebar Info
+  const sidebar = d3.select("#study-info-sidebar");
+  sidebar.html(`
+    <div style="font-weight:bold; color:#4338ca; margin-bottom:10px;">STUDY ${d.study_id}</div>
+    <div style="font-size:0.9em; line-height:1.6;">
+      <b>Realm:</b> ${d.realm}<br>
+      <b>Duration:</b> ${d.duration} yrs<br>
+      <b>Samples:</b> ${d.start_year} — ${d.end_year}<br>
+      <b>Status:</b> ${d.protected_area === "TRUE" ? "Protected" : "Standard"}
+    </div>
+  `);
+}
