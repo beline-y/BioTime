@@ -40,6 +40,7 @@ body {
 /* Sidebar — width matches LEFT_OFFSET = 260 in main.js */
 #sidebar {
   width: 260px;
+  height: 100vh;
   padding: 18px 16px;
   border-right: 1px solid rgba(223, 228, 234, 0.6);
   background: linear-gradient(180deg, #f9fafb 0%, #f5f7fb 100%);
@@ -169,7 +170,7 @@ svg {
 }
 
 /* Tooltip */
-#tooltip {
+#tooltip,#tooltip-detail{
   position: absolute;
   pointer-events: none;
   background: #ffffff;
@@ -204,17 +205,47 @@ svg {
   color: var(--text-muted);
 }
 
+/* Tooltip content */
+.tt-title{
+  font-weight: 700;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.tt-row{
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 6px;
+  line-height: 1.2;
+}
+
+.tt-k{
+  color: var(--text-muted);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.tt-v{
+  color: var(--text-main);
+  font-weight: 600;
+  text-align: right;
+}
+
+/* Bonus: un mini “glass” look */
+#tooltip, #tooltip-detail {
+  backdrop-filter: blur(6px);
+}
 
 /* Zoom buttons */
 #zoom-controls {
-  position: absolute;
-  left: 16px;
-  top: 200px;
   display: flex;
   flex-direction: column;
   gap: 6px;
-  z-index: 5;
+  margin-top: 6px; /* espace entre lasso et zoom */
 }
+
 
 .zoom-btn {
   width: 32px;
@@ -273,6 +304,16 @@ svg {
   border: 2px solid var(--accent);
   background: var(--accent-soft);
 
+}
+
+.control-label {
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 2px;
+  margin-left: 1px;
 }
 
 
@@ -380,7 +421,28 @@ svg {
 #page-3 {
   padding: 24px 32px;
   flex-direction: column;
+  height: 100vh;
   gap: 16px;
+}
+
+
+.study-layout {
+    flex: 1 1 auto;
+    display: flex;
+    width: 100%;
+    min-height: 0; /* Important pour le scroll flex */
+}
+
+
+/* Map container page 3 */
+#map-container-p3 {
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: radial-gradient(circle at top, #29407b 0, #030924 60%);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
 }
 
 #overview-charts { overflow: hidden; }
@@ -423,4 +485,122 @@ svg {
 
 #phylo-panel, #timeline-panel{
   width: 100%;
+}
+
+.overview-only { display: none; }
+
+.checklist{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 6px;
+  max-height: 220px;
+  overflow: auto;
+  padding-right: 4px;
+}
+
+.check-item{
+  display: grid;
+  grid-template-columns: 18px 1fr;
+  align-items: start;
+  column-gap: 10px;
+  font-size: 13px;
+  line-height: 1.3;
+  color: var(--text-main);
+}
+
+.check-item input{
+  margin: 0;
+}
+.mini-btn{
+  border: 1px solid var(--border);
+  background: #f9fafb;
+  border-radius: 999px;
+  padding: 4px 8px;
+  font-size: 12px;
+  cursor: pointer;
+}
+.mini-btn:hover{ background:#f1f5f9; }
+
+
+/* Dégradé spécifique pour l'abondance (Page 3) */
+
+#legend-abundance {
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
+  padding: 10px 14px;
+  background: var(--panel-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow-soft);
+  font-size: 12px;
+  color: var(--text-main);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  pointer-events: none; /* pour laisser la carte interactive */
+}
+
+#legend-abundance .legend-bar {
+  width: 180px;
+  height: 12px;
+  border-radius: 6px;
+  background: linear-gradient(to right, #00a0a0, #004242);
+}
+
+#legend-abundance .legend-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+#year-slider {
+  width: 100%;
+  margin: 10px 0;
+  padding: 0; 
+  cursor: pointer;
+  height: 6px;
+  border-radius: 5px;
+  background: #dfe4ea;
+  outline: none;
+}
+
+#year-slider-container .filter-body {
+  padding: 10px 12px; 
+}
+
+.play-btn {
+    background: #00a0a0;
+    border: none;
+    color: white;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.play-btn:hover {
+    background: #007a7a;
+    transform: scale(1.1);
+}
+
+.year-label {
+    font-size: 12px;
+    color: #666;
+    min-width: 35px;
+}
+
+#abundance-sparkline {
+    min-height: 80px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 10px 0;
 }

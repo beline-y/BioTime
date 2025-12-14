@@ -48,6 +48,58 @@
           </label>
         </div>
       </div>
+
+      <!-- SIDEBAR page 2 -->
+      <div id="phylo-filters-aside" class="filter-card overview-only" style="display:none;">
+        <div class="filter-header">
+          <div class="filter-label">Phylo domains</div>
+          <button id="phylo-select-all" class="mini-btn" type="button">All</button>
+        </div>
+
+        <div class="filter-body">
+          <div id="phylo-domain-list" class="checklist"></div>
+        </div>
+      </div>
+
+      <!-- SIDEBAR page 3 -->
+      <div id="study-details-aside" class="filter-card study-only" style="display: none;">
+          <div class="filter-header">
+            <div class="filter-label">Selected Study</div>
+          </div>
+
+          <div class="filter-body">
+            <select id="study-selector">
+              <option value="">Choose an ID...</option>
+            </select>
+          </div>
+
+          <div id="study-info-sidebar" class="filter-body">
+            <p style="font-size: 0.85em; color: #666;">Select a study on the map or via the dropdown.</p>
+          </div>
+      </div>
+
+      <div id="year-slider-container" class="filter-card study-only" style="display: none; margin-top: 10px;">
+        <div class="filter-header">
+            <div class="filter-label">Timeline: <span id="current-year-display" style="color: var(--accent); font-weight: bold;">-</span></div>
+            <button id="play-button" class="play-btn">▶</button>
+        </div>
+        <div class="filter-body">
+            <input type="range" id="year-slider" min="0" max="100" value="0" step="1" style="width: 100%;">
+            <div style="display: flex; justify-content: space-between; font-size: 10px; color: var(--text-muted); margin-top: 5px;">
+                <span id="year-min">-</span>
+                <span id="year-max">-</span>
+            </div>
+        </div>
+      </div>
+
+      <!-- SIDEBAR Chart page 3 -->
+      <div id="study-chart-container" class="detail-item" style="display: none; margin-top:20px;">
+        <div class="legend-title" style="margin-bottom:8px; font-weight:bold; color:#6a7c8a; font-size:0.8rem; letter-spacing:1px;">
+            SAMPLES PER YEAR
+        </div>
+        <div id="abundance-sparkline"></div>
+      </div>
+
     </div>
 
   <div id="main" class = "content">
@@ -59,12 +111,8 @@
         <div id="tooltip"></div>
         <div id="legend-duration"></div>
 
-        <div id="zoom-controls">
-          <div class="zoom-btn" id="zoom-in">+</div>
-          <div class="zoom-btn" id="zoom-out">−</div>
-        </div>
-
         <div id="tool-controls">
+          <div class="control-label">Selection</div>
           <div class="tool-btn"  id="move" aria-pressed="true">
             <img src = "..//icons//move_icon_64px.png">
           </div>
@@ -75,6 +123,14 @@
           
           <div class="tool-btn tool-lasso" id="free" aria-pressed="false">
             <img src = "..//icons//lasso_icon_64px.png">
+          </div>
+
+          <div id="zoom-controls">
+            <div class="control-label">Zoom</div>
+
+            <div class="zoom-btn" id="zoom-in">+</div>
+            <div class="zoom-btn" id="zoom-out">−</div>
+            <div class="zoom-btn" id="zoom-reset">⟲</div>
           </div>
 
         </div>
@@ -95,16 +151,30 @@
 
     <!-- PAGE 3 : STUDIES OVERVIEW -->
     <div id="page-3" class="page-section">
-      <h1>Studies overview</h1>
-      <p>
-        Graphiques de Béline
+      <div class="page-header">
+        <h1 style="margin-bottom: 0;">Study Explorer</h1>
+      </div>
+      <p id="timeline-subtitle" style="margin: 0; font-size: 0.85rem; color: #8899a6; font-style: italic;">
+            Spatial and temporal repartition of samples of biodiversity in a study
       </p>
+      
+      <div class="study-layout">
+        <div id="map-container-p3" style="position: relative;">
+          <div id="legend-abundance"></div>
 
-      <div id="overview-charts">
-        <!-- Conteneur pour tes futurs graphiques -->
+          <div id="tool-controls">
+            <div id="zoom-controls">
+              <div class="control-label">Zoom</div>
+              <div class="zoom-btn" id="zoom-in-p3">+</div>
+              <div class="zoom-btn" id="zoom-out-p3">−</div>
+              <div class="zoom-btn" id="zoom-reset-p3">⟲</div>
+            </div>
+          </div>
+
+
+        </div>
       </div>
     </div>
-  </div>
 
   <!-- Dependencies -->
   <script src="https://d3js.org/d3.v7.min.js"></script>
