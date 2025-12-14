@@ -584,9 +584,7 @@ function bboxToView(bbox) {
     ctx.svg.transition()
            .duration(300)
            .call(ctx.zoom.transform, focus)
-           .call(ctx.zoom.transform, focus)   
 }
-
 function resetMapZoom() {
   if (!ctx.svg || !ctx.zoom) return;
 
@@ -1162,12 +1160,6 @@ function populateStudySelector() {
 function displayStudyDetails(d) {
     if(!d) return;
 
-    // Remplissage de la sidebar avec l'ID utilisé dans votre HTML
-    const sidebar = d3.select("#study-info-sidebar");
-    
-    sidebar.html(`
-
-        <div class="detail-grid" style="margin-top: 15px; display: grid; grid-template-columns: 1fr; gap: 8px; font-size: 0.9em;">
     const sidebar = d3.select("#study-info-sidebar");
     
     sidebar.html(`
@@ -1185,9 +1177,6 @@ function displayStudyDetails(d) {
             <div class="detail-item"><strong>Duration:</strong> ${d.duration} years</div>
             <div class="detail-item"><strong>Years:</strong> ${d.start_year} – ${d.end_year}</div>
             <div class="detail-item"><strong>Taxa:</strong> ${d.taxa || 'N/A'}</div>
-            <div class="detail-item" style="border-left: 3px solid var(--accent); padding-left: 8px; background: rgba(0, 160, 160, 0.05);">
-                <strong>Abundance meaning:</strong> 
-                <span style="color: var(--text-muted); font-style: italic;">
             
             <div class="detail-item" style="border-left: 3px solid #4da0a0; padding-left: 8px; background: rgba(0, 160, 160, 0.05);">
                 <strong>Abundance meaning:</strong> 
@@ -1215,10 +1204,6 @@ function initPage3() {
         .attr("width", width)
         .attr("height", height)
         .attr("class", "map-svg-p3")
-        .style("background", "radial-gradient(circle at top, #29407b 0, #030924 60%)")
-        .style("border-radius", "18px");
-
-    // Création du groupe principal qui recevra les transformations de zoom
         .style("background", "#030924") // Couleur fixe pour éviter les dégradés qui bougent
         .style("border-radius", "18px");
 
@@ -1232,35 +1217,6 @@ function initPage3() {
 
     ctx.pathDetail = d3.geoPath().projection(ctx.projectionDetail);
 
-    // Ajout du comportement de zoom D3 pour un effet de continuité
-    const initialScale = width / 6.5;
-
-    ctx.zoomDetail = d3.zoom()
-      .scaleExtent([1, 1000])
-      .on("zoom", (event) => {
-        const { x, y, k } = event.transform;
-
-        // 1. ZOOM RÉEL : On change l'échelle de la projection
-        ctx.projectionDetail.scale(initialScale * k);
-
-        // 2. ROTATION INFINIE (X) : basée sur le mouvement horizontal
-        const rotateX = (x / (width * k)) * 360;
-        
-        // 3. CENTRAGE VERTICAL (Y) : au lieu de translater le SVG, on change le centre
-        // Cela permet aux points de ne pas "s'envoler"
-        const centerLat = (y / (height * k)) * 90; 
-
-        ctx.projectionDetail.rotate([rotateX, 0]);
-        // Note: On peut aussi ajuster le centre vertical si besoin : 
-        // ctx.projectionDetail.center([0, centerLat]);
-
-        // 4. MISE À JOUR VISUELLE
-        // On redessine la terre
-        ctx.gDetail.selectAll("path").attr("d", ctx.pathDetail);
-        
-        // On ne touche plus au transform du groupe des points (SAUF pour k si on veut)
-        // On recalcule tout par projection pour que ce soit fixe
-        updateDetailedPointsPosition(k);
     // --- CALCUL DES LIMITES (BORDS DE CARTE) ---
     const land = topojson.feature(ctx.world, ctx.world.objects.countries);
     const [[x0, y0], [x1, y1]] = ctx.pathDetail.bounds(land);
@@ -1277,9 +1233,7 @@ function initPage3() {
       });
 
     ctx.svgDetail.call(ctx.zoomDetail);
-
-    // Fond de carte
-    const land = topojson.feature(ctx.world, ctx.world.objects.countries);
+    
     // Dessin du fond de carte
     ctx.gDetail.append("path")
         .datum(land)
@@ -1368,22 +1322,6 @@ function setupStudySelector() {
 }
 
 function updateStudySelection(studyId) {
-  const d = ctx.studies.find(s => s.study_id == studyId);
-  const fileInfo = ctx.studyFiles.find(f => +f.STUDY_ID == +studyId);
-  
-  if (!d || !fileInfo) return;
-
-  // 1. Mettre à jour le menu déroulant
-  d3.select("#study-selector").property("value", studyId);
-  
-  // 2. Afficher les métadonnées dans la sidebar (Appel de la fonction corrigée ci-dessous)
-  displayStudyDetails(d);
-
-  // 3. Chargement des mesures (CSV) pour la carte de détail
-  loadStudyMeasurements(studyId).then(measurements => {
-    console.log(`Données prêtes pour affichage : ${measurements.length} lignes`);
-
-    // 1. Extraire les années uniques
   stopPlay(); // On arrête l'animation si on change d'étude
   const idNum = +studyId;
   const d = ctx.studies.find(s => +s.study_id === idNum);
@@ -1399,24 +1337,15 @@ function updateStudySelection(studyId) {
     const minYear = years[0];
     const maxYear = years[years.length - 1];
 
-    // 2. Configurer le slider
+    // Configurer le slider
     const slider = d3.select("#year-slider");
     slider.attr("min", minYear)
           .attr("max", maxYear)
           .property("value", minYear);
-
-    // Configurer le slider
-    const slider = d3.select("#year-slider");
-    slider.attr("min", minYear).attr("max", maxYear).property("value", minYear);
     d3.select("#year-min").text(minYear);
     d3.select("#year-max").text(maxYear);
     d3.select("#current-year-display").text(minYear);
     d3.select("#year-slider-container").style("display", "block");
-
-    // 3. Tracer la carte pour la première année
-    updateStudyMap(measurements, minYear);
-  });
-}
 
     createAbundanceChart(measurements);
     zoomToStudyBounds(measurements);
@@ -1551,124 +1480,6 @@ function loadStudyMeasurements(studyId) {
         return [];
     });
 }
-function updateStudyMap(measurements, selectedYear) {
-    if (!measurements || measurements.length === 0) return;
-
-    // 1. Calcul des limites géométriques des données
-    // On crée un objet GeoJSON factice pour utiliser d3.geoPath().bounds()
-    const pointsGeo = {
-        type: "FeatureCollection",
-        features: measurements.map(d => ({
-            type: "Feature",
-            geometry: { type: "Point", coordinates: [d.LONGITUDE, d.LATITUDE] }
-        }))
-    };
-
-    // Calculer les limites sur l'écran avec la projection actuelle
-    const bounds = ctx.pathDetail.bounds(pointsGeo);
-    const dx = bounds[1][0] - bounds[0][0];
-    const dy = bounds[1][1] - bounds[0][1];
-    const x = (bounds[0][0] + bounds[1][0]) / 2;
-    const y = (bounds[0][1] + bounds[1][1]) / 2;
-
-    // Calculer l'échelle nécessaire pour que ça rentre, avec une marge (0.8)
-    const svgW = +ctx.svgDetail.attr("width");
-    const svgH = +ctx.svgDetail.attr("height");
-    const scale = 0.8 / Math.max(dx / svgW, dy / svgH);
-    
-    // Appliquer la transformation de zoom fluide
-    const transform = d3.zoomIdentity
-        .translate(svgW / 2, svgH / 2)
-        .scale(scale)
-        .translate(-x, -y);
-
-    // Centrer la projection sur l'étude sans verrouiller le zoom
-    const centerLon = d3.mean(measurements, d => d.LONGITUDE);
-    const centerLat = d3.mean(measurements, d => d.LATITUDE);
-    ctx.projectionDetail.center([0, centerLat]).rotate([-centerLon, 0]);
-    ctx.gDetail.selectAll("path").attr("d", ctx.pathDetail);
-
-    // 2. Échelles de couleur (inchangées)
-    // Filtrage des données selon l'année choisie sur le slider
-    const filteredData = measurements.filter(d => d.YEAR === selectedYear);
-
-    // Échelle de couleur (on garde la même logique)
-    const extentAbundance = d3.extent(measurements, d => d.ABUNDANCE);
-    const colorScaleDetail = d3.scaleLog()
-        .domain([Math.max(0.1, extentAbundance[0]), extentAbundance[1]])
-        .range(["#00a0a0", "#004242ff"])
-        .interpolate(d3.interpolateHcl);
-
-    // DATA JOIN
-    const dots = ctx.gMeasurements.selectAll(".measure-dot")
-        .data(filteredData, d => d.ID_ALL_RAW_DATA);
-
-    // 3. Dessin des points (inchangé, mais utilisez ctx.gMeasurements)
-    dots.exit().transition().duration(20).attr("r", 0).remove();
-
-    const dotsEnter = dots.enter()
-        .append("circle")
-        .attr("class", "measure-dot")
-        .style("pointer-events", "all"); // Assure que les événements de souris sont captés
-
-    const currentK = d3.zoomTransform(ctx.svgDetail.node()).k;
-    const dynamicRadius = 2.5 * Math.sqrt(currentK);
-
-    dotsEnter.merge(dots)
-        .attr("cx", d => {
-            const p = ctx.projectionDetail([d.LONGITUDE, d.LATITUDE]);
-            return p ? p[0] : -1000;
-        })
-        .attr("cy", d => {
-            const p = ctx.projectionDetail([d.LONGITUDE, d.LATITUDE]);
-            return p ? p[1] : -1000;
-        })
-        .attr("stroke", d => colorScaleDetail(d.ABUNDANCE))
-        .attr("stroke-width", 1.5 / Math.sqrt(currentK)) 
-        .attr("r", dynamicRadius)
-        .attr("fill", "none")
-
-        // --- AJOUT DU TOOLTIP ---
-        .on("mouseover", function(event, d) {
-          //Création du label de date
-          let dateLabel = d.YEAR;
-            if (d.DAY) {
-                dateLabel = d.DAY + "/" + dateLabel;
-                if (d.MONTH) {
-                    dateLabel = d.MONTH + "/" + dateLabel;
-                }
-            }
-          
-            ctx.tooltipDetail
-              .style("opacity", 1)
-              .html(`
-                  <div class="tt-title">${d.valid_name || "Unknown Species"}</div>
-
-                  <div class="tt-row">
-                      <span class="tt-k">Abundance</span>
-                      <span class="tt-v">${d.ABUNDANCE}</span>
-                  </div>
-                  <div class="tt-row">
-                      <span class="tt-k">Date</span>
-                      <span class="tt-v">${dateLabel}</span>
-                  </div>
-                  <div class="tt-row">
-                      <span class="tt-k">Location</span>
-                      <span class="tt-v">${d.LATITUDE.toFixed(3)}, ${d.LONGITUDE.toFixed(3)}</span>
-                  </div>
-              `);
-        })
-        .on("mousemove", function(event) {
-          // Utiliser les coordonnées absolues de la page
-          ctx.tooltipDetail
-              .style("left", (event.pageX + 15) + "px")
-              .style("top", (event.pageY + 15) + "px");
-        })
-        .on("mouseout", function() {
-            ctx.tooltipDetail.style("opacity", 0);
-        })
-        .transition().duration(30);
-}
 
 function setupZoomButtonsP3() {
     d3.select("#zoom-in-p3").on("click", () => {
@@ -1681,54 +1492,6 @@ function setupZoomButtonsP3() {
     d3.select("#zoom-reset-p3").on("click", () => {
         ctx.svgDetail.transition().duration(500).call(ctx.zoomDetail.transform, d3.zoomIdentity);
     });
-}
-
-function setupYearSlider() {
-    const slider = d3.select("#year-slider");
-    
-    slider.on("input", function() {
-        const selectedYear = +this.value;
-        d3.select("#current-year-display").text(selectedYear);
-        
-        // On récupère les données de l'étude actuelle depuis le cache
-        const currentStudyId = d3.select("#study-selector").property("value");
-        const measurements = ctx.measurementsCache[currentStudyId];
-        
-        if (measurements) {
-            updateStudyMap(measurements, selectedYear);
-        }
-    });
-}
-
-function updateDetailedPointsPosition(k) {
-    // On définit une taille de base (ex: 2.5px)
-    // On multiplie par la racine carrée de k pour qu'ils grossissent 
-    // sans devenir disproportionnés trop vite.
-    const dynamicRadius = 2.5 * Math.sqrt(k); 
-
-    ctx.gMeasurements.selectAll(".measure-dot")
-        .attr("cx", d => {
-            const p = ctx.projectionDetail([d.LONGITUDE, d.LATITUDE]);
-            return p ? p[0] : -1000;
-        })
-        .attr("cy", d => {
-            const p = ctx.projectionDetail([d.LONGITUDE, d.LATITUDE]);
-            return p ? p[1] : -1000;
-        })
-        .attr("r", dynamicRadius) 
-        .attr("stroke-width", 1.5 / Math.sqrt(k)); // Affine le contour au zoom
-
-function setupZoomButtonsP3() {
-  d3.select("#zoom-in-p3").on("click", () => {
-      // scaleBy va déclencher l'événement "zoom" ci-dessus avec un k plus grand
-      ctx.svgDetail.transition().duration(300).call(ctx.zoomDetail.scaleBy, 1.5);
-  });
-  d3.select("#zoom-out-p3").on("click", () => {
-      ctx.svgDetail.transition().duration(300).call(ctx.zoomDetail.scaleBy, 1/1.5);
-  });
-  d3.select("#zoom-reset-p3").on("click", () => {
-      ctx.svgDetail.transition().duration(500).call(ctx.zoomDetail.transform, d3.zoomIdentity);
-  });
 }
 
 function setupYearSlider() {
@@ -1887,4 +1650,3 @@ function createAbundanceChart(measurements) {
   svg.append("text").attr("x", margin.left).attr("y", height - 5).style("font-size", "10px").style("fill", "#8899a6").text(yearsExtent[0]);
   svg.append("text").attr("x", width - margin.right).attr("y", height - 5).attr("text-anchor", "end").style("font-size", "10px").style("fill", "#8899a6").text(yearsExtent[1]);
 }
-
