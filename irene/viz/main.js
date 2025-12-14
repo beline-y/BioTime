@@ -12,7 +12,8 @@ const ctx = {
   zoom: null,
   studies: [],
   world: null,
-  tooltip: null
+  tooltip: null,
+  selected_tool:"move" 
 };
 
 // Main entry point
@@ -34,9 +35,11 @@ function createViz() {
     .style("display", "block");
 
   // Group container (will be zoomed)
-  ctx.g = ctx.svg.append("g");
+  ctx.g = ctx.svg.append("g").attr("id", "transformG");
+  
   ctx.gMap = ctx.g.append("g");
   ctx.gPoints = ctx.g.append("g");
+  ctx.gTools = ctx.g.append("g").attr("id", "toolG");
 
   // Mercator projection 
   ctx.projection = d3.geoMercator()
@@ -50,7 +53,7 @@ function createViz() {
     .scaleExtent([1, 12])
     .on("zoom", function (event) {
       ctx.g.attr("transform", event.transform);
-
+   
       const k = event.transform.k;
 
       ctx.gPoints
@@ -62,13 +65,19 @@ function createViz() {
             .size(ctx.BASE_SYMBOL_SIZE / k)
         )
         .attr("stroke-width", 0.4/(0.5*k));
-    });
+    })
+  
+   .filter(function(event) {
+      return ctx.selected_tool == "move";
+    }); // pour éviter les interférences entre les events lies aux outils et ceux aux zooms
+
 
   // Enable zoom/pan with mouse
   ctx.svg.call(ctx.zoom);
 
   // Zoom buttons (+ / -)
   setupZoomButtons();
+  setupTools();
   setupPageNavigation();
   setupSidebarNav();
 
@@ -104,6 +113,55 @@ function setupZoomButtons() {
       .duration(300)
       .call(ctx.zoom.scaleBy, 1 / 1.4);
   });
+}
+
+function setupTools() {
+  
+  const moveBtn = d3.select("#move");
+  const rectBtn = d3.select("#rectangle");
+  const freeBtn = d3.select("#free");
+
+  moveBtn.on("click", function() {
+    ctx.selected_tool = "move";
+    moveBtn.attr("aria-pressed", "true");
+    rectBtn.attr("aria-pressed", "false");
+    freeBtn.attr("aria-pressed", "false");
+
+    console.log("move");
+    ctx.gTools.on("mousedown", null)
+              .on("mouseup", null);
+    
+
+  })
+
+  rectBtn.on("click", function() {
+    ctx.selected_tool = "rect";
+    moveBtn.attr("aria-pressed", "false");
+    rectBtn.attr("aria-pressed", "true");
+    freeBtn.attr("aria-pressed", "false");
+
+    console.log("rect");
+    ctx.gTools.on("mousedown", mouseDownRect)
+              .on("mouseup", mouseUpRect);
+  })
+
+  freeBtn.on("click", function() {
+    ctx.selected_tool = "free";
+    moveBtn.attr("aria-pressed", "false");
+    rectBtn.attr("aria-pressed", "false");
+    freeBtn.attr("aria-pressed", "true");
+
+    console.log("free");
+
+    ctx.gTools.on("mousedown", mouseDownFree)
+              .on("mouseup", mouseUpFree);
+
+  })
+
+  ctx.lineGenerator = d3.line().x(d => d[0])
+                               .y(d => d[1]);
+
+  ctx.pathPoints = [];
 }
 
 // Load world + studies
@@ -149,6 +207,16 @@ function drawBaseMap() {
   const [[x0, y0], [x1, y1]] = ctx.path.bounds(land);
   const margin = 0;
 
+  // add a rectangle object to recieve clicks
+ 
+  d3.select("g#toolG").append("rect")
+                      .attr("x", x0)
+                      .attr("y", y0)
+                      .attr("width", x1-x0)
+                      .attr("height", y1-y0)
+                      .attr("id", "toolrect")
+                      .attr("fill", "rgba(100,0,0,0.0)");
+
   // Configure zoom so panning is allowed but never shows empty space
   ctx.zoom
     .extent([[0, 0], [ctx.WIDTH, ctx.HEIGHT]])
@@ -183,14 +251,10 @@ function applyFilters() {
   });
 }
 
-
-
-
 function setupFilterListeners() {
   d3.select("#realm-select").on("change", updatePoints);
   d3.select("#protected-only").on("change", updatePoints);
 }
-
 
 function handleMouseOver(event, d) {
   ctx.tooltip
@@ -270,7 +334,6 @@ function updatePoints() {
   updateLegend(minDuration, maxDuration);
 }
 
-
 function updateLegend(minVal, maxVal) {
   const legend = d3.select("#legend-duration");
 
@@ -289,7 +352,6 @@ function updateLegend(minVal, maxVal) {
   legend.select(".legend-min").text(minVal);
   legend.select(".legend-max").text(maxVal);
 }
-
 
 function setupPageNavigation() {
   const btn = document.getElementById("next-page-btn");
@@ -314,7 +376,6 @@ function setupPageNavigation() {
 }
 
 
-
 function setupSidebarNav() {
   const buttons = Array.from(document.querySelectorAll(".nav-link"));
   const sections = buttons
@@ -326,7 +387,6 @@ function setupSidebarNav() {
     btn.addEventListener("click", () => {
       document.getElementById(btn.dataset.target)
         ?.scrollIntoView({ behavior: "smooth", block: "start" });
-
     });
   });
 
@@ -350,6 +410,103 @@ function setupSidebarNav() {
   sections.forEach(sec => observer.observe(sec));
 }
 
+
+// fonctions de contrôle des outils
+
+
+
+
+function mouseDownFree() {
+    console.log("freeeedoooom")
+
+    ctx.pathPoints = [d3.pointer(event, this)]; // adding first point of path
+    
+    ctx.gTools.append("path").attr("d", ctx.lineGenerator(ctx.pathPoints))
+                      .style("stroke", "lightblue")
+                      .style("fill", "lightblue")
+                      .attr("opacity", 0.5)
+                      .attr("id", "currentfree");
+
+    ctx.gTools.on("mousemove", mouseMoveFree);
+}
+
+function mouseMoveFree() {
+    console.log("nyoom")
+
+    ctx.pathPoints.push(d3.pointer(event, this));
+    d3.select("path#currentfree").attr("d", ctx.lineGenerator(ctx.pathPoints));
+}
+
+function mouseUpFree() {
+
+  console.log("free mouseup !!");
+  ctx.gTools.on("mousemove", null);
+
+  let path = d3.select("path#currentfree");
+  path.attr("d", path.attr("d") + "Z") //close the path when mouse is released
+  bboxToView(path.node().getBBox());
+
+  // do stuff to choose the studies to display, call function to draw the graphs
+
+  path.remove();
+}
+
+
+function mouseDownRect() {
+    console.log("starting rectangular selection");
+    ctx.startingPoint = d3.pointer(event, this);
+    
+    ctx.rectangle = ctx.gTools.append("rect")
+                                  .attr("x", ctx.startingPoint[0])
+                                  .attr("y", ctx.startingPoint[1])
+                                  .attr("height", 0) 
+                                  .attr("width", 0)
+                                  .attr("id", "currentrect")
+                                  .style("fill", "lightblue")
+                                  .style("opacity", 0.5);
+
+    ctx.gTools.on("mousemove", mouseMoveRect);
+}
+
+function mouseMoveRect() {
+    let mouse = d3.pointer(event, this);
+
+    let width = mouse[0] - ctx.startingPoint[0];
+    let height = mouse[1] - ctx.startingPoint[1];
+
+    ctx.rectangle.attr("x", Math.min(mouse[0], ctx.startingPoint[0]))
+             .attr("y", Math.min(mouse[1], ctx.startingPoint[1]))
+             .attr("width", Math.abs(width))
+             .attr("height", Math.abs(height));
+}
+
+function mouseUpRect() {
+    console.log("rect mouseup")
+    ctx.gTools.on("mousemove", null);
+    let rect = d3.select("rect#currentrect");    
+    bboxToView(rect.node().getBBox());
+    rect.remove();
+}
+
+
+function bboxToView(bbox) {
+    //updates the view to fit to the bounding box
+
+    console.log(bbox);
+    ctx.tempProj = ctx.proj;
+
+    const scaleFactor = Math.min((ctx.WIDTH * 0.9) / bbox.width,
+                                 (ctx.HEIGHT * 0.9) / bbox.height)
+    
+    const xTranslation = ctx.WIDTH / 2 - scaleFactor * (bbox.x + bbox.width/2) 
+    const yTranslation = ctx.HEIGHT / 2 - scaleFactor * (bbox.y + bbox.height/2)
+
+    const focus = d3.zoomIdentity.translate(xTranslation, yTranslation)
+                                 .scale(scaleFactor);
+
+    ctx.svg.transition()
+           .duration(300)
+           .call(ctx.zoom.transform, focus)   
 function resetMapZoom() {
   if (!ctx.svg || !ctx.zoom) return;
 
