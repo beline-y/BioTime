@@ -208,8 +208,8 @@ svg {
 /* Zoom buttons */
 #zoom-controls {
   position: absolute;
-  right: 16px;
-  top: 16px;
+  left: 16px;
+  top: 200px;
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -257,7 +257,7 @@ svg {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 22px;
   line-height: 0;
 }
 
