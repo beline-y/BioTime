@@ -1,0 +1,158 @@
+[
+  {
+    "Code": "life>eukaryota",
+    "Parent": null,
+    "Amount": 0,
+    "Description": "Eukaryota"
+  },
+  {
+    "Code": "life>eukaryota>archaeplastida",
+    "Parent": "life>eukaryota",
+    "Amount": 0,
+    "Description": "Archaeplastida"
+  },
+  {
+    "Code": "life>eukaryota>archaeplastida>plants",
+    "Parent": "life>eukaryota>archaeplastida",
+    "Amount": 149,
+    "Description": "Plants"
+  },
+  {
+    "Code": "life>eukaryota>metazoa_animals",
+    "Parent": "life>eukaryota",
+    "Amount": 0,
+    "Description": "Metazoa (Animals)"
+  },
+  {
+    "Code": "life>eukaryota>metazoa_animals>chordata",
+    "Parent": "life>eukaryota>metazoa_animals",
+    "Amount": 0,
+    "Description": "Chordata"
+  },
+  {
+    "Code": "life>eukaryota>metazoa_animals>chordata>fish",
+    "Parent": "life>eukaryota>metazoa_animals>chordata",
+    "Amount": 138,
+    "Description": "Fish"
+  },
+  {
+    "Code": "life>eukaryota>sar__protists",
+    "Parent": "life>eukaryota",
+    "Amount": 0,
+    "Description": "SAR / Protists"
+  },
+  {
+    "Code": "life>eukaryota>sar__protists>plankton__protists",
+    "Parent": "life>eukaryota>sar__protists",
+    "Amount": 88,
+    "Description": "Plankton / Protists"
+  },
+  {
+    "Code": "life>eukaryota>metazoa_animals>chordata>birds",
+    "Parent": "life>eukaryota>metazoa_animals>chordata",
+    "Amount": 83,
+    "Description": "Birds"
+  },
+  {
+    "Code": "life>eukaryota>metazoa_animals>invertebrates",
+    "Parent": "life>eukaryota>metazoa_animals",
+    "Amount": 0,
+    "Description": "Invertebrates"
+  },
+  {
+    "Code": "life>eukaryota>metazoa_animals>invertebrates>other",
+    "Parent": "life>eukaryota>metazoa_animals>invertebrates",
+    "Amount": 67,
+    "Description": "Other"
+  },
+  {
+    "Code": "life>eukaryota>metazoa_animals>invertebrates>insects",
+    "Parent": "life>eukaryota>metazoa_animals>invertebrates",
+    "Amount": 45,
+    "Description": "Insects"
+  },
+  {
+    "Code": "life>eukaryota>metazoa_animals>chordata>mammals",
+    "Parent": "life>eukaryota>metazoa_animals>chordata",
+    "Amount": 36,
+    "Description": "Mammals"
+  },
+  {
+    "Code": "life>eukaryota>unclassified",
+    "Parent": "life>eukaryota",
+    "Amount": 0,
+    "Description": "Unclassified"
+  },
+  {
+    "Code": "life>eukaryota>unclassified>other",
+    "Parent": "life>eukaryota>unclassified",
+    "Amount": 16,
+    "Description": "Other"
+  },
+  {
+    "Code": "life>eukaryota>metazoa_animals>chordata>amphibians",
+    "Parent": "life>eukaryota>metazoa_animals>chordata",
+    "Amount": 12,
+    "Description": "Amphibians"
+  },
+  {
+    "Code": "life>eukaryota>metazoa_animals>invertebrates>arthropods",
+    "Parent": "life>eukaryota>metazoa_animals>invertebrates",
+    "Amount": 11,
+    "Description": "Arthropods"
+  },
+  {
+    "Code": "life>eukaryota>metazoa_animals>invertebrates>corals_cnidaria",
+    "Parent": "life>eukaryota>metazoa_animals>invertebrates",
+    "Amount": 10,
+    "Description": "Corals (Cnidaria)"
+  },
+  {
+    "Code": "life>eukaryota>metazoa_animals>invertebrates>molluscs",
+    "Parent": "life>eukaryota>metazoa_animals>invertebrates",
+    "Amount": 10,
+    "Description": "Molluscs"
+  },
+  {
+    "Code": "life>eukaryota>archaeplastida>algae__seagrass",
+    "Parent": "life>eukaryota>archaeplastida",
+    "Amount": 10,
+    "Description": "Algae / Seagrass"
+  },
+  {
+    "Code": "life>eukaryota>unclassified>mixed",
+    "Parent": "life>eukaryota>unclassified",
+    "Amount": 9,
+    "Description": "Mixed"
+  },
+  {
+    "Code": "life>eukaryota>metazoa_animals>chordata>reptiles",
+    "Parent": "life>eukaryota>metazoa_animals>chordata",
+    "Amount": 8,
+    "Description": "Reptiles"
+  },
+  {
+    "Code": "life>eukaryota>unclassified>unknown",
+    "Parent": "life>eukaryota>unclassified",
+    "Amount": 6,
+    "Description": "Unknown"
+  },
+  {
+    "Code": "life>eukaryota>fungi",
+    "Parent": "life>eukaryota",
+    "Amount": 0,
+    "Description": "Fungi"
+  },
+  {
+    "Code": "life>eukaryota>fungi>fungi__lichens__moss",
+    "Parent": "life>eukaryota>fungi",
+    "Amount": 6,
+    "Description": "Fungi / Lichens / Moss"
+  },
+  {
+    "Code": "life>eukaryota>metazoa_animals>chordata>amphibians__reptiles",
+    "Parent": "life>eukaryota>metazoa_animals>chordata",
+    "Amount": 4,
+    "Description": "Amphibians & Reptiles"
+  }
+]
