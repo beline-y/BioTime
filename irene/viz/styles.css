@@ -427,6 +427,12 @@ svg {
 
 
 .study-layout {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+    height: 500px;
+}
+
     flex: 1 1 auto;
     display: flex;
     width: 100%;
@@ -487,6 +493,40 @@ svg {
   width: 100%;
 }
 
+.overview-only { display: none; }
+
+.checklist{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 6px;
+  max-height: 220px;
+  overflow: auto;
+  padding-right: 4px;
+}
+
+.check-item{
+  display: grid;
+  grid-template-columns: 18px 1fr;
+  align-items: start;
+  column-gap: 10px;
+  font-size: 13px;
+  line-height: 1.3;
+  color: var(--text-main);
+}
+
+.check-item input{
+  margin: 0;
+}
+.mini-btn{
+  border: 1px solid var(--border);
+  background: #f9fafb;
+  border-radius: 999px;
+  padding: 4px 8px;
+  font-size: 12px;
+  cursor: pointer;
+}
+.mini-btn:hover{ background:#f1f5f9; }
 
 
 /* Dégradé spécifique pour l'abondance (Page 3) */

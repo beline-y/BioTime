@@ -49,6 +49,18 @@
         </div>
       </div>
 
+      <!-- SIDEBAR page 2 -->
+      <div id="phylo-filters-aside" class="filter-card overview-only" style="display:none;">
+        <div class="filter-header">
+          <div class="filter-label">Phylo domains</div>
+          <button id="phylo-select-all" class="mini-btn" type="button">All</button>
+        </div>
+
+        <div class="filter-body">
+          <div id="phylo-domain-list" class="checklist"></div>
+        </div>
+      </div>
+
       <!-- SIDEBAR page 3 -->
       <div id="study-details-aside" class="filter-card study-only" style="display: none;">
           <div class="filter-header">
@@ -140,6 +152,17 @@
     <!-- PAGE 3 : STUDIES OVERVIEW -->
     <div id="page-3" class="page-section">
       <div class="page-header">
+        <h1>Study Explorer</h1>
+        </div>
+      
+      <div class="study-layout">
+        <div id="map-container-p3" style="position: relative;">
+          <div id="zoom-controls" style="position: absolute; right: 15px; top: 15px; z-index: 10; display: flex; flex-direction: column; gap: 5px;">
+            <button class="zoom-btn" id="zoom-in-p3">+</button>
+            <button class="zoom-btn" id="zoom-out-p3">−</button>
+            <button class="zoom-btn" id="zoom-reset-p3">⟲</button>
+          </div>
+          </div>
         <h1 style="margin-bottom: 0;">Study Explorer</h1>
       </div>
       <p id="timeline-subtitle" style="margin: 0; font-size: 0.85rem; color: #8899a6; font-style: italic;">
