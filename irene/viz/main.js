@@ -954,7 +954,7 @@ function drawStudyPageMap() {
         .attr("class", "study-dot-p3")
         .attr("cx", d => ctx.projection3([d.lon, d.lat])[0])
         .attr("cy", d => ctx.projection3([d.lon, d.lat])[1])
-        .attr("r", 1.5)
+        .attr("r", 3)
         .attr("fill", d => colorScale(d.duration))
         .attr("stroke", "#333")
         .attr("stroke-width", 0.2)
@@ -1034,14 +1034,36 @@ function initPage3() {
 
     ctx.pathDetail = d3.geoPath().projection(ctx.projectionDetail);
 
-    // Ajout du comportement de zoom D3
+    // Ajout du comportement de zoom D3 pour un effet de continuité
+    const initialScale = width / 6.5;
+
     ctx.zoomDetail = d3.zoom()
-        .scaleExtent([1, 1000])
-        .on("zoom", (event) => {
-            gMain.attr("transform", event.transform); 
-            ctx.gMeasurements.selectAll(".measure-dot")
-                .attr("stroke-width", 1.5 / event.transform.k);
-        });
+      .scaleExtent([1, 1000])
+      .on("zoom", (event) => {
+        const { x, y, k } = event.transform;
+
+        // 1. ZOOM RÉEL : On change l'échelle de la projection
+        ctx.projectionDetail.scale(initialScale * k);
+
+        // 2. ROTATION INFINIE (X) : basée sur le mouvement horizontal
+        const rotateX = (x / (width * k)) * 360;
+        
+        // 3. CENTRAGE VERTICAL (Y) : au lieu de translater le SVG, on change le centre
+        // Cela permet aux points de ne pas "s'envoler"
+        const centerLat = (y / (height * k)) * 90; 
+
+        ctx.projectionDetail.rotate([rotateX, 0]);
+        // Note: On peut aussi ajuster le centre vertical si besoin : 
+        // ctx.projectionDetail.center([0, centerLat]);
+
+        // 4. MISE À JOUR VISUELLE
+        // On redessine la terre
+        ctx.gDetail.selectAll("path").attr("d", ctx.pathDetail);
+        
+        // On ne touche plus au transform du groupe des points (SAUF pour k si on veut)
+        // On recalcule tout par projection pour que ce soit fixe
+        updateDetailedPointsPosition(k);
+      });
 
     ctx.svgDetail.call(ctx.zoomDetail);
 
@@ -1106,7 +1128,7 @@ function renderSecondMap() {
     .attr("id", d => "p3-dot-" + d.study_id)
     .attr("cx", d => projection3([d.lon, d.lat])[0])
     .attr("cy", d => projection3([d.lon, d.lat])[1])
-    .attr("r", 1.5) 
+    .attr("r", 2) 
     .attr("fill", d => colorScale(d.duration))
     .attr("stroke", "white")
     .attr("stroke-width", 1)
@@ -1251,7 +1273,11 @@ function updateStudyMap(measurements, selectedYear) {
         .scale(scale)
         .translate(-x, -y);
 
-    ctx.svgDetail.transition().duration(750).call(ctx.zoomDetail.transform, transform);
+    // Centrer la projection sur l'étude sans verrouiller le zoom
+    const centerLon = d3.mean(measurements, d => d.LONGITUDE);
+    const centerLat = d3.mean(measurements, d => d.LATITUDE);
+    ctx.projectionDetail.center([0, centerLat]).rotate([-centerLon, 0]);
+    ctx.gDetail.selectAll("path").attr("d", ctx.pathDetail);
 
     // 2. Échelles de couleur (inchangées)
     // Filtrage des données selon l'année choisie sur le slider
@@ -1276,13 +1302,23 @@ function updateStudyMap(measurements, selectedYear) {
         .attr("class", "measure-dot")
         .style("pointer-events", "all"); // Assure que les événements de souris sont captés
 
+    const currentK = d3.zoomTransform(ctx.svgDetail.node()).k;
+    const dynamicRadius = 2.5 * Math.sqrt(currentK);
+
     dotsEnter.merge(dots)
-        .attr("cx", d => ctx.projectionDetail([d.LONGITUDE, d.LATITUDE])[0])
-        .attr("cy", d => ctx.projectionDetail([d.LONGITUDE, d.LATITUDE])[1])
-        .attr("fill", "rgba(0, 160, 160, 0.1)") // Ajout d'un fond léger pour faciliter le survol
+        .attr("cx", d => {
+            const p = ctx.projectionDetail([d.LONGITUDE, d.LATITUDE]);
+            return p ? p[0] : -1000;
+        })
+        .attr("cy", d => {
+            const p = ctx.projectionDetail([d.LONGITUDE, d.LATITUDE]);
+            return p ? p[1] : -1000;
+        })
         .attr("stroke", d => colorScaleDetail(d.ABUNDANCE))
-        .attr("stroke-width", 1 / scale)
-        .attr("r", 1.5 / Math.sqrt(scale))
+        .attr("stroke-width", 1.5 / Math.sqrt(currentK)) 
+        .attr("r", dynamicRadius)
+        .attr("fill", "none")
+
         // --- AJOUT DU TOOLTIP ---
         .on("mouseover", function(event, d) {
           //Création du label de date
@@ -1327,6 +1363,7 @@ function updateStudyMap(measurements, selectedYear) {
 
 function setupZoomButtonsP3() {
     d3.select("#zoom-in-p3").on("click", () => {
+        // scaleBy va déclencher l'événement "zoom" ci-dessus avec un k plus grand
         ctx.svgDetail.transition().duration(300).call(ctx.zoomDetail.scaleBy, 1.5);
     });
     d3.select("#zoom-out-p3").on("click", () => {
@@ -1352,4 +1389,23 @@ function setupYearSlider() {
             updateStudyMap(measurements, selectedYear);
         }
     });
+}
+
+function updateDetailedPointsPosition(k) {
+    // On définit une taille de base (ex: 2.5px)
+    // On multiplie par la racine carrée de k pour qu'ils grossissent 
+    // sans devenir disproportionnés trop vite.
+    const dynamicRadius = 2.5 * Math.sqrt(k); 
+
+    ctx.gMeasurements.selectAll(".measure-dot")
+        .attr("cx", d => {
+            const p = ctx.projectionDetail([d.LONGITUDE, d.LATITUDE]);
+            return p ? p[0] : -1000;
+        })
+        .attr("cy", d => {
+            const p = ctx.projectionDetail([d.LONGITUDE, d.LATITUDE]);
+            return p ? p[1] : -1000;
+        })
+        .attr("r", dynamicRadius) 
+        .attr("stroke-width", 1.5 / Math.sqrt(k)); // Affine le contour au zoom
 }
