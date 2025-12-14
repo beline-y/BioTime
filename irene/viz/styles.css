@@ -170,7 +170,7 @@ svg {
 }
 
 /* Tooltip */
-#tooltip {
+#tooltip,#tooltip-detail{
   position: absolute;
   pointer-events: none;
   background: #ffffff;
@@ -206,13 +206,13 @@ svg {
 }
 
 /* Tooltip content */
-#tooltip .tt-title{
+.tt-title{
   font-weight: 700;
   font-size: 13px;
   margin-bottom: 8px;
 }
 
-#tooltip .tt-row{
+.tt-row{
   display: flex;
   align-items: baseline;
   justify-content: space-between;
@@ -221,20 +221,20 @@ svg {
   line-height: 1.2;
 }
 
-#tooltip .tt-k{
+.tt-k{
   color: var(--text-muted);
   font-weight: 600;
   white-space: nowrap;
 }
 
-#tooltip .tt-v{
+.tt-v{
   color: var(--text-main);
   font-weight: 600;
   text-align: right;
 }
 
 /* Bonus: un mini “glass” look */
-#tooltip{
+#tooltip, #tooltip-detail {
   backdrop-filter: blur(6px);
 }
 
@@ -466,4 +466,3 @@ svg {
     border-radius: var(--radius-lg);
     overflow: hidden;
 }
-
