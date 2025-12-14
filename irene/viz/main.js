@@ -18,11 +18,13 @@ const ctx = {
   // Éléments Page 3 (Détail)
   svgDetail: null,
   gDetail: null,
+  gMeasurements: null,
   projectionDetail: null,
   pathDetail: null,
-  tooltip3: null,
+  tooltipDetail: null,
   playInterval: null,
   zoomDetail: null,
+
   availableStudyIds: [],
   studyFiles: [],
   measurementsCache: {}
@@ -40,6 +42,15 @@ function createViz() {
 
   const container = d3.select("#map-container");
   ctx.tooltip = d3.select("#tooltip");
+
+  //Tooltip detail page 3
+  ctx.tooltipDetail = d3.select("body").append("div")
+    .attr("id", "tooltip-detail")
+    .attr("class", "tooltip") // On réutilise la classe CSS existante pour le style
+    .style("position", "absolute")
+    .style("pointer-events", "none")
+    .style("opacity", 0)
+    .style("z-index", 1000);
 
   ctx.svg = container.append("svg")
     .attr("width", ctx.WIDTH)
@@ -442,6 +453,7 @@ function setupSidebarNav() {
     // Affichage conditionnel des éléments de la sidebar
     d3.selectAll(".map-only").style("display", isMapPage ? "flex" : "none");
     d3.select("#study-details-aside").style("display", isStudyPage ? "flex" : "none");
+    d3.select("#year-slider-container").style("display", isStudyPage ? "flex" : "none");
 
     document.body.classList.toggle("map-filters-hidden", visible.target.id !== "page-map");
 
@@ -942,7 +954,7 @@ function drawStudyPageMap() {
         .attr("class", "study-dot-p3")
         .attr("cx", d => ctx.projection3([d.lon, d.lat])[0])
         .attr("cy", d => ctx.projection3([d.lon, d.lat])[1])
-        .attr("r", 3)
+        .attr("r", 1.5)
         .attr("fill", d => colorScale(d.duration))
         .attr("stroke", "#333")
         .attr("stroke-width", 0.2)
@@ -978,11 +990,17 @@ function displayStudyDetails(d) {
     sidebar.html(`
 
         <div class="detail-grid" style="margin-top: 15px; display: grid; grid-template-columns: 1fr; gap: 8px; font-size: 0.9em;">
-            <div class="detail-item"><strong>Realm:</strong> ${d.realm} years</div>
+            <div class="detail-item"><strong>Realm:</strong> ${d.realm} </div>
             <div class="detail-item"><strong>Duration:</strong> ${d.duration} years</div>
             <div class="detail-item"><strong>Years:</strong> ${d.start_year} – ${d.end_year}</div>
             <div class="detail-item"><strong>Taxa:</strong> ${d.taxa || 'N/A'}</div>
-            <div class="detail-item"><strong>Protected:</strong> ${d.protected_area === "TRUE" ? "✅ Yes" : "❌ No"}</div>
+            <div class="detail-item" style="border-left: 3px solid var(--accent); padding-left: 8px; background: rgba(0, 160, 160, 0.05);">
+                <strong>Abundance meaning:</strong> 
+                <span style="color: var(--text-muted); font-style: italic;">
+                    ${d.abundance_type || 'Count of individuals'}
+                </span>
+            </div>
+            <div class="detail-item"><strong>Protected area:</strong> ${d.protected_area === "TRUE" ? "✅ Yes" : "❌ No"}</div>
         </div>
         <div class="detail-footer" style="margin-top: 15px; font-size: 0.8em; color: #666; border-top: 1px solid #eee; padding-top: 10px;">
             <strong>Location:</strong> Lat ${d.lat.toFixed(2)}, Lon ${d.lon.toFixed(2)}
@@ -1006,8 +1024,9 @@ function initPage3() {
         .style("border-radius", "18px");
 
     // Création du groupe principal qui recevra les transformations de zoom
-    ctx.gDetail = ctx.svgDetail.append("g");
-    ctx.gMeasurements = ctx.gDetail.append("g").attr("id", "measurements-layer");
+    const gMain = ctx.svgDetail.append("g").attr("id", "zoom-group");
+    ctx.gDetail = gMain.append("g").attr("id", "map-layer");
+    ctx.gMeasurements = gMain.append("g").attr("id", "measurements-layer");
 
     ctx.projectionDetail = d3.geoMercator()
         .scale(width / 6.5)
@@ -1017,10 +1036,9 @@ function initPage3() {
 
     // Ajout du comportement de zoom D3
     ctx.zoomDetail = d3.zoom()
-        .scaleExtent([1, 1000]) // Permet un zoom très profond pour les petites zones
+        .scaleExtent([1, 1000])
         .on("zoom", (event) => {
-            ctx.gDetail.attr("transform", event.transform);
-            // Optionnel : garder les points à une taille lisible lors du zoom
+            gMain.attr("transform", event.transform); 
             ctx.gMeasurements.selectAll(".measure-dot")
                 .attr("stroke-width", 1.5 / event.transform.k);
         });
@@ -1038,7 +1056,8 @@ function initPage3() {
         .attr("stroke-width", 0.5);
 
     setupStudySelector();
-    setupZoomButtonsP3(); // Nouvelle fonction pour les boutons
+    setupZoomButtonsP3();
+    setupYearSlider();
 }
 
 function renderSecondMap() {
@@ -1087,7 +1106,7 @@ function renderSecondMap() {
     .attr("id", d => "p3-dot-" + d.study_id)
     .attr("cx", d => projection3([d.lon, d.lat])[0])
     .attr("cy", d => projection3([d.lon, d.lat])[1])
-    .attr("r", 4) // Un peu plus gros pour les voir
+    .attr("r", 1.5) 
     .attr("fill", d => colorScale(d.duration))
     .attr("stroke", "white")
     .attr("stroke-width", 1)
@@ -1129,7 +1148,25 @@ function updateStudySelection(studyId) {
   // 3. Chargement des mesures (CSV) pour la carte de détail
   loadStudyMeasurements(studyId).then(measurements => {
     console.log(`Données prêtes pour affichage : ${measurements.length} lignes`);
-    updateStudyMap(measurements);
+
+    // 1. Extraire les années uniques
+    const years = [...new Set(measurements.map(d => d.YEAR))].sort();
+    const minYear = years[0];
+    const maxYear = years[years.length - 1];
+
+    // 2. Configurer le slider
+    const slider = d3.select("#year-slider");
+    slider.attr("min", minYear)
+          .attr("max", maxYear)
+          .property("value", minYear);
+
+    d3.select("#year-min").text(minYear);
+    d3.select("#year-max").text(maxYear);
+    d3.select("#current-year-display").text(minYear);
+    d3.select("#year-slider-container").style("display", "block");
+
+    // 3. Tracer la carte pour la première année
+    updateStudyMap(measurements, minYear);
   });
 }
 
@@ -1157,6 +1194,8 @@ function loadStudyMeasurements(studyId) {
             LATITUDE: +d.LATITUDE,
             LONGITUDE: +d.LONGITUDE,
             YEAR: +d.YEAR,
+            MONTH: +d.MONTH,
+            DAY: +d.DAY,
             valid_name: d.valid_name,
             STUDY_ID: +d.STUDY_ID,
             ID_ALL_RAW_DATA: d.ID_ALL_RAW_DATA
@@ -1181,7 +1220,7 @@ function loadStudyMeasurements(studyId) {
         return [];
     });
 }
-function updateStudyMap(measurements) {
+function updateStudyMap(measurements, selectedYear) {
     if (!measurements || measurements.length === 0) return;
 
     // 1. Calcul des limites géométriques des données
@@ -1215,32 +1254,75 @@ function updateStudyMap(measurements) {
     ctx.svgDetail.transition().duration(750).call(ctx.zoomDetail.transform, transform);
 
     // 2. Échelles de couleur (inchangées)
+    // Filtrage des données selon l'année choisie sur le slider
+    const filteredData = measurements.filter(d => d.YEAR === selectedYear);
+
+    // Échelle de couleur (on garde la même logique)
     const extentAbundance = d3.extent(measurements, d => d.ABUNDANCE);
-    const colorScale = d3.scaleLog()
+    const colorScaleDetail = d3.scaleLog()
         .domain([Math.max(0.1, extentAbundance[0]), extentAbundance[1]])
-        .range(["#00ffcc", "#ff0066"])
+        .range(["#00a0a0", "#004242ff"])
         .interpolate(d3.interpolateHcl);
 
-    // 3. Dessin des points (inchangé, mais utilisez ctx.gMeasurements)
-    const years = [...new Set(measurements.map(d => d.YEAR))].sort();
-    const filteredData = measurements.filter(d => d.YEAR === years[0]);
-
+    // DATA JOIN
     const dots = ctx.gMeasurements.selectAll(".measure-dot")
         .data(filteredData, d => d.ID_ALL_RAW_DATA);
 
-    dots.exit().remove();
+    // 3. Dessin des points (inchangé, mais utilisez ctx.gMeasurements)
+    dots.exit().transition().duration(20).attr("r", 0).remove();
 
-    dots.enter()
+    const dotsEnter = dots.enter()
         .append("circle")
         .attr("class", "measure-dot")
-        .merge(dots)
+        .style("pointer-events", "all"); // Assure que les événements de souris sont captés
+
+    dotsEnter.merge(dots)
         .attr("cx", d => ctx.projectionDetail([d.LONGITUDE, d.LATITUDE])[0])
         .attr("cy", d => ctx.projectionDetail([d.LONGITUDE, d.LATITUDE])[1])
-        .attr("fill", "none")
-        .attr("stroke", d => colorScale(d.ABUNDANCE))
-        .attr("stroke-width", 2 / scale) // Ajuste l'épaisseur selon le zoom
-        .attr("r", 5 / Math.sqrt(scale)) // Optionnel : réduit la taille visuelle si on est très zoomé
-        .transition().duration(750);
+        .attr("fill", "rgba(0, 160, 160, 0.1)") // Ajout d'un fond léger pour faciliter le survol
+        .attr("stroke", d => colorScaleDetail(d.ABUNDANCE))
+        .attr("stroke-width", 1 / scale)
+        .attr("r", 1.5 / Math.sqrt(scale))
+        // --- AJOUT DU TOOLTIP ---
+        .on("mouseover", function(event, d) {
+          //Création du label de date
+          let dateLabel = d.YEAR;
+            if (d.DAY) {
+                dateLabel = d.DAY + "/" + dateLabel;
+                if (d.MONTH) {
+                    dateLabel = d.MONTH + "/" + dateLabel;
+                }
+            }
+          
+            ctx.tooltipDetail
+              .style("opacity", 1)
+              .html(`
+                  <div class="tt-title">${d.valid_name || "Unknown Species"}</div>
+
+                  <div class="tt-row">
+                      <span class="tt-k">Abundance</span>
+                      <span class="tt-v">${d.ABUNDANCE}</span>
+                  </div>
+                  <div class="tt-row">
+                      <span class="tt-k">Date</span>
+                      <span class="tt-v">${dateLabel}</span>
+                  </div>
+                  <div class="tt-row">
+                      <span class="tt-k">Location</span>
+                      <span class="tt-v">${d.LATITUDE.toFixed(3)}, ${d.LONGITUDE.toFixed(3)}</span>
+                  </div>
+              `);
+        })
+        .on("mousemove", function(event) {
+          // Utiliser les coordonnées absolues de la page
+          ctx.tooltipDetail
+              .style("left", (event.pageX + 15) + "px")
+              .style("top", (event.pageY + 15) + "px");
+        })
+        .on("mouseout", function() {
+            ctx.tooltipDetail.style("opacity", 0);
+        })
+        .transition().duration(30);
 }
 
 function setupZoomButtonsP3() {
@@ -1252,5 +1334,22 @@ function setupZoomButtonsP3() {
     });
     d3.select("#zoom-reset-p3").on("click", () => {
         ctx.svgDetail.transition().duration(500).call(ctx.zoomDetail.transform, d3.zoomIdentity);
+    });
+}
+
+function setupYearSlider() {
+    const slider = d3.select("#year-slider");
+    
+    slider.on("input", function() {
+        const selectedYear = +this.value;
+        d3.select("#current-year-display").text(selectedYear);
+        
+        // On récupère les données de l'étude actuelle depuis le cache
+        const currentStudyId = d3.select("#study-selector").property("value");
+        const measurements = ctx.measurementsCache[currentStudyId];
+        
+        if (measurements) {
+            updateStudyMap(measurements, selectedYear);
+        }
     });
 }
