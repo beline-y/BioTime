@@ -235,6 +235,47 @@ svg {
   background: #f1f5f9;
 }
 
+
+#tool-controls {
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 5;
+}
+
+.tool-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--panel-bg);
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 0;
+}
+
+.tool-btn:hover {
+  background: #f1f5f9;
+}
+
+.tool-btn img {
+  transform : scale(0.5);
+}
+
+.tool-btn[aria-pressed="true"] {
+  border: 2px solid var(--accent);
+  background: var(--accent-soft);
+
+}
+
+
 .checkbox-row {
   display: flex;
   align-items: center;
@@ -340,4 +381,46 @@ svg {
   padding: 24px 32px;
   flex-direction: column;
   gap: 16px;
+}
+
+#overview-charts { overflow: hidden; }
+
+.kpi-bar{
+  width: 100%;
+  padding: 15px 100px;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  gap: 1px;
+}
+
+.kpi{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1;
+}
+
+.kpi .value{
+  font-size: 50px;      /* ajuste */
+  font-weight: 300;
+  color: #1f2a37;
+  letter-spacing: 1px;
+}
+
+.kpi .label{
+  margin-top: 14px;
+  font-size: 20px;      /* ajuste */
+  font-weight: 700;
+  color: #111827;
+}
+
+#page-2{
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+#phylo-panel, #timeline-panel{
+  width: 100%;
 }
