@@ -53,6 +53,13 @@
           <div class="filter-header">
             <div class="filter-label">Selected Study</div>
           </div>
+
+          <div class="filter-body">
+            <select id="study-selector">
+              <option value="">Choose an ID...</option>
+            </select>
+          </div>
+
           <div id="study-info-sidebar" class="filter-body">
             <p style="font-size: 0.85em; color: #666;">Select a study on the map or via the dropdown.</p>
           </div>
@@ -113,14 +120,19 @@
     <div id="page-3" class="page-section">
       <div class="page-header">
         <h1>Study Explorer</h1>
-        <select id="study-selector">
-            <option value="">Select a study ID...</option>
-        </select>
-      </div>
+        </div>
+      
       <div class="study-layout">
-          <div id="map-container-p3"></div>
+        <div id="map-container-p3" style="position: relative;">
+          <div id="zoom-controls-p3" style="position: absolute; right: 15px; top: 15px; z-index: 10; display: flex; flex-direction: column; gap: 5px;">
+            <button class="zoom-btn-p3" id="zoom-in-p3">+</button>
+            <button class="zoom-btn-p3" id="zoom-out-p3">−</button>
+            <button class="zoom-btn-p3" id="zoom-reset-p3">⟲</button>
+          </div>
+          </div>
       </div>
     </div>
+
   <!-- Dependencies -->
   <script src="https://d3js.org/d3.v7.min.js"></script>
   <script src="https://unpkg.com/topojson-client@3"></script>

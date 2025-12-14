@@ -266,6 +266,30 @@ svg {
   background: #f1f5f9;
 }
 
+/* Zoom buttons page 3 */
+.zoom-btn-p3 {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--panel-bg);
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 0;
+}
+
+.zoom-btn-p3:hover {
+    background: #f1f5f9;
+}
+
+#zoom-reset-p3 {
+    font-size: 18px;
+    margin-top: 5px;
+}
 
 #tool-controls {
   position: absolute;
@@ -436,6 +460,7 @@ svg {
 #map-container-p3 {
     flex: 1;
     width: 100%;
+    height: 100%;
     position: relative;
     background: radial-gradient(circle at top, #29407b 0, #030924 60%);
     border-radius: var(--radius-lg);
