@@ -48,6 +48,49 @@
           </label>
         </div>
       </div>
+
+      <!-- SIDEBAR page 2 -->
+      <div id="phylo-filters-aside" class="filter-card overview-only" style="display:none;">
+        <div class="filter-header">
+          <div class="filter-label">Phylo domains</div>
+          <button id="phylo-select-all" class="mini-btn" type="button">All</button>
+        </div>
+
+        <div class="filter-body">
+          <div id="phylo-domain-list" class="checklist"></div>
+        </div>
+      </div>
+
+      <!-- SIDEBAR page 3 -->
+      <div id="study-details-aside" class="filter-card study-only" style="display: none;">
+          <div class="filter-header">
+            <div class="filter-label">Selected Study</div>
+          </div>
+
+          <div class="filter-body">
+            <select id="study-selector">
+              <option value="">Choose an ID...</option>
+            </select>
+          </div>
+
+          <div id="study-info-sidebar" class="filter-body">
+            <p style="font-size: 0.85em; color: #666;">Select a study on the map or via the dropdown.</p>
+          </div>
+      </div>
+
+      <div id="year-slider-container" class="filter-card study-only" style="display: none; margin-top: 10px;">
+        <div class="filter-header">
+            <div class="filter-label">Timeline: <span id="current-year-display" style="color: var(--accent); font-weight: bold;">-</span></div>
+        </div>
+        <div class="filter-body">
+            <input type="range" id="year-slider" min="0" max="100" value="0" step="1" style="width: 100%;">
+            <div style="display: flex; justify-content: space-between; font-size: 10px; color: var(--text-muted); margin-top: 5px;">
+                <span id="year-min">-</span>
+                <span id="year-max">-</span>
+            </div>
+        </div>
+      </div>
+
     </div>
 
   <div id="main" class = "content">
@@ -80,7 +123,7 @@
 
             <div class="zoom-btn" id="zoom-in">+</div>
             <div class="zoom-btn" id="zoom-out">−</div>
-            <div class="zoom-btn" id="zoom-reset">⤾</div>
+            <div class="zoom-btn" id="zoom-reset">⟲</div>
           </div>
 
         </div>
@@ -101,16 +144,20 @@
 
     <!-- PAGE 3 : STUDIES OVERVIEW -->
     <div id="page-3" class="page-section">
-      <h1>Studies overview</h1>
-      <p>
-        Graphiques de Béline
-      </p>
-
-      <div id="overview-charts">
-        <!-- Conteneur pour tes futurs graphiques -->
+      <div class="page-header">
+        <h1>Study Explorer</h1>
+        </div>
+      
+      <div class="study-layout">
+        <div id="map-container-p3" style="position: relative;">
+          <div id="zoom-controls" style="position: absolute; right: 15px; top: 15px; z-index: 10; display: flex; flex-direction: column; gap: 5px;">
+            <button class="zoom-btn" id="zoom-in-p3">+</button>
+            <button class="zoom-btn" id="zoom-out-p3">−</button>
+            <button class="zoom-btn" id="zoom-reset-p3">⟲</button>
+          </div>
+          </div>
       </div>
     </div>
-  </div>
 
   <!-- Dependencies -->
   <script src="https://d3js.org/d3.v7.min.js"></script>
