@@ -364,14 +364,16 @@ function updatePoints() {
     .on("mousemove", handleMouseMove)
     .on("mouseout", handleMouseOut)
     .on("click", (event, d) => {
-    // optionnel : mémoriser l’étude cliquée
-    ctx.selectedStudy = d;
+      // optionnel : mémoriser l’étude cliquée
+      ctx.selectedStudy = d;
+      console.log("Study clicked:", d);
+      updateStudySelection(d.study_id);
 
-    // scroll vers la page Studies
-    document
-      .getElementById("page-3")
-      ?.scrollIntoView({ behavior: "smooth", block: "start" });
-  });
+      // scroll vers la page Studies
+      document
+        .getElementById("page-3")
+        ?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
 
   // ENTER + UPDATE: positionner correctement
   entered.merge(points)
@@ -471,6 +473,7 @@ function setupSidebarNav() {
     d3.selectAll(".map-only").style("display", isMapPage ? "flex" : "none");
     d3.select("#study-details-aside").style("display", isStudyPage ? "flex" : "none");
     d3.select("#year-slider-container").style("display", isStudyPage ? "flex" : "none");
+    d3.select("#study-chart-container").style("display", isStudyPage ? "flex" : "none");
 
     document.body.classList.toggle("map-filters-hidden", visible.target.id !== "page-map");
 
@@ -583,6 +586,8 @@ function bboxToView(bbox) {
            .call(ctx.zoom.transform, focus)
 }
 
+           .call(ctx.zoom.transform, focus)   
+}
 function resetMapZoom() {
   if (!ctx.svg || !ctx.zoom) return;
 
@@ -1164,6 +1169,19 @@ function displayStudyDetails(d) {
     sidebar.html(`
 
         <div class="detail-grid" style="margin-top: 15px; display: grid; grid-template-columns: 1fr; gap: 8px; font-size: 0.9em;">
+    const sidebar = d3.select("#study-info-sidebar");
+    
+    sidebar.html(`
+        <div class="detail-grid" style="margin-top: 15px; display: grid; grid-template-columns: 1fr; gap: 8px; font-size: 0.9em;">
+            <div class="detail-item" style="background: rgba(77, 160, 160, 0.1); padding: 8px; border-radius: 8px;">
+                <strong style="color: #4da0a0;">Species count:</strong> ${d.number_species || 'N/A'}
+            </div>
+            <div class="detail-item" style="background: rgba(77, 160, 160, 0.1); padding: 8px; border-radius: 8px;">
+                <strong style="color: #4da0a0;">Total samples:</strong> ${d.number_samples || 'N/A'}
+            </div>
+            
+            <hr style="border: 0; border-top: 1px solid #eee; margin: 5px 0;">
+
             <div class="detail-item"><strong>Realm:</strong> ${d.realm} </div>
             <div class="detail-item"><strong>Duration:</strong> ${d.duration} years</div>
             <div class="detail-item"><strong>Years:</strong> ${d.start_year} – ${d.end_year}</div>
@@ -1171,6 +1189,10 @@ function displayStudyDetails(d) {
             <div class="detail-item" style="border-left: 3px solid var(--accent); padding-left: 8px; background: rgba(0, 160, 160, 0.05);">
                 <strong>Abundance meaning:</strong> 
                 <span style="color: var(--text-muted); font-style: italic;">
+            
+            <div class="detail-item" style="border-left: 3px solid #4da0a0; padding-left: 8px; background: rgba(0, 160, 160, 0.05);">
+                <strong>Abundance meaning:</strong> 
+                <span style="color: #6a7c8a; font-style: italic;">
                     ${d.abundance_type || 'Count of individuals'}
                 </span>
             </div>
@@ -1198,6 +1220,9 @@ function initPage3() {
         .style("border-radius", "18px");
 
     // Création du groupe principal qui recevra les transformations de zoom
+        .style("background", "#030924") // Couleur fixe pour éviter les dégradés qui bougent
+        .style("border-radius", "18px");
+
     const gMain = ctx.svgDetail.append("g").attr("id", "zoom-group");
     ctx.gDetail = gMain.append("g").attr("id", "map-layer");
     ctx.gMeasurements = gMain.append("g").attr("id", "measurements-layer");
@@ -1237,12 +1262,26 @@ function initPage3() {
         // On ne touche plus au transform du groupe des points (SAUF pour k si on veut)
         // On recalcule tout par projection pour que ce soit fixe
         updateDetailedPointsPosition(k);
+    // --- CALCUL DES LIMITES (BORDS DE CARTE) ---
+    const land = topojson.feature(ctx.world, ctx.world.objects.countries);
+    const [[x0, y0], [x1, y1]] = ctx.pathDetail.bounds(land);
+
+    ctx.zoomDetail = d3.zoom()
+      .scaleExtent([1, 1000])
+      // Empêche de sortir des limites du monde calculées ci-dessus
+      .translateExtent([[x0, y0], [x1, y1]]) 
+      .on("zoom", (event) => {
+        gMain.attr("transform", event.transform);
+        const k = event.transform.k;
+        updateDetailedPointsPosition(k);
+        ctx.gDetail.selectAll("path").attr("stroke-width", 0.5 / k);
       });
 
     ctx.svgDetail.call(ctx.zoomDetail);
 
     // Fond de carte
     const land = topojson.feature(ctx.world, ctx.world.objects.countries);
+    // Dessin du fond de carte
     ctx.gDetail.append("path")
         .datum(land)
         .attr("class", "land-p3")
@@ -1346,6 +1385,17 @@ function updateStudySelection(studyId) {
     console.log(`Données prêtes pour affichage : ${measurements.length} lignes`);
 
     // 1. Extraire les années uniques
+  stopPlay(); // On arrête l'animation si on change d'étude
+  const idNum = +studyId;
+  const d = ctx.studies.find(s => +s.study_id === idNum);
+  const fileInfo = ctx.studyFiles.find(f => +f.STUDY_ID === idNum);
+  
+  if (!d || !fileInfo) return;
+
+  d3.select("#study-selector").property("value", studyId);
+  displayStudyDetails(d);
+
+  loadStudyMeasurements(studyId).then(measurements => {
     const years = [...new Set(measurements.map(d => d.YEAR))].sort();
     const minYear = years[0];
     const maxYear = years[years.length - 1];
@@ -1356,6 +1406,9 @@ function updateStudySelection(studyId) {
           .attr("max", maxYear)
           .property("value", minYear);
 
+    // Configurer le slider
+    const slider = d3.select("#year-slider");
+    slider.attr("min", minYear).attr("max", maxYear).property("value", minYear);
     d3.select("#year-min").text(minYear);
     d3.select("#year-max").text(maxYear);
     d3.select("#current-year-display").text(minYear);
@@ -1364,6 +1417,89 @@ function updateStudySelection(studyId) {
     // 3. Tracer la carte pour la première année
     updateStudyMap(measurements, minYear);
   });
+}
+
+    createAbundanceChart(measurements);
+    zoomToStudyBounds(measurements);
+    renderStudyYear(measurements, minYear);
+  });
+}
+
+function centerMapOnStudy(measurements) {
+  if (!measurements || measurements.length === 0) return;
+
+  const centerLon = d3.mean(measurements, d => d.LONGITUDE);
+  const centerLat = d3.mean(measurements, d => d.LATITUDE);
+  
+  // Recentrage de la projection
+  ctx.projectionDetail.center([0, centerLat]).rotate([-centerLon, 0]);
+  
+  // Redessiner le fond de carte
+  ctx.gDetail.selectAll("path").attr("d", ctx.pathDetail);
+
+  // Mise à jour des limites de translation (pour éviter les bandes noires)
+  const land = topojson.feature(ctx.world, ctx.world.objects.countries);
+  const [[bx0, by0], [bx1, by1]] = ctx.pathDetail.bounds(land);
+  const width = +ctx.svgDetail.attr("width");
+  ctx.zoomDetail.translateExtent([[bx0 - width, by0], [bx1 + width, by1]]);
+
+  // Reset du zoom à l'identité
+  ctx.svgDetail.call(ctx.zoomDetail.transform, d3.zoomIdentity);
+}
+
+function renderStudyYear(measurements, selectedYear) {
+  if (!measurements) return;
+
+  // 1. Filtrer les données pour l'année choisie
+  const filteredData = measurements.filter(d => d.YEAR === selectedYear);
+  
+  // 2. Calculer l'emprise sur TOUTES les données de l'étude pour une légende stable
+  const extentAbundance = d3.extent(measurements, d => d.ABUNDANCE);
+  
+  // --- APPEL DE LA LÉGENDE RÉTABLI ---
+  updateAbundanceLegend(extentAbundance[0], extentAbundance[1]);
+
+  // 3. Échelle de couleur logarithmique (adaptée aux données biologiques)
+  const colorScaleDetail = d3.scaleLog()
+    .domain([Math.max(0.1, extentAbundance[0]), extentAbundance[1]])
+    .range(["#4da0a0", "#004242"])
+    .interpolate(d3.interpolateHcl);
+
+  // 4. Jointure D3 pour les points
+  const dots = ctx.gMeasurements.selectAll(".measure-dot")
+    .data(filteredData, d => d.ID_ALL_RAW_DATA);
+
+  dots.exit().remove();
+
+  const dotsEnter = dots.enter()
+    .append("circle")
+    .attr("class", "measure-dot")
+    .style("pointer-events", "all");
+
+  // Récupération du facteur de zoom pour la taille des points
+  const transform = d3.zoomTransform(ctx.svgDetail.node());
+  const k = transform.k;
+
+  dotsEnter.merge(dots)
+    .attr("cx", d => ctx.projectionDetail([d.LONGITUDE, d.LATITUDE])[0])
+    .attr("cy", d => ctx.projectionDetail([d.LONGITUDE, d.LATITUDE])[1])
+    .attr("fill", "none")
+    .attr("stroke", d => colorScaleDetail(d.ABUNDANCE))
+    .attr("stroke-width", 0.5 / k)
+    .attr("r", 2 / Math.sqrt(k))
+    .on("mouseover", function(event, d) {
+        let dateLabel = d.YEAR;
+        if (d.DAY && d.MONTH) dateLabel = `${d.DAY}/${d.MONTH}/${d.YEAR}`;
+        ctx.tooltipDetail.style("opacity", 1).html(`
+            <div class="tt-title">${d.valid_name || "Unknown Species"}</div>
+            <div class="tt-row"><span class="tt-k">Abundance</span><span class="tt-v">${d.ABUNDANCE}</span></div>
+            <div class="tt-row"><span class="tt-k">Date</span><span class="tt-v">${dateLabel}</span></div>
+        `);
+    })
+    .on("mousemove", (event) => {
+        ctx.tooltipDetail.style("left", (event.pageX + 15) + "px").style("top", (event.pageY + 15) + "px");
+    })
+    .on("mouseout", () => ctx.tooltipDetail.style("opacity", 0));
 }
 
 //Charge les mesures spécifiques (abondances) pour une étude donnée
@@ -1582,4 +1718,173 @@ function updateDetailedPointsPosition(k) {
         })
         .attr("r", dynamicRadius) 
         .attr("stroke-width", 1.5 / Math.sqrt(k)); // Affine le contour au zoom
+
+function setupZoomButtonsP3() {
+  d3.select("#zoom-in-p3").on("click", () => {
+      // scaleBy va déclencher l'événement "zoom" ci-dessus avec un k plus grand
+      ctx.svgDetail.transition().duration(300).call(ctx.zoomDetail.scaleBy, 1.5);
+  });
+  d3.select("#zoom-out-p3").on("click", () => {
+      ctx.svgDetail.transition().duration(300).call(ctx.zoomDetail.scaleBy, 1/1.5);
+  });
+  d3.select("#zoom-reset-p3").on("click", () => {
+      ctx.svgDetail.transition().duration(500).call(ctx.zoomDetail.transform, d3.zoomIdentity);
+  });
+}
+
+function setupYearSlider() {
+  const slider = d3.select("#year-slider");
+  const playBtn = d3.select("#play-button");
+
+  // On attache simplement l'événement au bouton déjà présent
+  playBtn.on("click", togglePlay);
+
+  slider.on("input", function() {
+    stopPlay(); // Arrête si l'utilisateur manipule manuellement
+    const selectedYear = +this.value;
+    updateYearUI(selectedYear);
+  });
+}
+
+// Fonction utilitaire pour mettre à jour l'affichage
+function updateYearUI(year) {
+  d3.select("#current-year-display").text(year);
+  d3.select("#year-slider").property("value", year);
+  
+  const currentStudyId = d3.select("#study-selector").property("value");
+  const measurements = ctx.measurementsCache[currentStudyId];
+  if (measurements) {
+    renderStudyYear(measurements, year);
+  }
+}
+
+function updateDetailedPointsPosition(k) {
+    // k est le niveau de zoom. 
+    // On divise l'épaisseur du trait par k pour qu'elle reste constante à l'écran.
+    ctx.gMeasurements.selectAll(".measure-dot")
+        .attr("r", 2 / Math.sqrt(k)) 
+        .attr("stroke-width", 1 / k);
+}
+
+function updateAbundanceLegend(minVal, maxVal) {
+  const legend = d3.select("#legend-abundance");
+
+  // On crée le squelette si la légende est vide
+  if (legend.selectAll("*").empty()) {
+    legend.html(`
+      <div class="legend-title">Abundance</div>
+      <div class="legend-bar"></div>
+      <div class="legend-labels">
+        <span class="legend-min"></span>
+        <span class="legend-max"></span>
+      </div>
+    `);
+  }
+
+  // Mise à jour des textes (on arrondit pour que ce soit joli)
+  legend.select(".legend-min").text(Math.round(minVal * 10) / 10);
+  legend.select(".legend-max").text(Math.round(maxVal));
+}
+
+function togglePlay() {
+  const slider = d3.select("#year-slider").node();
+  if (!ctx.playInterval && +slider.value === +slider.max) {
+    updateYearUI(+slider.min);
+  }
+
+  if (ctx.playInterval) {
+    stopPlay();
+  } else {
+    startPlay();
+  }
+}
+
+function startPlay() {
+  const slider = d3.select("#year-slider").node();
+  const playBtn = d3.select("#play-button");
+  
+  playBtn.html("⏸"); // Change l'icône en Pause
+
+  ctx.playInterval = setInterval(() => {
+    let current = +slider.value;
+    let max = +slider.max;
+
+    if (current < max) {
+      // S'il reste des années, on avance
+      updateYearUI(current + 1);
+    } else {
+      // Si on est à la dernière année, on arrête tout
+      stopPlay();
+    }
+  }, 600); // Vitesse de l'animation
+}
+
+function stopPlay() {
+  if (ctx.playInterval) {
+    clearInterval(ctx.playInterval);
+    ctx.playInterval = null;
+    d3.select("#play-button").html("▶");
+  }
+}
+
+function zoomToStudyBounds(measurements) {
+  if (!measurements || measurements.length === 0) return;
+
+  // Calcul des limites (Bounding Box)
+  const lons = measurements.map(d => d.LONGITUDE);
+  const lats = measurements.map(d => d.LATITUDE);
+  
+  const minLon = d3.min(lons), maxLon = d3.max(lons);
+  const minLat = d3.min(lats), maxLat = d3.max(lats);
+  const centerLon = (minLon + maxLon) / 2;
+  const centerLat = (minLat + maxLat) / 2;
+
+  // Recentrer la projection
+  ctx.projectionDetail.center([0, centerLat]).rotate([-centerLon, 0]);
+  ctx.gDetail.selectAll("path").attr("d", ctx.pathDetail);
+
+  // Calcul auto du niveau de zoom pour que l'étude remplisse ~70% du SVG
+  const pMin = ctx.projectionDetail([minLon, minLat]);
+  const pMax = ctx.projectionDetail([maxLon, maxLat]);
+  const dx = Math.abs(pMax[0] - pMin[0]);
+  const dy = Math.abs(pMax[1] - pMin[1]);
+  const width = +ctx.svgDetail.attr("width");
+  const height = +ctx.svgDetail.attr("height");
+  
+  // Facteur d'échelle pour tenir dans la vue
+  const padding = 0.7;
+  const scaleFactor = padding / Math.max(dx / width, dy / height);
+
+  // Appliquer le zoom de manière fluide
+  ctx.svgDetail.transition().duration(750).call(
+    ctx.zoomDetail.transform,
+    d3.zoomIdentity.translate(width/2, height/2).scale(scaleFactor).translate(-((pMin[0]+pMax[0])/2), -((pMin[1]+pMax[1])/2))
+  );
+}
+
+function createAbundanceChart(measurements) {
+  const container = d3.select("#abundance-sparkline");
+  container.selectAll("*").remove();
+
+  const width = container.node().getBoundingClientRect().width || 240;
+  const height = 60;
+  const margin = {top: 5, right: 5, bottom: 20, left: 5};
+
+  const svg = container.append("svg").attr("width", width).attr("height", height);
+
+  const countsByYear = d3.rollups(measurements, v => v.length, d => d.YEAR).sort((a, b) => a[0] - b[0]);
+  const data = countsByYear.map(d => ({year: d[0], count: d[1]}));
+
+  const x = d3.scaleLinear().domain(d3.extent(data, d => d.year)).range([margin.left, width - margin.right]);
+  const y = d3.scaleLinear().domain([0, d3.max(data, d => d.count)]).range([height - margin.bottom, margin.top]);
+
+  const area = d3.area().x(d => x(d.year)).y0(y(0)).y1(d => y(d.count)).curve(d3.curveMonotoneX);
+  svg.append("path").datum(data).attr("fill", "#4da0a0").attr("opacity", 0.3).attr("d", area);
+
+  const line = d3.line().x(d => x(d.year)).y(d => y(d.count)).curve(d3.curveMonotoneX);
+  svg.append("path").datum(data).attr("fill", "none").attr("stroke", "#4da0a0").attr("stroke-width", 2).attr("d", line);
+
+  const yearsExtent = d3.extent(data, d => d.year);
+  svg.append("text").attr("x", margin.left).attr("y", height - 5).style("font-size", "10px").style("fill", "#8899a6").text(yearsExtent[0]);
+  svg.append("text").attr("x", width - margin.right).attr("y", height - 5).attr("text-anchor", "end").style("font-size", "10px").style("fill", "#8899a6").text(yearsExtent[1]);
 }

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>Visualisation bioTime avec D3.js</title>
+    <script type="text/javascript" src="js/d3.v7.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/topojson@3"></script>
+    <script type="text/javascript" src="js/Study.js"></script>
+    <style type="text/css">
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+        }
+        .countryArea {
+            fill: rgb(232, 232, 232);
+        }
+        .countryArea:hover {
+            fill: rgb(200, 200, 200);
+        }
+        .countryBorder {
+            fill: none;
+            stroke-width: 1px;
+            stroke: rgb(70, 70, 70);
+        }
+        .pointSample {
+            opacity: 0.7;
+            /*stroke: black;*/
+            stroke-width: 0.3px;
+        }
+        .pointSample:hover {
+            opacity: 1;
+            stroke: darkblue;
+            stroke-width: 1.5px;
+        }
+        .tooltip {
+            position: absolute;
+            text-align: center;
+            width: auto;
+            height: auto;
+            padding: 8px;
+            font: 12px sans-serif;
+            background: lightsteelblue;
+            border: 0px;
+            border-radius: 8px;
+            pointer-events: none;
+            opacity: 0;
+        }
+        /* CSS pour les conteneurs côte à côte */
+        #mainContainer {
+            display: flex; /* Active le mode flexible */
+            gap: 20px;     /* Espace entre la carte et le panneau de contrôle */
+            align-items: flex-start; /* Aligne le contenu en haut (évite l'étirement) */
+        }
+
+        /* S'assurer que la carte ne prend pas toute la place et laisse de l'espace pour les filtres */
+        #mapContainer {
+            flex-grow: 1; /* Permet à la carte de prendre l'espace restant (la plus grande partie) */
+            width: 75%;   /* Définir une largeur de base (ex: 75% pour la carte) */
+            min-width: 600px; /* Optionnel : pour garantir que la carte reste lisible */
+        }
+
+        /* Conteneur des filtres (barre latérale) */
+        #speciesFilterContainer {
+            width: 25%;   /* Définir une largeur fixe ou relative (ex: 25% pour les filtres) */
+            padding: 10px;
+            border-left: 1px solid #ccc; /* Séparateur visuel */
+            height: 600px; /* Optionnel: Correspond à la hauteur de votre SVG pour l'alignement */
+            overflow-y: auto; /* Ajoute un ascenseur si la liste d'espèces est trop longue */
+        }
+
+        /* Style pour les items de la liste d'espèces (pour un affichage propre) */
+        .species-item {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body onload="createViz()">
+    <h1>Visualisation de l'abondance des espèces</h1>
+
+    <div>
+        <label for="studySelector">Sélectionner l'étude :</label>
+        <select id="studySelector">
+            <option value="108">Étude 108 (Oiseaux)</option>
+            <option value="321">Étude 321 (Mammifères - Clean)</option>
+        </select>
+    </div>
+
+    <div id="yearControls">
+        <label>Année: <span id="yearLabel"></span></label>
+        <input type="range" id="yearSlider">
+        <button id="playButton">Play</button>
+    </div>
+
+    <hr>
+
+    <div id="mainContainer">
+        
+        <div id="mapContainer"></div>
+        
+    </div>
+
+    <div class="tooltip"></div>
+</body>
+
+</html>

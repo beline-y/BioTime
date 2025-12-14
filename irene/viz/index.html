@@ -81,6 +81,7 @@
       <div id="year-slider-container" class="filter-card study-only" style="display: none; margin-top: 10px;">
         <div class="filter-header">
             <div class="filter-label">Timeline: <span id="current-year-display" style="color: var(--accent); font-weight: bold;">-</span></div>
+            <button id="play-button" class="play-btn">▶</button>
         </div>
         <div class="filter-body">
             <input type="range" id="year-slider" min="0" max="100" value="0" step="1" style="width: 100%;">
@@ -89,6 +90,14 @@
                 <span id="year-max">-</span>
             </div>
         </div>
+      </div>
+
+      <!-- SIDEBAR Chart page 3 -->
+      <div id="study-chart-container" class="detail-item" style="display: none; margin-top:20px;">
+        <div class="legend-title" style="margin-bottom:8px; font-weight:bold; color:#6a7c8a; font-size:0.8rem; letter-spacing:1px;">
+            SAMPLES PER YEAR
+        </div>
+        <div id="abundance-sparkline"></div>
       </div>
 
     </div>
@@ -101,8 +110,6 @@
       <div id="map-container">
         <div id="tooltip"></div>
         <div id="legend-duration"></div>
-
-        
 
         <div id="tool-controls">
           <div class="control-label">Selection</div>
@@ -156,6 +163,27 @@
             <button class="zoom-btn" id="zoom-reset-p3">⟲</button>
           </div>
           </div>
+        <h1 style="margin-bottom: 0;">Study Explorer</h1>
+      </div>
+      <p id="timeline-subtitle" style="margin: 0; font-size: 0.85rem; color: #8899a6; font-style: italic;">
+            Spatial and temporal repartition of samples of biodiversity in a study
+      </p>
+      
+      <div class="study-layout">
+        <div id="map-container-p3" style="position: relative;">
+          <div id="legend-abundance"></div>
+
+          <div id="tool-controls">
+            <div id="zoom-controls">
+              <div class="control-label">Zoom</div>
+              <div class="zoom-btn" id="zoom-in-p3">+</div>
+              <div class="zoom-btn" id="zoom-out-p3">−</div>
+              <div class="zoom-btn" id="zoom-reset-p3">⟲</div>
+            </div>
+          </div>
+
+
+        </div>
       </div>
     </div>
 

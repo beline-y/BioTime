@@ -421,6 +421,7 @@ svg {
 #page-3 {
   padding: 24px 32px;
   flex-direction: column;
+  height: 100vh;
   gap: 16px;
 }
 
@@ -431,6 +432,13 @@ svg {
     margin-top: 20px;
     height: 500px;
 }
+
+    flex: 1 1 auto;
+    display: flex;
+    width: 100%;
+    min-height: 0; /* Important pour le scroll flex */
+}
+
 
 /* Map container page 3 */
 #map-container-p3 {
@@ -519,3 +527,86 @@ svg {
   cursor: pointer;
 }
 .mini-btn:hover{ background:#f1f5f9; }
+
+
+/* Dégradé spécifique pour l'abondance (Page 3) */
+
+#legend-abundance {
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
+  padding: 10px 14px;
+  background: var(--panel-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow-soft);
+  font-size: 12px;
+  color: var(--text-main);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  pointer-events: none; /* pour laisser la carte interactive */
+}
+
+#legend-abundance .legend-bar {
+  width: 180px;
+  height: 12px;
+  border-radius: 6px;
+  background: linear-gradient(to right, #00a0a0, #004242);
+}
+
+#legend-abundance .legend-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+#year-slider {
+  width: 100%;
+  margin: 10px 0;
+  padding: 0; 
+  cursor: pointer;
+  height: 6px;
+  border-radius: 5px;
+  background: #dfe4ea;
+  outline: none;
+}
+
+#year-slider-container .filter-body {
+  padding: 10px 12px; 
+}
+
+.play-btn {
+    background: #00a0a0;
+    border: none;
+    color: white;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.play-btn:hover {
+    background: #007a7a;
+    transform: scale(1.1);
+}
+
+.year-label {
+    font-size: 12px;
+    color: #666;
+    min-width: 35px;
+}
+
+#abundance-sparkline {
+    min-height: 80px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 10px 0;
+}
