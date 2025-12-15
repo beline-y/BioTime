@@ -99,12 +99,11 @@ function createViz() {
    .filter(function(event) {
       return ctx.selected_tool == "move";
     }); // pour éviter les interférences entre les events lies aux outils et ceux aux zooms
-
-
-  // Enable zoom/pan with mouse
+  
+  // enable zoom/pan with mouse and block page scroll
   ctx.svg.call(ctx.zoom);
-
-  // Zoom buttons (+ / -)
+  ctx.svg.on("wheel", event =>{event.preventDefault()}, {passive:false});
+  
   setupZoomButtons();
   setupTools();
   setupSelectionFigures();
@@ -203,6 +202,14 @@ function setupTools() {
                                .y(d => d[1]);
 
   ctx.pathPoints = [];
+  ctx.shape = null;
+  
+  // ctx.shape = ctx.gMap.append("rect");
+  // ctx.shape.attr("x", 0)
+  //          .attr("y", 0)
+  //          .attr("width", 0)
+  //          .attr("height", 0)
+  //          .attr("opacity", 0) //creating an invisible rectangle to initialize ctx.path
 }
 
 function setupSelectionFigures() {
@@ -241,6 +248,7 @@ function setupSelectionFigures() {
               .attr("y", 0)
               .attr("width", sideWin.attr("width") - 48)
               .attr("height", 0.48 * sideWin.attr("height"));
+  ctx.sideG1 = ctx.sideSVG1.append("g");
 
   ctx.sideSVG1.append("rect").attr("x", 0)
                              .attr("y", 0)
@@ -250,13 +258,15 @@ function setupSelectionFigures() {
                              .attr("rx", 16)
                              .attr("ry", 16);
 
+  
+
   ctx.sideSVG2 = sideWin.append("svg");
   ctx.sideSVG2.attr("id","sidesvg2")
               .attr("x", 48)
               .attr("y", 0.5 * sideWin.attr("height"))
               .attr("width", sideWin.attr("width") - 48)
               .attr("height", 0.48 * sideWin.attr("height"));
-
+  ctx.sideG2 = ctx.sideSVG2.append("g");
 
   ctx.sideSVG2.append("rect").attr("x", 0)
                              .attr("y", 0)
@@ -413,17 +423,29 @@ function updatePoints() {
   maxDuration = d3.max(data, d => d.duration);
 
   const colorScale = d3.scaleLinear().domain([minDuration, maxDuration]).range(["lightblue", "darkblue"]);
-
+  const colorScale2 = d3.scaleLinear().domain([minDuration, maxDuration]).range(["lightgreen", "darkgreen"]);
   // EXIT:
   points.exit().remove();
-
+  
   // ENTER:
+  //console.log("points after exit", points)
   const entered = points.enter()
     .append("path")
     .attr("class", "study")
     .attr("d", symbols)
     //.attr("fill", "#2684ac")
-    .attr("fill", d => colorScale(d.duration))
+
+    .attr("fill", function(d) {
+      //console.log("coloring points", ctx.shape);
+      let point = ctx.projection([d.lon, d.lat])
+      
+      if (ctx.shape != null) {
+        
+        if (ctx.shape.node().isPointInFill({x:point[0], y:point[1]})) {return colorScale2(d.duration)} //non functional for now
+        else {return colorScale(d.duration)}
+      }
+      else {return colorScale(d.duration)}     
+    })
     .attr("stroke", "#333")
     .attr("stroke-width", 0.4)
     .on("mouseover", handleMouseOver)
@@ -586,9 +608,16 @@ function mouseUpFree() {
   path.attr("d", path.attr("d") + "Z") //close the path when mouse is released
   bboxToView(path.node().getBBox(), 0.6);
 
-  drawSelectionFigures(path);
-  // do stuff to choose the studies to display, call function to draw the graphs
+  ctx.shape = path;
+  updatePoints(); // to make the selected points change color
 
+  ctx.sideG1.transition()
+              .duration(200)
+              .remove(); // clear the previous graph
+    
+  ctx.sideG1 = ctx.sideSVG1.append("g");
+
+  drawSideGraph(path);
   path.remove();
 }
 
@@ -627,7 +656,15 @@ function mouseUpRect() {
     let rect = d3.select("rect#currentrect");    
     bboxToView(rect.node().getBBox(), 0.6);
 
-    drawSelectionFigures(rect);
+    ctx.shape = rect;
+    updatePoints(); // to make the selected points change color
+
+    ctx.sideG1.transition()
+              .duration(200)
+              .remove(); // clear the previous graph
+    
+    ctx.sideG1 = ctx.sideSVG1.append("g");
+    drawSideGraph(rect);
 
     rect.remove();
 }
@@ -635,8 +672,8 @@ function mouseUpRect() {
 
 function bboxToView(bbox, ratio) {
     //updates the view to fit 60% of the screen to the bounding box in the leftmost ratio of the svg
-    ctx.lastFocusedBbox = bbox;
-    console.log(bbox);
+    //ctx.lastFocusedBbox = bbox;
+    console.log("bbox to view", bbox);
     ctx.tempProj = ctx.proj;
 
     const scaleFactor = Math.min((ctx.WIDTH * 0.6) / bbox.width,
@@ -653,31 +690,191 @@ function bboxToView(bbox, ratio) {
            .call(ctx.zoom.transform, focus)
 }
 
-function drawSelectionFigures(shape) {
+function drawSideGraph(shape) {
 
   //test if points are inside the drawn selection
   function selectionFilter(coordinates) {
     point = ctx.projection(coordinates)
-    return shape.node().isPointInFill({x:point[0], y:point[1]})
+    return ctx.shape.node().isPointInFill({x:point[0], y:point[1]})
   }
 
   // show side graphs as as map overlay
   ctx.overlay.transition().duration(200)
                           .style("transform", "translateX(0px)");
-                          
-  zoneData = d3.filter(ctx.studies, (d) => selectionFilter([d.lon, d.lat]) )
+  const height = ctx.sideSVG1.attr("height");
+  const width = ctx.sideSVG1.attr("width");
+  ctx.sideG1.append("text")
+              .attr("x", width/2)
+              .attr("y", height/2)
+              .attr("text-anchor", "middle")
+              .attr("dominant-baseline", "middle")
+              .text("Loading...");
 
-  console.log(zoneData.length);
+  ctx.sideG1.transition().duration(200).attr("opacity", 1) //show loading text
 
-  let habitatCount = d3.rollup(zoneData, (d) => d.habitat);
-  console.log(habitatCount);
+  
+  zoneData = d3.filter(applyFilters(), (d) => selectionFilter([d.lon, d.lat]) );
+  console.log("studies selected:", zoneData.length);
+
+
+
+  zoneData = d3.filter(zoneData, (d) => d.abundance_type == "Count")
+  
+  let graphData = [];
+  
+  // prepare relevant measurement files for loading
+  // zoneData.forEach(function(d) {
+  //   promises.push(loadStudyMeasurements(d.study_id))
+  // })
+  const promises = zoneData.map((study) => {return loadStudyMeasurements(study.study_id)});
+
+  // console.log("promises", promises);
+
+  //load and build graphData
+  Promise.allSettled(promises)
+        .then(function(studies){ // studies is actually all the promises results
+
+          studies.forEach(function(result){
+            
+            if(result.status == "fulfilled"){ // if there were files to load
+              
+              let measurements = result.value;
+              //console.log("measurements", measurements);
+
+              measurements.forEach(function(m){
+                graphData.push({
+                  study_id: m.STUDY_ID,
+                  realm: zoneData.find((e) => e.study_id == m.STUDY_ID).realm,
+                  abundance: m.ABUNDANCE,
+                  year: m.YEAR
+              })
+            })
+            }
+            
+          })
+          //console.log("graphData", graphData);
+          ctx.sideG1.transition().duration(200).attr("opacity", 0) //hide loading text
+          drawSidePlot(graphData)
+        })
+}
+
+function drawSidePlot(data) {
+
+  const margin = { top: 28, right: 16, bottom: 26, left: 50 };
+  
+  const height = ctx.sideSVG1.attr("height");
+  const width = ctx.sideSVG1.attr("width");
+  
+  if(data.length == 0) {
+    ctx.sideG1.select("text")
+              .text("No abundance data to show on selected studies");
+    ctx.sideG1.transition().duration(200).attr("opacity", 1)
+    return
+  }
+
+  else {
+    ctx.sideG1.select("text")
+              .text("");
+  }
+
+  const minYear = d3.min(data, d => d.year);
+  const maxYear = d3.max(data, d => d.year);
+  const years = d3.range(minYear, maxYear + 1);
+
+  const realms = ["Marine", "Terrestrial", "Freshwater", "Unknown"]
+    .filter(r => data.some(s => s.realm === r));
+
+  const rows = years.map(y => {
+    const row = { year: y };
+    for (const r of realms) row[r] = 0;
+    for (const s of data) {
+      if (s.year == y) row[s.realm] = (row[s.realm] || 0) + 1;
+    }
+    return row;
+  });
+
+  const x = d3.scaleLinear()
+    .domain([minYear, maxYear])
+    .range([margin.left, width - margin.right]);
+
+  const stack = d3.stack()
+    .keys(realms)
+    .order(d3.stackOrderNone)
+    .offset(d3.stackOffsetNone);
+
+  const series = stack(rows);
+
+  const y = d3.scaleLinear()
+    .domain([0, d3.max(series, s => d3.max(s, d => d[1])) || 1])
+    .nice()
+    .range([height - margin.bottom, margin.top]);
+
+  const color = d3.scaleOrdinal()
+    .domain(realms)
+    .range(d3.schemeTableau10);
+
+  const area = d3.area()
+    .x(d => x(d.data.year))
+    .y0(d => y(d[0]))
+    .y1(d => y(d[1]));
+
+  ctx.sideG1.attr("opacity", 0)
+  ctx.sideG1.append("g")
+    .selectAll("path")
+    .data(series)
+    .enter()
+    .append("path")
+    .attr("d", area)
+    .attr("fill", d => color(d.key))
+    .attr("opacity", 0.65);
+
+  ctx.sideG1.append("g")
+    .attr("transform", `translate(0,${height - margin.bottom})`)
+    .call(d3.axisBottom(x).ticks(6).tickFormat(d3.format("d")))
+    .call(g => g.selectAll("text").style("font-size", "10px"));
+
+  ctx.sideG1.append("g")
+    .attr("transform", `translate(${margin.left},0)`)
+    .call(d3.axisLeft(y).ticks(4))
+    .call(g => g.selectAll("text").style("font-size", "10px"))
+    .call(g => g.select(".domain").attr("opacity", 1));
+
+  ctx.sideG1.append("text")
+    .attr("x", margin.left)
+    .attr("y", 18)
+    .style("font-size", "13px")
+    .style("font-weight", 800)
+    .style("fill", "rgba(15,23,42,0.9)")
+    .text("Measurements per year (stacked by realm)");
+
+  const leg = ctx.sideG1.append("g")
+    .attr("transform", `translate(${margin.left + 15},${margin.top + 6})`);
+
+  realms.forEach((r, i) => {
+    const g = leg.append("g").attr("transform", `translate(${i * 110},0)`);
+    g.append("rect").attr("width", 10).attr("height", 10).attr("rx", 2)
+      .attr("fill", color(r)).attr("opacity", 0.8);
+    g.append("text").attr("x", 14).attr("y", 9)
+      .style("font-size", "11px")
+      .style("fill", "rgba(15,23,42,0.75)")
+      .text(r);
+  });
+
+  ctx.sideG1.transition().duration(100).attr("opacity", 1)
 }
 
 function closeSelectionFigures() {
   ctx.overlay.transition().duration(200)
                           .style("transform", `translateX(${ctx.WIDTH}px)`);
+  ctx.shape = null;
+  updatePoints();
+  const currentZoom = d3.zoomTransform(ctx.svg.node())
+  ctx.svg
+      .transition()
+      .duration(300)
+      .call(ctx.zoom.translateBy, 0.165 * ctx.WIDTH / currentZoom.k ,0);
 
-  bboxToView(ctx.lastFocusedBbox, 1) // set the view to focus the last selection in the middle of the screen
+  //bboxToView(ctx.lastFocusedBbox, 1) // set the view to focus the last selection in the middle of the screen
 }
 
 
