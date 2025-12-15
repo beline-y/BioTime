@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Species Taxonomy Tree</title>
+        <!-- https://d3js.org/ -->
+        <script type="text/javascript" src="js/d3.v7.min.js"></script>
+        <!-- https://github.com/bgrins/TinyColor -->
+        <script type="text/javascript" src="js/tinycolor-min.js"></script>
+        <script type="text/javascript" src="js/Tree2.js"></script>
+        <style>
+svg {
+    display: block;
+    font: 12px sans-serif;
+    border: 1px solid #444;
+    margin-left: auto;
+    margin-right: auto;
+}
+        </style>
+    </head>
+
+    <body onload="createViz()">
+        <div id="breadcrumb" style="margin:12px; font-family:sans-serif;"></div>
+        <div id="main">
+        </div>
+    </body>
+
+</html>
