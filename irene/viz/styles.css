@@ -405,6 +405,7 @@ svg {
   justify-content: center;
   cursor: pointer;
   font-size: 18px;
+  z-index: 9;
 }
 
 #next-page-btn:hover {
