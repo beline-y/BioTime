@@ -87,23 +87,31 @@ function createViz() {
 
       ctx.gPoints
         .selectAll("path.study")
-        .attr(
-          "d",
-          d3.symbol()
-            .type(d3.symbolCircle)
-            .size(ctx.BASE_SYMBOL_SIZE / k)
-        )
+        .attr("d", d => {
+      const id = +d.study_id;
+
+      if (ctx.availableStudyIds.includes(id)) {
+        return d3.symbol()
+          .type(d3.symbolCircle)
+          .size(ctx.BASE_SYMBOL_SIZE/k)();
+      } else {
+        return d3.symbol()
+          .type(d3.symbolCross)
+          .size(ctx.BASE_SYMBOL_SIZE/k)();
+      }
+    })
         .attr("stroke-width", 0.4/(0.5*k));
     })
   
    .filter(function(event) {
       return ctx.selected_tool == "move";
     }); // pour éviter les interférences entre les events lies aux outils et ceux aux zooms
-  
-  // enable zoom/pan with mouse and block page scroll
+
+
+  // Enable zoom/pan with mouse
   ctx.svg.call(ctx.zoom);
-  ctx.svg.on("wheel", event =>{event.preventDefault()}, {passive:false});
-  
+
+  // Zoom buttons (+ / -)
   setupZoomButtons();
   setupTools();
   setupSelectionFigures();
@@ -240,7 +248,6 @@ function setupSelectionFigures() {
               .attr("y", 0)
               .attr("width", sideWin.attr("width") - 48)
               .attr("height", 0.48 * sideWin.attr("height"));
-  ctx.sideG1 = ctx.sideSVG1.append("g");
 
   ctx.sideSVG1.append("rect").attr("x", 0)
                              .attr("y", 0)
@@ -250,15 +257,13 @@ function setupSelectionFigures() {
                              .attr("rx", 16)
                              .attr("ry", 16);
 
-  
-
   ctx.sideSVG2 = sideWin.append("svg");
   ctx.sideSVG2.attr("id","sidesvg2")
               .attr("x", 48)
               .attr("y", 0.5 * sideWin.attr("height"))
               .attr("width", sideWin.attr("width") - 48)
               .attr("height", 0.48 * sideWin.attr("height"));
-  ctx.sideG2 = ctx.sideSVG2.append("g");
+
 
   ctx.sideSVG2.append("rect").attr("x", 0)
                              .attr("y", 0)
@@ -282,7 +287,6 @@ function loadData() {
       ctx.studies = values[1];
       ctx.availableStudyIds = values[2].map(d => +d.STUDY_ID);
       ctx.studyFiles = values[2];
-      console.log(ctx.studies)
 
       drawBaseMap();
       setupFilterListeners();
@@ -405,7 +409,8 @@ function updatePoints() {
 
   ctx.BASE_SYMBOL_SIZE = 40;
 
-  const symbols = d3.symbol().size(ctx.BASE_SYMBOL_SIZE).type(d3.symbolCircle);
+  const symbolsCircle = d3.symbol().size(ctx.BASE_SYMBOL_SIZE).type(d3.symbolCircle);
+  const symbolsCross = d3.symbol().size(ctx.BASE_SYMBOL_SIZE).type(d3.symbolCross);
 
   const points = ctx.gPoints
     .selectAll("path.study")
@@ -415,18 +420,29 @@ function updatePoints() {
   maxDuration = d3.max(data, d => d.duration);
 
   const colorScale = d3.scaleLinear().domain([minDuration, maxDuration]).range(["lightblue", "darkblue"]);
-  
+
   // EXIT:
   points.exit().remove();
-  
+
   // ENTER:
   const entered = points.enter()
     .append("path")
     .attr("class", "study")
-    .attr("d", symbols)
-    //.attr("fill", "#2684ac")
+    .attr("d", d => {
+      const id = +d.study_id;
 
-    .attr("fill", (d) => colorScale(d.duration))
+      if (ctx.availableStudyIds.includes(id)) {
+        return d3.symbol()
+          .type(d3.symbolCircle)
+          .size(ctx.BASE_SYMBOL_SIZE)();
+      } else {
+        return d3.symbol()
+          .type(d3.symbolCross)
+          .size(ctx.BASE_SYMBOL_SIZE)();
+      }
+    })
+    //.attr("fill", "#2684ac")
+    .attr("fill", d => colorScale(d.duration))
     .attr("stroke", "#333")
     .attr("stroke-width", 0.4)
     .on("mouseover", handleMouseOver)
@@ -446,6 +462,19 @@ function updatePoints() {
 
   // ENTER + UPDATE: positionner correctement
   entered.merge(points)
+    .attr("d", d => {
+      const id = +d.study_id;
+
+      if (ctx.availableStudyIds.includes(id)) {
+        return d3.symbol()
+          .type(d3.symbolCircle)
+          .size(ctx.BASE_SYMBOL_SIZE)();
+      } else {
+        return d3.symbol()
+          .type(d3.symbolCross)
+          .size(ctx.BASE_SYMBOL_SIZE)();
+      }
+    })
     .attr("transform", d => {
       const p = ctx.projection([d.lon, d.lat]);
       return `translate(${p[0]}, ${p[1]})`;
@@ -545,6 +574,7 @@ function setupSidebarNav() {
     d3.select("#study-chart-container").style("display", isStudyPage ? "flex" : "none");
 
     document.body.classList.toggle("map-filters-hidden", visible.target.id !== "page-map");
+    document.body.classList.toggle("on-page-3", isStudyPage);
 
     buttons.forEach(b => b.classList.remove("active"));
     const activeBtn = buttons.find(b => b.dataset.target === visible.target.id);
@@ -561,8 +591,7 @@ function setupSidebarNav() {
 
 function mouseDownFree() {
     console.log("freeeedoooom")
-    d3.select("g#toolG").selectAll("path#currentfree").remove() //safeguard for when there is an issue with mouseup
-    
+
     ctx.pathPoints = [d3.pointer(event, this)]; // adding first point of path
     
     ctx.gTools.append("path").attr("d", ctx.lineGenerator(ctx.pathPoints))
@@ -588,27 +617,17 @@ function mouseUpFree() {
 
   let path = d3.select("path#currentfree");
   path.attr("d", path.attr("d") + "Z") //close the path when mouse is released
-  let bbox = path.node().getBBox();
-  bboxToView(bbox, 0.6);
-   
-  recolorPoints(path); // to make the selected points change color
+  bboxToView(path.node().getBBox(), 0.6);
 
-  ctx.sideG1.transition()
-              .duration(200)
-              .remove(); // clear the previous graph
-    
-  ctx.sideG1 = ctx.sideSVG1.append("g");
+  drawSelectionFigures(path);
+  // do stuff to choose the studies to display, call function to draw the graphs
 
-  drawSideGraph(path);
   path.remove();
 }
 
 
 function mouseDownRect() {
     console.log("starting rectangular selection");
-    
-    d3.select("g#toolG").selectAll("rect#currentrect").remove() //safeguard for when there is an issue with mouseup
-    
     ctx.startingPoint = d3.pointer(event, this);
     
     ctx.rectangle = ctx.gTools.append("rect")
@@ -639,18 +658,9 @@ function mouseUpRect() {
     console.log("rect mouseup")
     ctx.gTools.on("mousemove", null);
     let rect = d3.select("rect#currentrect");    
-    let bbox = rect.node().getBBox()
-    
-    bboxToView(bbox, 0.6);
-        
-    recolorPoints(rect); // to make the selected points change color
+    bboxToView(rect.node().getBBox(), 0.6);
 
-    ctx.sideG1.transition()
-              .duration(200)
-              .remove(); // clear the previous graph
-    
-    ctx.sideG1 = ctx.sideSVG1.append("g");
-    drawSideGraph(rect);
+    drawSelectionFigures(rect);
 
     rect.remove();
 }
@@ -658,13 +668,12 @@ function mouseUpRect() {
 
 function bboxToView(bbox, ratio) {
     //updates the view to fit 60% of the screen to the bounding box in the leftmost ratio of the svg
-    //ctx.lastFocusedBbox = bbox;
-    console.log("bbox to view", bbox);
+    ctx.lastFocusedBbox = bbox;
+    console.log(bbox);
     ctx.tempProj = ctx.proj;
 
     const scaleFactor = Math.min((ctx.WIDTH * 0.6) / bbox.width,
-                                 (ctx.HEIGHT * 0.9) / bbox.height, 
-                                 ctx.zoom.scaleExtent()[1]) // avoid zooming too much
+                                 (ctx.HEIGHT * 0.9) / bbox.height)
     
     const xTranslation = 0.5 * ratio * ctx.WIDTH - scaleFactor * (bbox.x + bbox.width*0.5) 
     const yTranslation = 0.5 * ctx.HEIGHT - scaleFactor * (bbox.y + bbox.height*0.5)
@@ -677,21 +686,7 @@ function bboxToView(bbox, ratio) {
            .call(ctx.zoom.transform, focus)
 }
 
-function recolorPoints(shape){
-  const colorScale = d3.scaleLinear().domain([minDuration, maxDuration]).range(["lightblue", "darkblue"]);
-  const colorScale2 = d3.scaleLinear().domain([minDuration, maxDuration]).range(["lightgreen", "darkgreen"]);
-  
-  ctx.gPoints.selectAll("path.study")
-             .attr("fill", function(d){
-              let point = ctx.projection([d.lon, d.lat])
-              if ((shape != null) && (shape.node().isPointInFill({x:point[0], y:point[1]}))) {
-                return colorScale2(d.duration)
-              } 
-              else {return colorScale(d.duration)}
-            })
-}
-
-function drawSideGraph(shape) {
+function drawSelectionFigures(shape) {
 
   //test if points are inside the drawn selection
   function selectionFilter(coordinates) {
@@ -702,180 +697,20 @@ function drawSideGraph(shape) {
   // show side graphs as as map overlay
   ctx.overlay.transition().duration(200)
                           .style("transform", "translateX(0px)");
-  const height = ctx.sideSVG1.attr("height");
-  const width = ctx.sideSVG1.attr("width");
-  ctx.sideG1.append("text")
-              .attr("x", width/2)
-              .attr("y", height/2)
-              .attr("text-anchor", "middle")
-              .attr("dominant-baseline", "middle")
-              .text("Loading...");
+                          
+  zoneData = d3.filter(ctx.studies, (d) => selectionFilter([d.lon, d.lat]) )
 
-  ctx.sideG1.transition().duration(200).attr("opacity", 1) //show loading text
+  console.log(zoneData.length);
 
-  
-  zoneData = d3.filter(applyFilters(), (d) => selectionFilter([d.lon, d.lat]) );
-  console.log("studies selected:", zoneData.length);
-
-
-
-  zoneData = d3.filter(zoneData, (d) => d.abundance_type == "Count")
-  
-  let graphData = [];
-  
-  // prepare relevant measurement files for loading
-  // zoneData.forEach(function(d) {
-  //   promises.push(loadStudyMeasurements(d.study_id))
-  // })
-  const promises = zoneData.map((study) => {return loadStudyMeasurements(study.study_id)});
-
-  // console.log("promises", promises);
-
-  //load and build graphData
-  Promise.allSettled(promises)
-        .then(function(studies){ // studies is actually all the promises results
-
-          studies.forEach(function(result){
-            
-            if(result.status == "fulfilled"){ // if there were files to load
-              
-              let measurements = result.value;
-              //console.log("measurements", measurements);
-
-              measurements.forEach(function(m){
-                graphData.push({
-                  study_id: m.STUDY_ID,
-                  realm: zoneData.find((e) => e.study_id == m.STUDY_ID).realm,
-                  abundance: m.ABUNDANCE,
-                  year: m.YEAR
-              })
-            })
-            }
-            
-          })
-          //console.log("graphData", graphData);
-          ctx.sideG1.transition().duration(200).attr("opacity", 0) //hide loading text
-          drawSidePlot(graphData)
-        })
-}
-
-function drawSidePlot(data) {
-
-  const margin = { top: 28, right: 16, bottom: 26, left: 50 };
-  
-  const height = ctx.sideSVG1.attr("height");
-  const width = ctx.sideSVG1.attr("width");
-  
-  if(data.length == 0) {
-    ctx.sideG1.select("text")
-              .text("No abundance data to show on selected studies");
-    ctx.sideG1.transition().duration(200).attr("opacity", 1)
-    return
-  }
-
-  else {
-    ctx.sideG1.select("text")
-              .text("");
-  }
-
-  const minYear = d3.min(data, d => d.year);
-  const maxYear = d3.max(data, d => d.year);
-  const years = d3.range(minYear, maxYear + 1);
-
-  const realms = ["Marine", "Terrestrial", "Freshwater", "Unknown"]
-    .filter(r => data.some(s => s.realm === r));
-
-  const rows = years.map(y => {
-    const row = { year: y };
-    for (const r of realms) row[r] = 0;
-    for (const s of data) {
-      if (s.year == y) row[s.realm] = (row[s.realm] || 0) + 1;
-    }
-    return row;
-  });
-
-  const x = d3.scaleLinear()
-    .domain([minYear, maxYear])
-    .range([margin.left, width - margin.right]);
-
-  const stack = d3.stack()
-    .keys(realms)
-    .order(d3.stackOrderNone)
-    .offset(d3.stackOffsetNone);
-
-  const series = stack(rows);
-
-  const y = d3.scaleLinear()
-    .domain([0, d3.max(series, s => d3.max(s, d => d[1])) || 1])
-    .nice()
-    .range([height - margin.bottom, margin.top]);
-
-  const color = d3.scaleOrdinal()
-    .domain(realms)
-    .range(d3.schemeTableau10);
-
-  const area = d3.area()
-    .x(d => x(d.data.year))
-    .y0(d => y(d[0]))
-    .y1(d => y(d[1]));
-
-  ctx.sideG1.attr("opacity", 0)
-  ctx.sideG1.append("g")
-    .selectAll("path")
-    .data(series)
-    .enter()
-    .append("path")
-    .attr("d", area)
-    .attr("fill", d => color(d.key))
-    .attr("opacity", 0.65);
-
-  ctx.sideG1.append("g")
-    .attr("transform", `translate(0,${height - margin.bottom})`)
-    .call(d3.axisBottom(x).ticks(6).tickFormat(d3.format("d")))
-    .call(g => g.selectAll("text").style("font-size", "10px"));
-
-  ctx.sideG1.append("g")
-    .attr("transform", `translate(${margin.left},0)`)
-    .call(d3.axisLeft(y).ticks(4))
-    .call(g => g.selectAll("text").style("font-size", "10px"))
-    .call(g => g.select(".domain").attr("opacity", 1));
-
-  ctx.sideG1.append("text")
-    .attr("x", margin.left)
-    .attr("y", 18)
-    .style("font-size", "13px")
-    .style("font-weight", 800)
-    .style("fill", "rgba(15,23,42,0.9)")
-    .text("Measurements per year (stacked by realm)");
-
-  const leg = ctx.sideG1.append("g")
-    .attr("transform", `translate(${margin.left + 15},${margin.top + 6})`);
-
-  realms.forEach((r, i) => {
-    const g = leg.append("g").attr("transform", `translate(${i * 110},0)`);
-    g.append("rect").attr("width", 10).attr("height", 10).attr("rx", 2)
-      .attr("fill", color(r)).attr("opacity", 0.8);
-    g.append("text").attr("x", 14).attr("y", 9)
-      .style("font-size", "11px")
-      .style("fill", "rgba(15,23,42,0.75)")
-      .text(r);
-  });
-
-  ctx.sideG1.transition().duration(100).attr("opacity", 1)
+  let habitatCount = d3.rollup(zoneData, (d) => d.habitat);
+  console.log(habitatCount);
 }
 
 function closeSelectionFigures() {
   ctx.overlay.transition().duration(200)
                           .style("transform", `translateX(${ctx.WIDTH}px)`);
-  
-  recolorPoints(null);
-  const currentZoom = d3.zoomTransform(ctx.svg.node())
-  ctx.svg
-      .transition()
-      .duration(300)
-      .call(ctx.zoom.translateBy, 0.165 * ctx.WIDTH / currentZoom.k ,0);
 
-  //bboxToView(ctx.lastFocusedBbox, 1) // set the view to focus the last selection in the middle of the screen
+  bboxToView(ctx.lastFocusedBbox, 1) // set the view to focus the last selection in the middle of the screen
 }
 
 
@@ -915,174 +750,6 @@ function tileByDepth(node, x0, y0, x1, y1) {
 }
 
 // --- Treemap: phylogenetic hierarchy (JSON) ---
-/*function createPhyloTreemap() {
-  const host = d3.select("#phylo-panel");
-  if (host.empty()) return;
-
-  host.selectAll("*").remove();
-
-  const nodeEl = host.node();
-
-  // ---- Taille + "prend moins de place" ----
-  const width = Math.floor((nodeEl.getBoundingClientRect().width)|| 900);
-  const height = 580;            // <-- baisse la hauteur (ex: 320-380)
-  const titleheight = 25
-
-  const svg = host.append("svg")
-    .attr("width", width)
-    .attr("height", height);
-
-  svg.append("text")
-      .attr("x", width / 2)
-      .attr("y", 15)   
-      .attr("text-anchor", "middle")
-      .style("font-size", "14px")
-      .style("font-weight", 700)
-      .style("fill", "#0f172a")
-      .text("Number of studies by major evolutionary lineage");
-
-  d3.json("../data/organism_groups_phylo_rows.json").then(rows => {
-    // ---- Stratify ----
-    const root = d3.stratify()
-      .id(d => d.Code)
-      .parentId(d => d.Parent)
-      (rows);
-
-    // DOM ids safe
-    root.eachBefore(d => {
-      d.data.id = d.data.Code
-        .replaceAll(">", "_")
-        .replaceAll("|", "_")
-        .replaceAll(/[^\w\-]/g, "");
-    });
-
-    // Sum leaf values
-    root.sum(d => d.Amount || 0);
-
-    // ---- Treemap ----
-    const treemap = d3.treemap()
-      .tile(tileByDepth)
-      .size([width, height - titleheight])
-      .paddingInner(5)
-      .paddingOuter(25);
-
-
-    treemap(root);
-
-    // ---- Couleurs : par grand groupe (enfant direct du root) ----
-    // On colore selon l'ancêtre à depth=1 (le "top group").
-    function topGroup(d) {
-      // root.depth = 0 ; ses enfants depth = 1
-      const a = d.ancestors().reverse();
-      return a[1] ? (a[1].data.Description || a[1].id) : (a[0]?.data.Description || "root");
-    }
-
-    const topGroups = Array.from(new Set(root.descendants().map(d => topGroup(d))));
-    const color = d3.scaleOrdinal()
-      .domain(topGroups)
-      .range(d3.schemeTableau10.concat(d3.schemeSet3)); // palette sympa (si plus de 10)
-
-    // ---- Draw ----
-    const gTreemap = svg.append("g")
-      .attr("transform", `translate(0, ${titleheight})`); //décale pour le titre
-
-    const nodes = gTreemap.selectAll("g.node")
-      .data(root.descendants())
-      .enter()
-      .append("g")
-      .attr("class", d => `node ${d.children ? "internal" : "leaf"}`)
-      .attr("transform", d => `translate(${d.x0},${d.y0})`);
-
-    // Rects
-    nodes.append("rect")
-      .attr("id", d => d.data.id)
-      .attr("width", d => Math.max(0, d.x1 - d.x0))
-      .attr("height", d => Math.max(0, d.y1 - d.y0))
-      .attr("rx", d => d.children ? 12 : 14)
-      .attr("fill", d => {
-        // Parents: plus clair, Leaves: plus saturé
-        const c = d3.color(color(topGroup(d)));
-        if (!c) return "rgba(0,0,0,0.06)";
-        return d.children ? c.copy({ opacity: 0.18 }) : c.copy({ opacity: 0.45 });
-      })
-      .attr("stroke", d => {
-        const c = d3.color(color(topGroup(d)));
-        return c ? c.copy({ opacity: 0.55 }) : "rgba(15, 23, 42, 0.25)";
-      })
-      .append("title")
-      .text(d => {
-        const path = d.ancestors().map(a => a.data.Description).reverse().join(" → ");
-        return `${path} : ${d.value}`;
-      });
-
-    // ---- ClipPaths pour labels (leaves + internes) ----
-    nodes.append("clipPath")
-      .attr("id", d => "clip-" + d.data.id)
-      .append("use")
-      .attr("xlink:href", d => "#" + d.data.id);
-
-    // Helpers taille
-    const w = d => Math.max(0, d.x1 - d.x0);
-    const h = d => Math.max(0, d.y1 - d.y0);
-
-    // ---- Titres des groupes internes ----
-    // Affichés uniquement si la boîte est assez grande.
-    nodes.filter(d => d.children)
-      .append("text")
-      .attr("clip-path", d => `url(#clip-${d.data.id})`)
-      .attr("x", 8)
-      .attr("y", 16)
-      .style("font-size", "12px")
-      .style("font-weight", 800)
-      .style("fill", "rgba(15, 23, 42, 0.80)")
-      .style("pointer-events", "none")
-      .text(d => d.data.Description)
-      .attr("display", d => (w(d) >= 90 && h(d) >= 26) ? null : "none");
-
-    // Petite ligne valeur pour internes (optionnel)
-    nodes.filter(d => d.children)
-      .append("text")
-      .attr("clip-path", d => `url(#clip-${d.data.id})`)
-      .attr("x", 8)
-      .attr("y", 32)
-      .style("font-size", "11px")
-      .style("font-weight", 600)
-      .style("fill", "rgba(15, 23, 42, 0.55)")
-      .style("pointer-events", "none")
-      .text(d => d.value)
-      .attr("display", d => (w(d) >= 70 && h(d) >= 40) ? null : "none");
-
-    // ---- Labels feuilles ----
-    nodes.filter(d => !d.children)
-      .append("text")
-      .attr("clip-path", d => `url(#clip-${d.data.id})`)
-      .attr("x", 8)
-      .attr("y", 18)
-      .style("font-size", "11px")
-      .style("font-weight", 700)
-      .style("fill", "rgba(15, 23, 42, 0.85)")
-      .style("pointer-events", "none")
-      .text(d => truncateLabel(d.data.Description || "", d));
-
-
-    // Valeur feuille (si assez grand)
-    nodes.filter(d => !d.children)
-      .append("text")
-      .attr("clip-path", d => `url(#clip-${d.data.id})`)
-      .attr("x", 8)
-      .attr("y", 44)
-      .style("font-size", "11px")
-      .style("fill", "rgba(15, 23, 42, 0.55)")
-      .style("pointer-events", "none")
-      .text(d => d.value)
-      ;
-
-      
-
-  }).catch(err => console.error(err));
-}
-*/
-
 function createPhyloTreemap() {
   const host = d3.select("#phylo-panel");
   if (host.empty()) return;
@@ -1145,6 +812,7 @@ function createPhyloTreemap() {
           if (this.checked) ctx.phyloSelected.add(d);
           else ctx.phyloSelected.delete(d);
           createPhyloTreemap(); // rerender
+          requestAnimationFrame(() => window.scrollTo(0, y));
         });
 
       items.append("span").text(d => d);
@@ -1168,7 +836,7 @@ function createPhyloTreemap() {
     const treemap = d3.treemap()
       .tile(tileByDepth)
       .size([width, height - titleH])
-      .paddingInner(5)
+      .paddingInner(3)
       .paddingOuter(25);
 
     treemap(root);
@@ -1227,7 +895,19 @@ function createPhyloTreemap() {
       .style("fill", "rgba(15, 23, 42, 0.85)")
       .style("pointer-events", "none")
       .text(d => truncateLabel(d.data.Description || "", d));
+
+    nodes.filter(d => !d.children)
+      .append("text")
+      
+      .attr("x", 8)
+      .attr("y", 30)
+      .style("font-size", "11px")
+      .style("fill", "rgba(15, 23, 42, 0.55)")
+      .style("pointer-events", "none")
+      .text(d => d.value)
+      ;
   }
+
 
   // charge une fois puis rerender
   if (ctx.phyloRows) render(ctx.phyloRows);
@@ -1514,8 +1194,6 @@ function initPage3() {
       });
 
     ctx.svgDetail.call(ctx.zoomDetail);
-    ctx.svgDetail.on("wheel", event =>{event.preventDefault()}, {passive:false});
-  
     
     // Dessin du fond de carte
     ctx.gDetail.append("path")
@@ -1531,58 +1209,58 @@ function initPage3() {
     setupYearSlider();
 }
 
-// function renderSecondMap() {
-//   const container = d3.select("#map-container-p3");
-//   if (container.empty()) return;
+function renderSecondMap() {
+  const container = d3.select("#map-container-p3");
+  if (container.empty()) return;
 
-//   // Filtrer les données pour ne garder que celles du CSV
-//   const filteredData = ctx.studies.filter(d => ctx.availableStudyIds.includes(+d.study_id));
-//   console.log("length filtered data:", filteredData.length);
+  // Filtrer les données pour ne garder que celles du CSV
+  const filteredData = ctx.studies.filter(d => ctx.availableStudyIds.includes(+d.study_id));
+  console.log("length filtered data:", filteredData.length);
 
-//   const width = container.node().getBoundingClientRect().width || 800;
-//   const height = 500;
+  const width = container.node().getBoundingClientRect().width || 800;
+  const height = 500;
 
-//   const svg3 = container.append("svg")
-//     .attr("width", width)
-//     .attr("height", height)
-//     .attr("class", "map-svg-p3")
-//     .style("background", "radial-gradient(circle at top, #29407b 0, #030924 60%)")
-//     .style("border-radius", "18px");
+  const svg3 = container.append("svg")
+    .attr("width", width)
+    .attr("height", height)
+    .attr("class", "map-svg-p3")
+    .style("background", "radial-gradient(circle at top, #29407b 0, #030924 60%)")
+    .style("border-radius", "18px");
 
-//   const projection3 = d3.geoMercator()
-//     .scale(width / 6.5)
-//     .translate([width / 2, height / 1.5]);
+  const projection3 = d3.geoMercator()
+    .scale(width / 6.5)
+    .translate([width / 2, height / 1.5]);
 
-//   const path3 = d3.geoPath().projection(projection3);
-//   const g = svg3.append("g");
+  const path3 = d3.geoPath().projection(projection3);
+  const g = svg3.append("g");
 
-//   // Fond de carte
-//   g.append("path")
-//     .datum(topojson.feature(ctx.world, ctx.world.objects.countries))
-//     .attr("d", path3)
-//     .attr("fill", "#e0dbe7ff")
-//     .attr("stroke", "#aaa");
+  // Fond de carte
+  g.append("path")
+    .datum(topojson.feature(ctx.world, ctx.world.objects.countries))
+    .attr("d", path3)
+    .attr("fill", "#e0dbe7ff")
+    .attr("stroke", "#aaa");
 
-//   const minDur = d3.min(ctx.studies, d => d.duration);
-//   const maxDur = d3.max(ctx.studies, d => d.duration);
-//   const colorScale = d3.scaleLinear().domain([minDur, maxDur]).range(["lightblue", "darkblue"]);
+  const minDur = d3.min(ctx.studies, d => d.duration);
+  const maxDur = d3.max(ctx.studies, d => d.duration);
+  const colorScale = d3.scaleLinear().domain([minDur, maxDur]).range(["lightblue", "darkblue"]);
 
-//   // On n'affiche QUE les points disponibles dans le CSV
-//   g.append("g")
-//     .selectAll("circle")
-//     .data(filteredData) 
-//     .enter()
-//     .append("circle")
-//     .attr("class", "dot-p3")
-//     .attr("id", d => "p3-dot-" + d.study_id)
-//     .attr("cx", d => projection3([d.lon, d.lat])[0])
-//     .attr("cy", d => projection3([d.lon, d.lat])[1])
-//     .attr("r", 2) 
-//     .attr("fill", d => colorScale(d.duration))
-//     .attr("stroke", "white")
-//     .attr("stroke-width", 1)
-//     .on("click", (event, d) => updateStudySelection(d.study_id));
-// }
+  // On n'affiche QUE les points disponibles dans le CSV
+  g.append("g")
+    .selectAll("circle")
+    .data(filteredData) 
+    .enter()
+    .append("circle")
+    .attr("class", "dot-p3")
+    .attr("id", d => "p3-dot-" + d.study_id)
+    .attr("cx", d => projection3([d.lon, d.lat])[0])
+    .attr("cy", d => projection3([d.lon, d.lat])[1])
+    .attr("r", 2) 
+    .attr("fill", d => colorScale(d.duration))
+    .attr("stroke", "white")
+    .attr("stroke-width", 1)
+    .on("click", (event, d) => updateStudySelection(d.study_id));
+}
 
 function setupStudySelector() {
   const selector = d3.select("#study-selector");
@@ -1673,8 +1351,9 @@ function renderStudyYear(measurements, selectedYear) {
   // 3. Échelle de couleur logarithmique (adaptée aux données biologiques)
   const colorScaleDetail = d3.scaleLog()
     .domain([Math.max(0.1, extentAbundance[0]), extentAbundance[1]])
-    .range(["#4da0a0", "#004242"])
-    .interpolate(d3.interpolateHcl);
+    //.range(["#4da0a0", "#004242"])
+    .interpolate(() => d3.interpolateViridis);
+    //.interpolate(d3.interpolateHcl);
 
   // 4. Jointure D3 pour les points
   const dots = ctx.gMeasurements.selectAll(".measure-dot")
@@ -1803,7 +1482,7 @@ function updateYearUI(year) {
   }
 }
 
-function updateDetailedPointsPosition(k) {
+/*function updateDetailedPointsPosition(k) {
     // k est le niveau de zoom. 
     // On divise l'épaisseur du trait par k pour qu'elle reste constante à l'écran.
     ctx.gMeasurements.selectAll(".measure-dot")
@@ -1813,6 +1492,7 @@ function updateDetailedPointsPosition(k) {
 
 function updateAbundanceLegend(minVal, maxVal) {
   const legend = d3.select("#legend-abundance");
+  
 
   // On crée le squelette si la légende est vide
   if (legend.selectAll("*").empty()) {
@@ -1829,7 +1509,50 @@ function updateAbundanceLegend(minVal, maxVal) {
   // Mise à jour des textes (on arrondit pour que ce soit joli)
   legend.select(".legend-min").text(Math.round(minVal * 10) / 10);
   legend.select(".legend-max").text(Math.round(maxVal));
+
+}*/
+
+function updateAbundanceLegend(minVal, maxVal) {
+  const legend = d3.select("#legend-abundance");
+
+  // sécurité pour scaleLog
+  const lo = Math.max(0.1, +minVal);
+  const hi = Math.max(lo, +maxVal);
+
+  // scale (même viridis que tes points)
+  const colorScaleDetail = d3.scaleLog()
+    .domain([lo, hi])
+    .interpolate(() => d3.interpolateViridis);
+
+  // squelette
+  if (legend.selectAll("*").empty()) {
+    legend.html(`
+      <div class="legend-title">Abundance</div>
+      <div class="legend-bar"></div>
+      <div class="legend-labels">
+        <span class="legend-min"></span>
+        <span class="legend-max"></span>
+      </div>
+    `);
+  }
+
+  // labels
+  legend.select(".legend-min").text(Math.round(lo * 10) / 10);
+  legend.select(".legend-max").text(Math.round(hi));
+
+  // gradient
+  const steps = 40;
+  const gradient = `linear-gradient(to right, ${
+    d3.range(steps).map(i => {
+      const t = i / (steps - 1);
+      const v = lo * Math.pow(hi / lo, t); // interpolation log
+      return colorScaleDetail(v);
+    }).join(",")
+  })`;
+
+  legend.select(".legend-bar").style("background", gradient);
 }
+
 
 function togglePlay() {
   const slider = d3.select("#year-slider").node();
