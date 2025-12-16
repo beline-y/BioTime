@@ -23,7 +23,7 @@ body {
   background: radial-gradient(circle at top left, #e3f2fd 0, #f5f7fb 40%, #f5f7fb 100%);
   color: var(--text-main);
 }
-html, body { overflow-x: hidden; } /*empeche scrool horizontal*/
+
 #main {
   padding-left: 260px;
 }
@@ -50,7 +50,6 @@ html, body { overflow-x: hidden; } /*empeche scrool horizontal*/
   gap: 16px;
   overflow-y: auto;
   overflow-x: hidden;
-  
 }
 
 .sidebar-title {
@@ -408,20 +407,16 @@ svg {
   justify-content: center;
   cursor: pointer;
   font-size: 18px;
+  z-index: 9;
 }
 
 #next-page-btn:hover {
   background: #f1f5f9;
 }
 
-body.on-page-3 #next-page-btn {
-  top: 20px;
-  bottom: auto;
-}
-
 /* Page 2 : style de base, tu ajusteras */
 #page-2 {
-padding: 0px 32px;
+  padding: 0px 32px;
   flex-direction: column;
   gap: 16px;
 }
@@ -429,7 +424,7 @@ padding: 0px 32px;
 #page-3 {
   padding: 0px 32px;
   flex-direction: column;
-  /*height: 100vh;*/
+  height: 100vh;
   gap: 16px;
 }
 
@@ -446,8 +441,7 @@ padding: 0px 32px;
 #map-container-p3 {
     flex: 1;
     width: 100%;
-    min-height: 0;
-    /*height: 100%;*/
+    height: 100%;
     position: relative;
     background: radial-gradient(circle at top, #29407b 0, #030924 60%);
     border-radius: var(--radius-lg);
