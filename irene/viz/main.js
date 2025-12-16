@@ -202,14 +202,6 @@ function setupTools() {
                                .y(d => d[1]);
 
   ctx.pathPoints = [];
-  ctx.shape = null;
-  
-  // ctx.shape = ctx.gMap.append("rect");
-  // ctx.shape.attr("x", 0)
-  //          .attr("y", 0)
-  //          .attr("width", 0)
-  //          .attr("height", 0)
-  //          .attr("opacity", 0) //creating an invisible rectangle to initialize ctx.path
 }
 
 function setupSelectionFigures() {
@@ -423,29 +415,18 @@ function updatePoints() {
   maxDuration = d3.max(data, d => d.duration);
 
   const colorScale = d3.scaleLinear().domain([minDuration, maxDuration]).range(["lightblue", "darkblue"]);
-  const colorScale2 = d3.scaleLinear().domain([minDuration, maxDuration]).range(["lightgreen", "darkgreen"]);
+  
   // EXIT:
   points.exit().remove();
   
   // ENTER:
-  //console.log("points after exit", points)
   const entered = points.enter()
     .append("path")
     .attr("class", "study")
     .attr("d", symbols)
     //.attr("fill", "#2684ac")
 
-    .attr("fill", function(d) {
-      //console.log("coloring points", ctx.shape);
-      let point = ctx.projection([d.lon, d.lat])
-      
-      if (ctx.shape != null) {
-        
-        if (ctx.shape.node().isPointInFill({x:point[0], y:point[1]})) {return colorScale2(d.duration)} //non functional for now
-        else {return colorScale(d.duration)}
-      }
-      else {return colorScale(d.duration)}     
-    })
+    .attr("fill", (d) => colorScale(d.duration))
     .attr("stroke", "#333")
     .attr("stroke-width", 0.4)
     .on("mouseover", handleMouseOver)
@@ -610,8 +591,7 @@ function mouseUpFree() {
   let bbox = path.node().getBBox();
   bboxToView(bbox, 0.6);
    
-  ctx.shape = path;
-  updatePoints(); // to make the selected points change color
+  recolorPoints(path); // to make the selected points change color
 
   ctx.sideG1.transition()
               .duration(200)
@@ -663,8 +643,7 @@ function mouseUpRect() {
     
     bboxToView(bbox, 0.6);
         
-    ctx.shape = rect;
-    updatePoints(); // to make the selected points change color
+    recolorPoints(rect); // to make the selected points change color
 
     ctx.sideG1.transition()
               .duration(200)
@@ -698,12 +677,26 @@ function bboxToView(bbox, ratio) {
            .call(ctx.zoom.transform, focus)
 }
 
+function recolorPoints(shape){
+  const colorScale = d3.scaleLinear().domain([minDuration, maxDuration]).range(["lightblue", "darkblue"]);
+  const colorScale2 = d3.scaleLinear().domain([minDuration, maxDuration]).range(["lightgreen", "darkgreen"]);
+  
+  ctx.gPoints.selectAll("path.study")
+             .attr("fill", function(d){
+              let point = ctx.projection([d.lon, d.lat])
+              if ((shape != null) && (shape.node().isPointInFill({x:point[0], y:point[1]}))) {
+                return colorScale2(d.duration)
+              } 
+              else {return colorScale(d.duration)}
+            })
+}
+
 function drawSideGraph(shape) {
 
   //test if points are inside the drawn selection
   function selectionFilter(coordinates) {
     point = ctx.projection(coordinates)
-    return ctx.shape.node().isPointInFill({x:point[0], y:point[1]})
+    return shape.node().isPointInFill({x:point[0], y:point[1]})
   }
 
   // show side graphs as as map overlay
@@ -874,8 +867,8 @@ function drawSidePlot(data) {
 function closeSelectionFigures() {
   ctx.overlay.transition().duration(200)
                           .style("transform", `translateX(${ctx.WIDTH}px)`);
-  ctx.shape = null;
-  updatePoints();
+  
+  recolorPoints(null);
   const currentZoom = d3.zoomTransform(ctx.svg.node())
   ctx.svg
       .transition()
@@ -1521,6 +1514,8 @@ function initPage3() {
       });
 
     ctx.svgDetail.call(ctx.zoomDetail);
+    ctx.svgDetail.on("wheel", event =>{event.preventDefault()}, {passive:false});
+  
     
     // Dessin du fond de carte
     ctx.gDetail.append("path")
@@ -1536,58 +1531,58 @@ function initPage3() {
     setupYearSlider();
 }
 
-function renderSecondMap() {
-  const container = d3.select("#map-container-p3");
-  if (container.empty()) return;
+// function renderSecondMap() {
+//   const container = d3.select("#map-container-p3");
+//   if (container.empty()) return;
 
-  // Filtrer les données pour ne garder que celles du CSV
-  const filteredData = ctx.studies.filter(d => ctx.availableStudyIds.includes(+d.study_id));
-  console.log("length filtered data:", filteredData.length);
+//   // Filtrer les données pour ne garder que celles du CSV
+//   const filteredData = ctx.studies.filter(d => ctx.availableStudyIds.includes(+d.study_id));
+//   console.log("length filtered data:", filteredData.length);
 
-  const width = container.node().getBoundingClientRect().width || 800;
-  const height = 500;
+//   const width = container.node().getBoundingClientRect().width || 800;
+//   const height = 500;
 
-  const svg3 = container.append("svg")
-    .attr("width", width)
-    .attr("height", height)
-    .attr("class", "map-svg-p3")
-    .style("background", "radial-gradient(circle at top, #29407b 0, #030924 60%)")
-    .style("border-radius", "18px");
+//   const svg3 = container.append("svg")
+//     .attr("width", width)
+//     .attr("height", height)
+//     .attr("class", "map-svg-p3")
+//     .style("background", "radial-gradient(circle at top, #29407b 0, #030924 60%)")
+//     .style("border-radius", "18px");
 
-  const projection3 = d3.geoMercator()
-    .scale(width / 6.5)
-    .translate([width / 2, height / 1.5]);
+//   const projection3 = d3.geoMercator()
+//     .scale(width / 6.5)
+//     .translate([width / 2, height / 1.5]);
 
-  const path3 = d3.geoPath().projection(projection3);
-  const g = svg3.append("g");
+//   const path3 = d3.geoPath().projection(projection3);
+//   const g = svg3.append("g");
 
-  // Fond de carte
-  g.append("path")
-    .datum(topojson.feature(ctx.world, ctx.world.objects.countries))
-    .attr("d", path3)
-    .attr("fill", "#e0dbe7ff")
-    .attr("stroke", "#aaa");
+//   // Fond de carte
+//   g.append("path")
+//     .datum(topojson.feature(ctx.world, ctx.world.objects.countries))
+//     .attr("d", path3)
+//     .attr("fill", "#e0dbe7ff")
+//     .attr("stroke", "#aaa");
 
-  const minDur = d3.min(ctx.studies, d => d.duration);
-  const maxDur = d3.max(ctx.studies, d => d.duration);
-  const colorScale = d3.scaleLinear().domain([minDur, maxDur]).range(["lightblue", "darkblue"]);
+//   const minDur = d3.min(ctx.studies, d => d.duration);
+//   const maxDur = d3.max(ctx.studies, d => d.duration);
+//   const colorScale = d3.scaleLinear().domain([minDur, maxDur]).range(["lightblue", "darkblue"]);
 
-  // On n'affiche QUE les points disponibles dans le CSV
-  g.append("g")
-    .selectAll("circle")
-    .data(filteredData) 
-    .enter()
-    .append("circle")
-    .attr("class", "dot-p3")
-    .attr("id", d => "p3-dot-" + d.study_id)
-    .attr("cx", d => projection3([d.lon, d.lat])[0])
-    .attr("cy", d => projection3([d.lon, d.lat])[1])
-    .attr("r", 2) 
-    .attr("fill", d => colorScale(d.duration))
-    .attr("stroke", "white")
-    .attr("stroke-width", 1)
-    .on("click", (event, d) => updateStudySelection(d.study_id));
-}
+//   // On n'affiche QUE les points disponibles dans le CSV
+//   g.append("g")
+//     .selectAll("circle")
+//     .data(filteredData) 
+//     .enter()
+//     .append("circle")
+//     .attr("class", "dot-p3")
+//     .attr("id", d => "p3-dot-" + d.study_id)
+//     .attr("cx", d => projection3([d.lon, d.lat])[0])
+//     .attr("cy", d => projection3([d.lon, d.lat])[1])
+//     .attr("r", 2) 
+//     .attr("fill", d => colorScale(d.duration))
+//     .attr("stroke", "white")
+//     .attr("stroke-width", 1)
+//     .on("click", (event, d) => updateStudySelection(d.study_id));
+// }
 
 function setupStudySelector() {
   const selector = d3.select("#study-selector");
