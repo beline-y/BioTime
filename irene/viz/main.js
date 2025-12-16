@@ -580,7 +580,8 @@ function setupSidebarNav() {
 
 function mouseDownFree() {
     console.log("freeeedoooom")
-
+    d3.select("g#toolG").selectAll("path#currentfree").remove() //safeguard for when there is an issue with mouseup
+    
     ctx.pathPoints = [d3.pointer(event, this)]; // adding first point of path
     
     ctx.gTools.append("path").attr("d", ctx.lineGenerator(ctx.pathPoints))
@@ -606,8 +607,9 @@ function mouseUpFree() {
 
   let path = d3.select("path#currentfree");
   path.attr("d", path.attr("d") + "Z") //close the path when mouse is released
-  bboxToView(path.node().getBBox(), 0.6);
-
+  let bbox = path.node().getBBox();
+  bboxToView(bbox, 0.6);
+   
   ctx.shape = path;
   updatePoints(); // to make the selected points change color
 
@@ -624,6 +626,9 @@ function mouseUpFree() {
 
 function mouseDownRect() {
     console.log("starting rectangular selection");
+    
+    d3.select("g#toolG").selectAll("rect#currentrect").remove() //safeguard for when there is an issue with mouseup
+    
     ctx.startingPoint = d3.pointer(event, this);
     
     ctx.rectangle = ctx.gTools.append("rect")
@@ -654,8 +659,10 @@ function mouseUpRect() {
     console.log("rect mouseup")
     ctx.gTools.on("mousemove", null);
     let rect = d3.select("rect#currentrect");    
-    bboxToView(rect.node().getBBox(), 0.6);
-
+    let bbox = rect.node().getBBox()
+    
+    bboxToView(bbox, 0.6);
+        
     ctx.shape = rect;
     updatePoints(); // to make the selected points change color
 
@@ -677,7 +684,8 @@ function bboxToView(bbox, ratio) {
     ctx.tempProj = ctx.proj;
 
     const scaleFactor = Math.min((ctx.WIDTH * 0.6) / bbox.width,
-                                 (ctx.HEIGHT * 0.9) / bbox.height)
+                                 (ctx.HEIGHT * 0.9) / bbox.height, 
+                                 ctx.zoom.scaleExtent()[1]) // avoid zooming too much
     
     const xTranslation = 0.5 * ratio * ctx.WIDTH - scaleFactor * (bbox.x + bbox.width*0.5) 
     const yTranslation = 0.5 * ctx.HEIGHT - scaleFactor * (bbox.y + bbox.height*0.5)
