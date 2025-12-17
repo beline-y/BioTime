@@ -30,7 +30,13 @@ const ctx = {
 
   availableStudyIds: [],
   studyFiles: [],
-  measurementsCache: {}
+  measurementsCache: {},
+
+  // Elements Taxonomic Tree
+  SVG_WIDTH: 1200,
+  SVG_HEIGHT: 1200,
+  TRANSITION_DURATION: 750,
+  COLLAPSE_DEPTH: 2
 };
 
 // Main entry point
@@ -283,20 +289,22 @@ function loadData() {
   Promise.all([
     d3.json("../data/world-110m.json"),
     d3.json("../data/studies.json"),
-    d3.csv("../data/study_list.csv")
+    d3.csv("../data/study_list.csv"),
+    d3.json("../data/taxonomy_tree.json")
   ])
     .then(function (values) {
       ctx.world = values[0];
       ctx.studies = values[1];
       ctx.availableStudyIds = values[2].map(d => +d.STUDY_ID);
       ctx.studyFiles = values[2];
-      console.log(ctx.studies)
+      ctx.taxonomicData = values[3];
 
       drawBaseMap();
       setupFilterListeners();
       updatePoints();
       createPhyloTreemap();
       createStudyTimeline(ctx.studies)
+      createTaxonomicTree();
 
       //page 3 
       initPage3();
@@ -510,26 +518,63 @@ function setupPageNavigation() {
   const btn = document.getElementById("next-page-btn");
   if (!btn) return;
 
-  const order = ["page-map", "page-2", "page-3"];
+  const order = ["page-map", "page-2", "page-3", "page-4"];
 
   btn.addEventListener("click", () => {
-    const y = window.scrollY + window.innerHeight * 0.4;
-
-    // trouve la section la plus "proche" du viewport
+    const windowHeight = window.innerHeight;
+    const scrollY = window.scrollY;
+    const fullHeight = document.documentElement.scrollHeight;
+    
+    // 1. Identify where we are
+    const midPoint = scrollY + windowHeight * 0.4;
     let currentIdx = 0;
-    for (let i = 0; i < order.length; i++) {
-      const el = document.getElementById(order[i]);
-      if (!el) continue;
-      if (el.offsetTop <= y) currentIdx = i;
-    }
+    order.forEach((id, index) => {
+      const el = document.getElementById(id);
+      if (el && el.offsetTop <= midPoint) currentIdx = index;
+    });
 
-    if (currentIdx === order.length - 1) {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      return;
-    }
+    const currentId = order[currentIdx];
 
-    const nextId = order[Math.min(currentIdx + 1, order.length - 1)];
-    document.getElementById(nextId)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    // 2. Logic for Page 4 (The "Overflow" Page)
+    if (currentId === "page-4") {
+      const isAtBottom = (windowHeight + scrollY) >= (fullHeight - 50);
+
+      if (isAtBottom) {
+        // Step C: If already at the bottom of 4, go to the very start of the site
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } else {
+        // Step B: If at the top of 4, scroll to the bottom of 4
+        window.scrollTo({ top: fullHeight, behavior: "smooth" });
+      }
+    } else {
+      // Step A: For Pages 1, 2, and 3, just go to the next ID in the list
+      const nextId = order[currentIdx + 1];
+      document.getElementById(nextId)?.scrollIntoView({ behavior: "smooth" });
+    }
+  });
+
+  // 3. Arrow Flip Logic (Visual only)
+  window.addEventListener("scroll", () => {
+    const isAtBottom = (window.innerHeight + window.scrollY) >= (document.documentElement.scrollHeight - 50);
+    btn.textContent = isAtBottom ? "↑" : "↓";
+  });
+}
+
+function toggleSidebarFilters(activePageId) {
+  // Hide all dynamic sidebar groups first
+  const groups = {
+    'page-map': '.map-only',
+    'page-2': '.overview-only',
+    'page-3': '.study-only',
+    'page-4': '.taxonomy-only'
+  };
+
+  // Select all sidebar cards and hide/show based on activePageId
+  Object.keys(groups).forEach(pageId => {
+    const elements = document.querySelectorAll(groups[pageId]);
+    elements.forEach(el => {
+      el.style.display = (pageId === activePageId) ? 'block' : 'none';
+    });
   });
 }
 
@@ -1830,3 +1875,377 @@ function createAbundanceChart(measurements) {
   svg.append("text").attr("x", margin.left).attr("y", height - 5).style("font-size", "10px").style("fill", "#8899a6").text(yearsExtent[0]);
   svg.append("text").attr("x", width - margin.right).attr("y", height - 5).attr("text-anchor", "end").style("font-size", "10px").style("fill", "#8899a6").text(yearsExtent[1]);
 }
+
+
+/*/------------------TAXONOMIC TREE------------------/*/
+
+/* ---------------- GLOBAL VARIABLES ---------------- */
+
+const colorScale = d3.scaleOrdinal(d3.schemePastel1);
+
+const levelRadius = {};
+
+
+ctx.OUTER_RADIUS = null;
+ctx.INNER_RADIUS = 0;
+
+const levelNames = {
+    1: "Kingdom",
+    2: "Phylum",
+    3: "Class",
+    4: "Order",
+    5: "Family",
+    6: "Genus",
+    7: "Species"
+};
+
+let vizRoot = null;
+let vizChart = null;
+let dataCache = null;
+let nodeParentMap = new Map();
+let selectedPath = new Set();
+let cluster = null;
+let update = null;
+
+/* ---------------- DATA HELPERS ---------------- */
+function convertJsonToD3(nodeContainer, nodeName) {
+    // Converts the JSON Newick file to be used as a d3 tree
+    const childrenData = nodeContainer.children || {};
+    const node = { name: nodeName, children: [] };
+    const childNames = Object.keys(childrenData);
+    if (childNames.length) {
+        childNames.forEach(name => node.children.push(convertJsonToD3(childrenData[name], name)));
+    } else {
+        delete node.children;
+    }
+    return node;
+}
+
+function buildParentMap(root) {
+    nodeParentMap.clear();
+    function traverse(node, parent) {
+        nodeParentMap.set(node, parent);
+        if (node.children) node.children.forEach(c => traverse(c, node));
+        if (node._children) node._children.forEach(c => traverse(c, node));
+    }
+    traverse(root, null);
+}
+
+function getPathToRoot(node) {
+    const path = new Set();
+    let current = node;
+    while (current) {
+        path.add(current);
+        current = nodeParentMap.get(current);
+    }
+    return path;
+}
+
+function collapseBelowDepth(d, targetDepth, pathToKeepVisible = new Set()) {
+    // Colapses the tree so that the branches do not extend naturaly to their full length
+    const mustCollapse = d.depth >= targetDepth && d.children;
+    const isProtected = pathToKeepVisible.size > 0 && pathToKeepVisible.has(d);
+    if (mustCollapse) {
+        if (!isProtected) {
+            d._children = d.children;
+            d.children = null;
+        }
+    }
+    if (d.children) d.children.forEach(c => collapseBelowDepth(c, targetDepth, pathToKeepVisible));
+    if (d._children) d._children.forEach(c => collapseBelowDepth(c, targetDepth, pathToKeepVisible));
+}
+
+/* ---------------- VISUALIZATION HELPERS ---------------- */
+
+function linkStep(sa, sr, ea, er) {
+    const s = (sa - 90) * Math.PI / 180;
+    const e = (ea - 90) * Math.PI / 180;
+    return `M${sr * Math.cos(s)},${sr * Math.sin(s)}
+            A${sr},${sr} 0 0 ${ea > sa ? 1 : 0}
+            ${sr * Math.cos(e)},${sr * Math.sin(e)}
+            L${er * Math.cos(e)},${er * Math.sin(e)}`;
+}
+
+function linkConstant(d) {
+    const rSource = levelRadius[d.source.depth];
+    const rTarget = levelRadius[d.target.depth];
+    return linkStep(d.source.x * 180 / Math.PI, rSource, d.target.x * 180 / Math.PI, rTarget);
+}
+
+function linkExtensionConstant(d) {
+    const rTarget = levelRadius[d.target.depth];
+    return linkStep(d.target.x * 180 / Math.PI, rTarget, d.target.x * 180 / Math.PI, ctx.OUTER_RADIUS);
+}
+
+function clearPath() {
+    if (!vizChart) return;
+    vizChart.selectAll(".link").classed("link--selected", false);
+    vizChart.selectAll(".link-extension").classed("link-extension--selected", false);
+    vizChart.selectAll(".labels text").classed("label--selected", false);
+}
+
+function highlightPath(d) {
+    clearPath();
+    const path = getPathToRoot(d);
+    selectedPath = path;
+    path.forEach(node => {
+        // Select label by data
+        vizChart.selectAll(".labels text")
+            .filter(d => d === node)
+            .classed("label--selected", true);
+        // Select link by data
+        vizChart.selectAll(".links path")
+            .filter(d => d.target === node)
+            .classed("link--selected", true);
+        // Select link extension by data
+        vizChart.selectAll(".link-extensions path")
+            .filter(d => d.target === node)
+            .classed("link-extension--selected", true);
+    });
+}
+
+/* ---------------- CREATE TREEMAP ---------------- */
+
+function createTreemap(data) {
+    const rootNode = convertJsonToD3({ children: data }, "");
+    const root = d3.hierarchy(rootNode, d => d.children).sum(d => d.children ? 0 : 1);
+    root.children?.forEach(child => child.each(d => d.data.colorGroup = child.data.name));
+    let nextId = 0;
+    root.each(d => d.uniqueId = d.data.name || "__temp_" + nextId++);
+    vizRoot = root;
+    buildParentMap(vizRoot);
+
+    // Initial selected path
+    selectedPath = getPathToRoot(vizRoot);
+
+    // Initial collapse
+    collapseBelowDepth(vizRoot, ctx.COLLAPSE_DEPTH, selectedPath);
+
+    // Cluster layout with homogenous separation
+    cluster = d3.cluster().size([360, ctx.INNER_RADIUS]).separation(() => 1);
+
+    const chart = vizChart;
+
+    // Concentric circles per taxonomic level
+    const levelGroup = chart.append("g").attr("class", "level-circles");
+    Object.keys(levelRadius).forEach(d => {
+        const r = levelRadius[d];
+        if (r > 0) {
+            levelGroup.append("circle")
+                .attr("r", r)
+                .attr("fill", "none")
+                .attr("stroke", "#e7e6e6ff")
+                .attr("stroke-dasharray", "4,2")
+                .attr("stroke-width", 1);
+            levelGroup.append("text")
+                .attr("y", -r - 4)
+                .attr("text-anchor", "middle")
+                .attr("fill", "#9c9b9bff")
+                .attr("font-size", 12)
+                .text(levelNames[d]);
+        }
+    });
+    levelGroup.lower();
+
+    /* -------- UPDATE FUNCTION -------- */
+
+    update = function(source) {
+        cluster(vizRoot);
+        const nodes = vizRoot.descendants();
+        const links = vizRoot.links();
+        nodes.forEach(d => d.x *= Math.PI / 180);
+
+        sourcePath = getPathToRoot(source);
+
+        // LINKS
+        const link = chart.select(".links").selectAll("path").data(links, d => d.target.uniqueId);
+        
+        const linkEnter = link.enter().append("path")
+            .attr("class", "link")
+            .attr("d", d => linkConstant({ source, target: source }))
+            .attr("stroke", d => colorScale(d.target.data.colorGroup))
+            .each(function(d) { d.target.data.linkNode = this; });
+        
+        link.merge(linkEnter)
+            .transition().duration(ctx.TRANSITION_DURATION)
+            .attr("d", linkConstant);
+    
+        link.exit().remove();
+
+        // LINK EXTENSIONS
+        const ext = chart.select(".link-extensions").selectAll("path")
+            .data(links.filter(d => !d.target.children), d => d.target.uniqueId);
+
+        const extEnter = ext.enter().append("path")
+            .attr("class", "link-extension")
+            .each(function(d) { d.target.data.linkExtensionNode = this; });
+  
+        ext.merge(extEnter)
+            .transition().duration(ctx.TRANSITION_DURATION)
+            .attr("d", linkExtensionConstant);
+
+        ext.exit().remove();
+
+        // NODES
+        const node = chart.select(".nodes").selectAll("circle").data(nodes, d => d.uniqueId);
+
+        const nodeEnter = node.enter().append("circle")
+            .attr("r", 1e-4)
+            .attr("fill", d => d.data.name ? colorScale(d.data.colorGroup) : "transparent")
+            .attr("transform", `translate(${source.y},0)`)
+            .on("click", click);
+        
+        node.merge(nodeEnter)
+            .transition().duration(ctx.TRANSITION_DURATION)
+            .attr("r", d => d.children || d._children ? 3.5 : 5)
+            .attr("fill", d => d.data.name ? colorScale(d.data.colorGroup) : "transparent")
+            .attr('transform', d => {
+                const radius = levelRadius[d.depth];
+                return `translate(${radius * Math.cos(d.x - Math.PI/2)}, ${radius * Math.sin(d.x - Math.PI/2)})`;
+            });
+
+        node.exit().remove();
+
+        // LABELS
+        const label = chart.select(".labels").selectAll("text").data(nodes, d => d.uniqueId);
+
+        const labelEnter = label.enter().append("text")
+            .attr("dy", ".31em")
+            .attr("opacity", 0)
+            .text(d => d.data.name ? d.data.name.replace(/_/g, " ") : "")
+            .each(function(d) { d.data.labelNode = this; });
+
+        label.merge(labelEnter)
+            .transition().duration(ctx.TRANSITION_DURATION)
+            .attr("opacity", d => {
+                const isSelected = sourcePath.has(d);
+                const isLeaf = !d.children && !d._children;
+                const isCollapsed = d._children && !d.children;                
+                // Show label if:
+                return (isSelected || isLeaf || isCollapsed) ? 1 : 0.3;
+            })
+            .attr("text-anchor", d => d.x < Math.PI ? "start" : "end")
+            .attr('transform', d => {
+                const radius = levelRadius[d.depth] || 0;
+                const angle = d.x * 180 / Math.PI;
+                let rotation = angle < 180 ? angle - 90 : angle + 90;
+                // Tilt so as to have the label not totaly on the branch
+                const tilt = d.children ? (angle < 180 ? 10 : -10) : 0;
+                rotation += tilt;
+                const offset = angle < 180 ? 8 : -8;
+                const xPos = radius * Math.cos(d.x - Math.PI/2);
+                const yPos = radius * Math.sin(d.x - Math.PI/2);
+                return `translate(${xPos}, ${yPos}) rotate(${rotation}) translate(${offset})`;
+            });
+       
+         label.exit().remove();
+
+        if (source) {
+            clearPath();
+            highlightPath(source);
+        }
+    };
+
+    // Initial render
+    update(vizRoot);
+}
+
+/* ---------------- CLICK HANDLER ---------------- */
+
+function click(_, d) {
+    if (!d.data.name) return;
+    if (!d.children && d._children) {
+        d.children = d._children;
+        d._children = null;
+    } else if (d.children) {
+        d._children = d.children;
+        d.children = null;
+    }
+    update(d);
+
+}
+
+function setupTaxonomicSlider(levelNames, initialDepth) {
+    
+    const currentDepthDisplay = d3.select("#taxonomic-display");
+    currentDepthDisplay.text(levelNames[initialDepth]);
+    
+    const slider = d3.select("#taxonomic-slider")
+        .attr("min", 1)
+        .attr("max", Object.keys(levelNames).length)
+        .property("value", initialDepth); 
+    
+    slider.on("input", function() {
+        const newDepth = +this.value;
+        
+        // Update the vizualisation
+        currentDepthDisplay.text(levelNames[newDepth]);
+        if (!vizRoot) return;
+        
+        // Total expansion to have correct labelNode and linkNode
+        vizRoot.each(d => { 
+            if (d._children) { 
+                d.children = d._children; 
+                d._children = null; 
+            } 
+        });
+        
+        collapseBelowDepth(vizRoot, newDepth); 
+        ctx.COLLAPSE_DEPTH = newDepth; 
+        update(vizRoot);
+    });
+}
+
+/* ---------------- INITIALIZE ---------------- */
+
+function createTaxonomicTree() {
+    setupTaxonomicSlider(levelNames, ctx.COLLAPSE_DEPTH);
+
+    const containerWidth = document.getElementById('taxo-container').clientWidth;
+    console.log(containerWidth)
+
+    const numLevels = 7
+    const step = containerWidth / ((numLevels + 2 ) *2); // Equal spacing and margin for labels 
+    for (let i = 0; i <= numLevels; i++) {
+        levelRadius[i] = i * step;
+    }
+
+    ctx.OUTER_RADIUS = levelRadius[numLevels];
+
+    const svg = d3.select("#taxo-container").append("svg")
+        .attr("width", containerWidth)
+        .attr("height", containerWidth);
+
+    vizChart = svg.append("g")
+        .attr("class", "tree-container")
+        .attr("transform", `translate(${containerWidth/2}, ${containerWidth/2})`)
+
+    vizChart.append("g").attr("class", "link-extensions");
+    vizChart.append("g").attr("class", "links");
+    vizChart.append("g").attr("class", "nodes");
+    vizChart.append("g").attr("class", "labels");
+    
+
+const container = document.getElementById('taxo-container');
+console.log("Container styles:", window.getComputedStyle(container));
+console.log("Container offsetWidth:", container.offsetWidth);
+console.log("Container clientWidth:", container.clientWidth);
+console.log("Container bounding rect:", container.getBoundingClientRect());
+    console.log(levelRadius)
+    console.log("Is taxonomicData available?", ctx.taxonomicData);
+
+  if (ctx.taxonomicData) {
+    dataCache = ctx.taxonomicData;
+    try {
+        createTreemap(ctx.taxonomicData);
+    } catch (error) {
+        console.error("Error with taxonomic tree", error);
+    }
+} else {
+    console.log("No taxonomic data");
+}
+
+}
+
+
+/*/-------------END TAXONOMIC TREE--------------/*/
