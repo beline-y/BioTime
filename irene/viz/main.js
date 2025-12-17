@@ -605,11 +605,12 @@ function setupSidebarNav() {
     const isMapPage = visible.target.id === "page-map";
     const isStudyPage = visible.target.id === "page-3";
     const isOverviewPage = visible.target.id === "page-2";
+    const isTaxonomyPage = visible.target.id === "page-4"
 
     const arrowBtn = document.getElementById("next-page-btn");
     if (arrowBtn) {
       arrowBtn.textContent =
-        visible.target.id === "page-3" ? "↑" : "↓";
+        visible.target.id === "page-4" ? "↑" : "↓";
     }
 
     d3.selectAll(".overview-only").style("display", isOverviewPage ? "flex" : "none");
@@ -620,6 +621,7 @@ function setupSidebarNav() {
     d3.select("#study-details-aside").style("display", isStudyPage ? "flex" : "none");
     d3.select("#year-slider-container").style("display", isStudyPage ? "flex" : "none");
     d3.select("#study-chart-container").style("display", isStudyPage ? "flex" : "none");
+    d3.select("#taxonomy-info-container").style("display", isTaxonomyPage ? "block" : "none");
 
     document.body.classList.toggle("map-filters-hidden", visible.target.id !== "page-map");
 
@@ -2226,24 +2228,16 @@ function createTaxonomicTree() {
     vizChart.append("g").attr("class", "labels");
     
 
-const container = document.getElementById('taxo-container');
-console.log("Container styles:", window.getComputedStyle(container));
-console.log("Container offsetWidth:", container.offsetWidth);
-console.log("Container clientWidth:", container.clientWidth);
-console.log("Container bounding rect:", container.getBoundingClientRect());
-    console.log(levelRadius)
-    console.log("Is taxonomicData available?", ctx.taxonomicData);
-
-  if (ctx.taxonomicData) {
-    dataCache = ctx.taxonomicData;
-    try {
-        createTreemap(ctx.taxonomicData);
-    } catch (error) {
-        console.error("Error with taxonomic tree", error);
+    if (ctx.taxonomicData) {
+        dataCache = ctx.taxonomicData;
+        try {
+            createTreemap(ctx.taxonomicData);
+        } catch (error) {
+            console.error("Error with taxonomic tree", error);
+        }
+    } else {
+        console.log("No taxonomic data");
     }
-} else {
-    console.log("No taxonomic data");
-}
 
 }
 
