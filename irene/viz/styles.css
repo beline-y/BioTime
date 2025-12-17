@@ -651,6 +651,16 @@ svg {
     font-size: 11px;
 }
 
+#taxonomy-info-container {
+  display: none;
+  margin-top: 10px;
+}
+
+#taxonomy-info-container.active {
+  display: block;
+}
+
+
 .taxo-layout {
     width: 100%;
     justify-content: center;
@@ -672,3 +682,4 @@ svg {
     justify-content: center;
     align-items: center;
 }
+
