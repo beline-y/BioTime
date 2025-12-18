@@ -291,7 +291,7 @@ function loadData() {
     d3.json("../data/studies.json"),
     d3.csv("../data/study_list.csv"),
     d3.json("../data/taxonomy_tree_structured.json"),
-    d3.csv("../data/filtered_data.csv")
+    d3.csv("../data/Biotime_with_NCBI_taxonomy.csv")
   ])
     .then(function (values) {
       ctx.world = values[0];
@@ -2402,3 +2402,4 @@ async function createTaxonomicTree() {
         console.log("No taxonomic data");
     }
 }
+
