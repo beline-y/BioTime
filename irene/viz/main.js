@@ -2228,20 +2228,7 @@ function createTreemap(data) {
           .attr("fill-opacity", 0.3)
           .attr("rx", 2)
           .attr("ry", 2)
-          .each(function(d) {
-            const text = d3.select(this.parentNode).select("text").node();
-            const bbox = text.getBBox();
-            const isRightSide = d.x < Math.PI;
-
-            d3.select(this)
-              .attr("x", isRightSide
-                ? 0 - 5                 
-                : -bbox.width - 5        
-              )
-              .attr("y", bbox.y - 3)
-              .attr("width", bbox.width + 10)
-              .attr("height", bbox.height + 6);
-          });
+          ;
 
         const labels = labelGroups.merge(labelEnter)
             .transition().duration(ctx.TRANSITION_DURATION)
@@ -2261,8 +2248,19 @@ function createTreemap(data) {
         labels.select("rect")
           .transition()
           .duration(ctx.TRANSITION_DURATION)
-            .attr("fill", "#f5f7fb")
+          .attr("fill", "#f5f7fb")
+          .each(function(d) {
+              const text = d3.select(this.parentNode).select("text").node();
 
+              const bbox = text.getBBox();
+              const isRightSide = d.x < Math.PI;
+
+              d3.select(this)
+                .attr("x", isRightSide ? -5 : -bbox.width - 5)
+                .attr("y", bbox.y - 3)
+                .attr("width", bbox.width + 10)
+                .attr("height", bbox.height + 6);
+            })
           .attr("fill-opacity", 0.6);
 
 
