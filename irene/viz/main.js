@@ -2154,58 +2154,129 @@ function createTreemap(data) {
         ext.exit().remove();
 
         // NODES
-        const node = chart.select(".nodes").selectAll("circle").data(nodes, d => d.uniqueId);
+        const nodeGroups = chart.select(".nodes")
+            .selectAll("g.node")
+            .data(nodes, d => d.uniqueId);
 
-        const nodeEnter = node.enter().append("circle")
-            .attr("r", 1e-4)
-            .attr("fill", d => d.data.name ? colorScale(d.data.colorGroup) : "transparent")
+        const nodeEnter = nodeGroups.enter()
+            .append("g")
+            .attr("class", "node")
             .attr("transform", `translate(${source.y},0)`)
             .on("click", click);
-        
-        node.merge(nodeEnter)
-            .transition().duration(ctx.TRANSITION_DURATION)
-            .attr("r", d => d.children || d._children ? 3.5 : 5)
-            .attr("fill", d => d.data.name ? colorScale(d.data.colorGroup) : "transparent")
-            .attr('transform', d => {
+
+        nodeEnter.filter(d => d.children || d._children)
+            .append("circle")
+            .attr("r", 1e-4)
+            .attr("fill", d => d.data.name ? colorScale(d.data.colorGroup) : "transparent");
+
+        // Leafs
+        nodeEnter.filter(d => !d.children && !d._children)
+            .append("rect")
+            .attr("width", 0)
+            .attr("height", 0)
+            .attr("x", -5)
+            .attr("y", -5)
+            .attr("fill", d => d.data.name ? colorScale(d.data.colorGroup) : "transparent");
+
+        const nodeMerge = nodeGroups.merge(nodeEnter)
+            .transition()
+            .duration(ctx.TRANSITION_DURATION)
+            .attr("transform", d => {
                 const radius = levelRadius[d.depth];
                 return `translate(${radius * Math.cos(d.x - Math.PI/2)}, ${radius * Math.sin(d.x - Math.PI/2)})`;
             });
 
-        node.exit().remove();
+        nodeMerge.selectAll("circle")
+            .transition()
+            .duration(ctx.TRANSITION_DURATION)
+            .attr("r", d => d.children || d._children ? 3.5 : 0);
 
-        // LABELS
-        const label = chart.select(".labels").selectAll("text").data(nodes, d => d.uniqueId);
+        nodeMerge.selectAll("rect")
+            .transition()
+            .duration(ctx.TRANSITION_DURATION)
+            .attr("width", 10)
+            .attr("height", 10)
+            .attr("x", -5)
+            .attr("y", -5)
+            .attr("transform", d => {
+                const angle = (d.x - Math.PI/2) * 180 / Math.PI; 
+                return `rotate(${angle})`;
+            });
 
-        const labelEnter = label.enter().append("text")
+        nodeGroups.exit().remove();
+
+
+                // LABELS
+        const labelGroups = chart.select(".labels")
+            .selectAll("g.label-group")
+            .data(nodes, d => d.uniqueId);
+
+        const labelEnter = labelGroups.enter()
+            .append("g")
+            .attr("class", "label-group")
+
+
+        labelEnter.append("text")
             .attr("dy", ".31em")
-            .attr("opacity", 0)
             .text(d => d.data.name ? d.data.name.replace(/_/g, " ") : "")
             .each(function(d) { d.data.labelNode = this; });
 
-        label.merge(labelEnter)
+
+        labelEnter.insert("rect", "text")
+          .attr("class", "label-background")
+          .attr("fill", "#f5f7fb")       
+          .attr("fill-opacity", 0.3)
+          .attr("rx", 2)
+          .attr("ry", 2)
+          .each(function(d) {
+            const text = d3.select(this.parentNode).select("text").node();
+            const bbox = text.getBBox();
+            const isRightSide = d.x < Math.PI;
+
+            d3.select(this)
+              .attr("x", isRightSide
+                ? 0 - 5                 
+                : -bbox.width - 5        
+              )
+              .attr("y", bbox.y - 3)
+              .attr("width", bbox.width + 10)
+              .attr("height", bbox.height + 6);
+          });
+
+        const labels = labelGroups.merge(labelEnter)
             .transition().duration(ctx.TRANSITION_DURATION)
-            .attr("opacity", d => {
-                const isSelected = sourcePath.has(d);
-                const isLeaf = !d.children && !d._children;
-                const isCollapsed = d._children && !d.children;                
-                // Show label if:
-                return (isSelected || isLeaf || isCollapsed) ? 1 : 0.3;
-            })
-            .attr("text-anchor", d => d.x < Math.PI ? "start" : "end")
-            .attr('transform', d => {
-                const radius = levelRadius[d.depth] || 0;
-                const angle = d.x * 180 / Math.PI;
-                let rotation = angle < 180 ? angle - 90 : angle + 90;
-                // Tilt so as to have the label not totaly on the branch
-                const tilt = d.children ? (angle < 180 ? 10 : -10) : 0;
-                rotation += tilt;
-                const offset = angle < 180 ? 8 : -8;
-                const xPos = radius * Math.cos(d.x - Math.PI/2);
-                const yPos = radius * Math.sin(d.x - Math.PI/2);
-                return `translate(${xPos}, ${yPos}) rotate(${rotation}) translate(${offset})`;
-            });
-       
-         label.exit().remove();
+                    .attr("text-anchor", d => d.x < Math.PI ? "start" : "end")
+                    .attr('transform', d => {
+                        const radius = levelRadius[d.depth] || 0;
+                        const angle = d.x * 180 / Math.PI;
+                        let rotation = angle < 180 ? angle - 90 : angle + 90;
+                        // Tilt so as to have the label not totaly on the branch
+                        const tilt = d.children ? (angle < 180 ? 10 : -10) : 0;
+                        rotation += tilt;
+                        const offset = angle < 180 ? 8 : -8;
+                        const xPos = radius * Math.cos(d.x - Math.PI/2);
+                        const yPos = radius * Math.sin(d.x - Math.PI/2);
+                        return `translate(${xPos}, ${yPos}) rotate(${rotation}) translate(${offset})`;
+                    });
+        labels.select("rect")
+          .transition()
+          .duration(ctx.TRANSITION_DURATION)
+            .attr("fill", "#f5f7fb")
+
+          .attr("fill-opacity", 0.6);
+
+
+          labels.select("text")
+          .transition()
+          .duration(ctx.TRANSITION_DURATION)
+          .attr("opacity", d => {
+            const isSelected = sourcePath.has(d);
+            const isLeaf = !d.children && !d._children;
+            const isCollapsed = d._children && !d.children;
+            return (isSelected || isLeaf || isCollapsed) ? 1 : 0.3;
+          });
+
+        labelGroups.exit().remove();
 
         if (source) {
             clearPath();
