@@ -1828,7 +1828,7 @@ function stopPlay() {
   }
 }
 
-function zoomToStudyBounds(measurements) {
+/*function zoomToStudyBounds(measurements) {
   if (!measurements || measurements.length === 0) return;
 
   // Calcul des limites (Bounding Box)
@@ -1862,7 +1862,7 @@ function zoomToStudyBounds(measurements) {
     d3.zoomIdentity.translate(width/2, height/2).scale(scaleFactor).translate(-((pMin[0]+pMax[0])/2), -((pMin[1]+pMax[1])/2))
   );
 }
-
+*/
 function createAbundanceChart(measurements) {
   const container = d3.select("#abundance-sparkline");
   container.selectAll("*").remove();
@@ -1889,6 +1889,59 @@ function createAbundanceChart(measurements) {
   svg.append("text").attr("x", margin.left).attr("y", height - 5).style("font-size", "10px").style("fill", "#8899a6").text(yearsExtent[0]);
   svg.append("text").attr("x", width - margin.right).attr("y", height - 5).attr("text-anchor", "end").style("font-size", "10px").style("fill", "#8899a6").text(yearsExtent[1]);
 }
+
+function zoomToStudyBounds(measurements) {
+  if (!measurements || measurements.length === 0) return;
+
+  const lons = measurements.map(d => d.LONGITUDE);
+  const lats = measurements.map(d => d.LATITUDE);
+
+  const minLon = d3.min(lons), maxLon = d3.max(lons);
+  const minLat = d3.min(lats), maxLat = d3.max(lats);
+  const centerLon = (minLon + maxLon) / 2;
+  const centerLat = (minLat + maxLat) / 2;
+
+  ctx.projectionDetail.center([0, centerLat]).rotate([-centerLon, 0]);
+  ctx.gDetail.selectAll("path").attr("d", ctx.pathDetail);
+
+  const pMin = ctx.projectionDetail([minLon, minLat]);
+  const pMax = ctx.projectionDetail([maxLon, maxLat]);
+
+  const dx = Math.abs(pMax[0] - pMin[0]);
+  const dy = Math.abs(pMax[1] - pMin[1]);
+
+  const width = +ctx.svgDetail.attr("width");
+  const height = +ctx.svgDetail.attr("height");
+
+  const padding = 0.7;
+  const MIN_PIXEL_EXTENT = 40;
+  const ZOOM_MIN = 1;
+  const ZOOM_MAX = 18;
+
+  const safeDx = Math.max(dx, MIN_PIXEL_EXTENT);
+  const safeDy = Math.max(dy, MIN_PIXEL_EXTENT);
+
+  const scaleFactor = padding / Math.max(
+    safeDx / width,
+    safeDy / height
+  );
+
+  const clampedScale = Math.max(
+    ZOOM_MIN,
+    Math.min(ZOOM_MAX, scaleFactor)
+  );
+
+  ctx.svgDetail.transition().duration(750).call(
+    ctx.zoomDetail.transform,
+    d3.zoomIdentity
+      .translate(width / 2, height / 2)
+      .scale(clampedScale)
+      .translate(
+        -((pMin[0] + pMax[0]) / 2),
+        -((pMin[1] + pMax[1]) / 2)
+      )
+  );
+                                }
 
 
 /*/------------------TAXONOMIC TREE------------------/*/
@@ -2255,5 +2308,6 @@ function createTaxonomicTree() {
 
 
 /*/-------------END TAXONOMIC TREE--------------/*/
+
 
 
