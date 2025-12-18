@@ -18,7 +18,7 @@ const ctx = {
   phyloRows: null,
   phyloSelected: null,
 
-  // Éléments Page 3 (Détail)
+  // Page 3
   svgDetail: null,
   gDetail: null,
   gMeasurements: null,
@@ -55,7 +55,7 @@ function createViz() {
   //Tooltip detail page 3
   ctx.tooltipDetail = d3.select("body").append("div")
     .attr("id", "tooltip-detail")
-    .attr("class", "tooltip") // On réutilise la classe CSS existante pour le style
+    .attr("class", "tooltip")
     .style("position", "absolute")
     .style("pointer-events", "none")
     .style("opacity", 0)
@@ -66,7 +66,7 @@ function createViz() {
     .attr("height", ctx.HEIGHT)
     .style("display", "block");
 
-  // Group container (will be zoomed)
+  // Group container
   ctx.g = ctx.svg.append("g").attr("id", "transformG");
   
   ctx.gMap = ctx.g.append("g");
@@ -78,7 +78,7 @@ function createViz() {
   
   // Mercator projection 
   ctx.projection = d3.geoMercator()
-    .scale((ctx.WIDTH / 2 / Math.PI) * 1.2)   // fills width, a bit extra for immersion
+    .scale((ctx.WIDTH / 2 / Math.PI) * 1.2)
     .translate([ctx.WIDTH / 2, ctx.HEIGHT / 2]);
 
   ctx.path = d3.geoPath().projection(ctx.projection);
@@ -103,7 +103,7 @@ function createViz() {
       } else {
         return d3.symbol()
           .type(d3.symbolCross)
-          .size(ctx.BASE_SYMBOL_SIZE/k)();
+          .size((ctx.BASE_SYMBOL_SIZE-10)/k)();
       }
     })
         .attr("stroke-width", 0.4/(0.5*k));
@@ -111,7 +111,7 @@ function createViz() {
   
    .filter(function(event) {
       return ctx.selected_tool == "move";
-    }); // pour éviter les interférences entre les events lies aux outils et ceux aux zooms
+    });
   
   // enable zoom/pan with mouse and block page scroll
   ctx.svg.call(ctx.zoom);
@@ -229,7 +229,7 @@ function setupSelectionFigures() {
              .style("right", `10px`)
              .style("top", `${0.05 * ctx.HEIGHT}px`);
 
-  //adding button similar to close buttons                                        
+  //adding close                                        
   button = ctx.overlay.append("div")
   button.attr("class", "tool-btn")
         .attr("id", "close")
@@ -306,7 +306,6 @@ function loadData() {
       createStudyTimeline(ctx.studies)
       createTaxonomicTree();
 
-      //page 3 
       initPage3();
 
     })
@@ -421,8 +420,6 @@ function updatePoints() {
 
   ctx.BASE_SYMBOL_SIZE = 40;
 
-  const symbols = d3.symbol().size(ctx.BASE_SYMBOL_SIZE).type(d3.symbolCircle);
-
   const points = ctx.gPoints
     .selectAll("path.study")
     .data(data, d => d.study_id); 
@@ -449,10 +446,10 @@ function updatePoints() {
       } else {
         return d3.symbol()
           .type(d3.symbolCross)
-          .size(ctx.BASE_SYMBOL_SIZE)();
+          .size(ctx.BASE_SYMBOL_SIZE-10)();
       }
     })
-    //.attr("fill", "#2684ac")
+
     .attr("fill", d => colorScale(d.duration))
     .attr("stroke", "#333")
     .attr("stroke-width", 0.4)
@@ -460,7 +457,6 @@ function updatePoints() {
     .on("mousemove", handleMouseMove)
     .on("mouseout", handleMouseOut)
     .on("click", (event, d) => {
-      // optionnel : mémoriser l’étude cliquée
       ctx.selectedStudy = d;
       console.log("Study clicked:", d);
       updateStudySelection(d.study_id);
@@ -471,7 +467,7 @@ function updatePoints() {
         ?.scrollIntoView({ behavior: "smooth", block: "start" });
     });
 
-  // ENTER + UPDATE: positionner correctement
+  // ENTER + UPDATE
   entered.merge(points)
   .attr("d", d => {
       const id = +d.study_id;
@@ -483,7 +479,7 @@ function updatePoints() {
       } else {
         return d3.symbol()
           .type(d3.symbolCross)
-          .size(ctx.BASE_SYMBOL_SIZE)();
+          .size(ctx.BASE_SYMBOL_SIZE-10)();
       }
     })
     .attr("transform", d => {
@@ -2243,3 +2239,4 @@ function createTaxonomicTree() {
 
 
 /*/-------------END TAXONOMIC TREE--------------/*/
+
