@@ -6,6 +6,7 @@
   --accent-soft: #c7f0ea;
   --text-main: #1f2933;
   --text-muted: #6b7b93;
+  --text-on-map: #dfe4ea;
   --shadow-soft: 0 10px 30px rgba(15, 23, 42, 0.08);
   --radius-lg: 18px;
 }
@@ -308,12 +309,22 @@ svg {
 
 }
 
-.control-label {
+#page-3 .control-label {
   font-size: 8px;
   font-weight: 600;
   letter-spacing: 0.10em;
   text-transform: uppercase;
-  color: var(--text-muted);
+  color: var(--text-on-map);
+  margin-bottom: 2px;
+  margin-left: 1px;
+}
+
+#page-map .control-label {
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--accent);
   margin-bottom: 2px;
   margin-left: 1px;
 }
@@ -745,6 +756,7 @@ svg {
         padding-left: 20px;
         margin: 0;
     }
+
 
 
 
