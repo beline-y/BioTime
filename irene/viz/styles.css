@@ -711,3 +711,40 @@ svg {
 }
 
 
+.node {
+  cursor: pointer;
+  pointer-events: all; /* make sure events are active */
+}
+
+#study-id-box {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        width: 250px;
+        max-height: 300px;
+        padding: 6px 10px;
+        background: var(--panel-bg, white);
+        border: 1px solid var(--border, #ccc);
+        border-radius: 12px;
+        box-shadow: var(--shadow-soft, 0 0 10px rgba(0, 0, 0, 0.1));
+        font-size: 12px;
+        color: var(--text-main, #333);
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        overflow-y: auto;
+        z-index: 100;
+    }
+
+    #study-id-box h3 {
+        margin: 0 0 6px 0;
+        font-size: 14px;
+    }
+
+    #study-id-box ul {
+        padding-left: 20px;
+        margin: 0;
+    }
+
+
+
