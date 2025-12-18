@@ -290,7 +290,8 @@ function loadData() {
     d3.json("../data/world-110m.json"),
     d3.json("../data/studies.json"),
     d3.csv("../data/study_list.csv"),
-    d3.json("../data/taxonomy_tree.json")
+    d3.json("../data/taxonomy_tree_structured.json"),
+    d3.csv("../data/filtered_data.csv")
   ])
     .then(function (values) {
       ctx.world = values[0];
@@ -298,6 +299,7 @@ function loadData() {
       ctx.availableStudyIds = values[2].map(d => +d.STUDY_ID);
       ctx.studyFiles = values[2];
       ctx.taxonomicData = values[3];
+      ctx.studyIdData = values[4];
 
       drawBaseMap();
       setupFilterListeners();
@@ -1947,11 +1949,8 @@ function zoomToStudyBounds(measurements) {
 /*/------------------TAXONOMIC TREE------------------/*/
 
 /* ---------------- GLOBAL VARIABLES ---------------- */
-
 const colorScale = d3.scaleOrdinal(d3.schemePastel1);
-
 const levelRadius = {};
-
 
 ctx.OUTER_RADIUS = null;
 ctx.INNER_RADIUS = 0;
@@ -1976,7 +1975,6 @@ let update = null;
 
 /* ---------------- DATA HELPERS ---------------- */
 function convertJsonToD3(nodeContainer, nodeName) {
-    // Converts the JSON Newick file to be used as a d3 tree
     const childrenData = nodeContainer.children || {};
     const node = { name: nodeName, children: [] };
     const childNames = Object.keys(childrenData);
@@ -2009,7 +2007,6 @@ function getPathToRoot(node) {
 }
 
 function collapseBelowDepth(d, targetDepth, pathToKeepVisible = new Set()) {
-    // Colapses the tree so that the branches do not extend naturaly to their full length
     const mustCollapse = d.depth >= targetDepth && d.children;
     const isProtected = pathToKeepVisible.size > 0 && pathToKeepVisible.has(d);
     if (mustCollapse) {
@@ -2022,8 +2019,38 @@ function collapseBelowDepth(d, targetDepth, pathToKeepVisible = new Set()) {
     if (d._children) d._children.forEach(c => collapseBelowDepth(c, targetDepth, pathToKeepVisible));
 }
 
-/* ---------------- VISUALIZATION HELPERS ---------------- */
 
+/* ---------------- MAP STUDY ID DATA TO NODES ---------------- */
+function mapStudyIdsToNodes(root) {
+    function traverse(node) {
+        if (!node.children && !node._children) {
+            const taxon = node.data.name;
+            node.data.studyIds = ctx.studyIdData
+                .filter(row =>
+                    row.species === taxon ||
+                    row.genus === taxon ||
+                    row.family === taxon ||
+                    row.order === taxon ||
+                    row.class === taxon ||
+                    row.phylum === taxon ||
+                    row.kingdom === taxon
+                )
+                .map(row => row.STUDY_ID);
+        } else if (node.children) {
+            node.data.studyIds = [];
+            node.children.forEach(traverse);
+            node.children.forEach(child => {
+                if (child.data.studyIds) {
+                    node.data.studyIds = node.data.studyIds.concat(child.data.studyIds);
+                }
+            });
+            node.data.studyIds = [...new Set(node.data.studyIds)];
+        }
+    }
+    traverse(root);
+}
+
+/* ---------------- VISUALIZATION HELPERS ---------------- */
 function linkStep(sa, sr, ea, er) {
     const s = (sa - 90) * Math.PI / 180;
     const e = (ea - 90) * Math.PI / 180;
@@ -2056,15 +2083,12 @@ function highlightPath(d) {
     const path = getPathToRoot(d);
     selectedPath = path;
     path.forEach(node => {
-        // Select label by data
         vizChart.selectAll(".labels text")
             .filter(d => d === node)
             .classed("label--selected", true);
-        // Select link by data
         vizChart.selectAll(".links path")
             .filter(d => d.target === node)
             .classed("link--selected", true);
-        // Select link extension by data
         vizChart.selectAll(".link-extensions path")
             .filter(d => d.target === node)
             .classed("link-extension--selected", true);
@@ -2072,28 +2096,26 @@ function highlightPath(d) {
 }
 
 /* ---------------- CREATE TREEMAP ---------------- */
-
-function createTreemap(data) {
+async function createTreemap(data) {
     const rootNode = convertJsonToD3({ children: data }, "");
     const root = d3.hierarchy(rootNode, d => d.children).sum(d => d.children ? 0 : 1);
     root.children?.forEach(child => child.each(d => d.data.colorGroup = child.data.name));
     let nextId = 0;
     root.each(d => d.uniqueId = d.data.name || "__temp_" + nextId++);
     vizRoot = root;
+
+    mapStudyIdsToNodes(vizRoot);
+
     buildParentMap(vizRoot);
 
-    // Initial selected path
     selectedPath = getPathToRoot(vizRoot);
 
-    // Initial collapse
     collapseBelowDepth(vizRoot, ctx.COLLAPSE_DEPTH, selectedPath);
 
-    // Cluster layout with homogenous separation
     cluster = d3.cluster().size([360, ctx.INNER_RADIUS]).separation(() => 1);
 
     const chart = vizChart;
 
-    // Concentric circles per taxonomic level
     const levelGroup = chart.append("g").attr("class", "level-circles");
     Object.keys(levelRadius).forEach(d => {
         const r = levelRadius[d];
@@ -2114,8 +2136,6 @@ function createTreemap(data) {
     });
     levelGroup.lower();
 
-    /* -------- UPDATE FUNCTION -------- */
-
     update = function(source) {
         cluster(vizRoot);
         const nodes = vizRoot.descendants();
@@ -2124,36 +2144,33 @@ function createTreemap(data) {
 
         sourcePath = getPathToRoot(source);
 
-        // LINKS
         const link = chart.select(".links").selectAll("path").data(links, d => d.target.uniqueId);
-        
+
         const linkEnter = link.enter().append("path")
             .attr("class", "link")
             .attr("d", d => linkConstant({ source, target: source }))
             .attr("stroke", d => colorScale(d.target.data.colorGroup))
             .each(function(d) { d.target.data.linkNode = this; });
-        
+
         link.merge(linkEnter)
             .transition().duration(ctx.TRANSITION_DURATION)
             .attr("d", linkConstant);
-    
+
         link.exit().remove();
 
-        // LINK EXTENSIONS
         const ext = chart.select(".link-extensions").selectAll("path")
             .data(links.filter(d => !d.target.children), d => d.target.uniqueId);
 
         const extEnter = ext.enter().append("path")
             .attr("class", "link-extension")
             .each(function(d) { d.target.data.linkExtensionNode = this; });
-  
+
         ext.merge(extEnter)
             .transition().duration(ctx.TRANSITION_DURATION)
             .attr("d", linkExtensionConstant);
 
         ext.exit().remove();
 
-        // NODES
         const nodeGroups = chart.select(".nodes")
             .selectAll("g.node")
             .data(nodes, d => d.uniqueId);
@@ -2162,6 +2179,7 @@ function createTreemap(data) {
             .append("g")
             .attr("class", "node")
             .attr("transform", `translate(${source.y},0)`)
+            .style("cursor", "pointer")
             .on("click", click);
 
         nodeEnter.filter(d => d.children || d._children)
@@ -2169,7 +2187,6 @@ function createTreemap(data) {
             .attr("r", 1e-4)
             .attr("fill", d => d.data.name ? colorScale(d.data.colorGroup) : "transparent");
 
-        // Leafs
         nodeEnter.filter(d => !d.children && !d._children)
             .append("rect")
             .attr("width", 0)
@@ -2199,80 +2216,72 @@ function createTreemap(data) {
             .attr("x", -5)
             .attr("y", -5)
             .attr("transform", d => {
-                const angle = (d.x - Math.PI/2) * 180 / Math.PI; 
+                const angle = (d.x - Math.PI/2) * 180 / Math.PI;
                 return `rotate(${angle})`;
             });
 
         nodeGroups.exit().remove();
 
-
-                // LABELS
         const labelGroups = chart.select(".labels")
             .selectAll("g.label-group")
             .data(nodes, d => d.uniqueId);
 
         const labelEnter = labelGroups.enter()
             .append("g")
-            .attr("class", "label-group")
-
+            .attr("class", "label-group");
 
         labelEnter.append("text")
             .attr("dy", ".31em")
             .text(d => d.data.name ? d.data.name.replace(/_/g, " ") : "")
             .each(function(d) { d.data.labelNode = this; });
 
-
         labelEnter.insert("rect", "text")
-          .attr("class", "label-background")
-          .attr("fill", "#f5f7fb")       
-          .attr("fill-opacity", 0.3)
-          .attr("rx", 2)
-          .attr("ry", 2)
-          ;
+            .attr("class", "label-background")
+            .attr("fill", "#f5f7fb")
+            .attr("fill-opacity", 0.3)
+            .attr("rx", 2)
+            .attr("ry", 2)
+            .style("pointer-events", "none");
 
         const labels = labelGroups.merge(labelEnter)
             .transition().duration(ctx.TRANSITION_DURATION)
-                    .attr("text-anchor", d => d.x < Math.PI ? "start" : "end")
-                    .attr('transform', d => {
-                        const radius = levelRadius[d.depth] || 0;
-                        const angle = d.x * 180 / Math.PI;
-                        let rotation = angle < 180 ? angle - 90 : angle + 90;
-                        // Tilt so as to have the label not totaly on the branch
-                        const tilt = d.children ? (angle < 180 ? 10 : -10) : 0;
-                        rotation += tilt;
-                        const offset = angle < 180 ? 8 : -8;
-                        const xPos = radius * Math.cos(d.x - Math.PI/2);
-                        const yPos = radius * Math.sin(d.x - Math.PI/2);
-                        return `translate(${xPos}, ${yPos}) rotate(${rotation}) translate(${offset})`;
-                    });
+            .attr("text-anchor", d => d.x < Math.PI ? "start" : "end")
+            .attr('transform', d => {
+                const radius = levelRadius[d.depth] || 0;
+                const angle = d.x * 180 / Math.PI;
+                let rotation = angle < 180 ? angle - 90 : angle + 90;
+                const tilt = d.children ? (angle < 180 ? 10 : -10) : 0;
+                rotation += tilt;
+                const offset = angle < 180 ? 8 : -8;
+                const xPos = radius * Math.cos(d.x - Math.PI/2);
+                const yPos = radius * Math.sin(d.x - Math.PI/2);
+                return `translate(${xPos}, ${yPos}) rotate(${rotation}) translate(${offset})`;
+            });
+
         labels.select("rect")
-          .transition()
-          .duration(ctx.TRANSITION_DURATION)
-          .attr("fill", "#f5f7fb")
-          .each(function(d) {
-              const text = d3.select(this.parentNode).select("text").node();
+            .each(function(d) {
+                const text = d3.select(this.parentNode).select("text").node();
+                const bbox = text.getBBox();
+                const isRightSide = d.x < Math.PI;
 
-              const bbox = text.getBBox();
-              const isRightSide = d.x < Math.PI;
-
-              d3.select(this)
-                .attr("x", isRightSide ? -5 : -bbox.width - 5)
-                .attr("y", bbox.y - 3)
-                .attr("width", bbox.width + 10)
-                .attr("height", bbox.height + 6);
+                d3.select(this)
+                    .attr("x", isRightSide ? -5 : -bbox.width - 5)
+                    .attr("y", bbox.y - 3)
+                    .attr("width", bbox.width + 10)
+                    .attr("height", bbox.height + 6);
             })
-          .attr("fill-opacity", 0.6);
+            .attr("fill-opacity", 0.6);
 
-
-          labels.select("text")
-          .transition()
-          .duration(ctx.TRANSITION_DURATION)
-          .attr("opacity", d => {
-            const isSelected = sourcePath.has(d);
-            const isLeaf = !d.children && !d._children;
-            const isCollapsed = d._children && !d.children;
-            return (isSelected || isLeaf || isCollapsed) ? 1 : 0.3;
-          });
+        labels.select("text")
+            .attr("text-anchor", d => d.x < Math.PI ? "start" : "end")
+            .transition()
+            .duration(ctx.TRANSITION_DURATION)
+            .attr("opacity", d => {
+                const isSelected = selectedPath.has(d);
+                const isLeaf = !d.children && !d._children;
+                const isCollapsed = d._children && !d.children;
+                return (isSelected || isLeaf || isCollapsed) ? 1 : 0.3;
+            });
 
         labelGroups.exit().remove();
 
@@ -2282,14 +2291,14 @@ function createTreemap(data) {
         }
     };
 
-    // Initial render
     update(vizRoot);
 }
 
 /* ---------------- CLICK HANDLER ---------------- */
-
 function click(_, d) {
     if (!d.data.name) return;
+
+    // Toggle node expansion/collapse
     if (!d.children && d._children) {
         d.children = d._children;
         d._children = null;
@@ -2297,51 +2306,72 @@ function click(_, d) {
         d._children = d.children;
         d.children = null;
     }
-    update(d);
 
+    // Display study IDs for the selected node
+    const studyIdContent = d3.select("#study-id-content");
+
+    if (d.data.studyIds && d.data.studyIds.length > 0) {
+        // Sort study IDs numerically
+        const sortedStudyIds = d.data.studyIds.sort((a, b) => {
+            // Extract numeric part from study IDs (assuming format like "study1", "study2", etc.)
+            const numA = parseInt(a.replace(/\D/g, ''), 10);
+            const numB = parseInt(b.replace(/\D/g, ''), 10);
+            return numA - numB;
+        });
+
+        studyIdContent.html(`
+            <p><strong>Node:</strong> ${d.data.name}</p>
+            <p><strong>Study IDs:</strong></p>
+            <ul>
+                ${sortedStudyIds.map(id => `<li>${id}</li>`).join("")}
+            </ul>
+        `);
+    } else {
+        studyIdContent.html(`
+            <p><strong>Node:</strong> ${d.data.name}</p>
+            <p>No study IDs found.</p>
+        `);
+    }
+
+    update(d);
 }
 
+/* ---------------- SETUP SLIDER ---------------- */
 function setupTaxonomicSlider(levelNames, initialDepth) {
-    
     const currentDepthDisplay = d3.select("#taxonomic-display");
     currentDepthDisplay.text(levelNames[initialDepth]);
-    
+
     const slider = d3.select("#taxonomic-slider")
         .attr("min", 1)
         .attr("max", Object.keys(levelNames).length)
-        .property("value", initialDepth); 
-    
+        .property("value", initialDepth);
+
     slider.on("input", function() {
         const newDepth = +this.value;
-        
-        // Update the vizualisation
         currentDepthDisplay.text(levelNames[newDepth]);
         if (!vizRoot) return;
-        
-        // Total expansion to have correct labelNode and linkNode
-        vizRoot.each(d => { 
-            if (d._children) { 
-                d.children = d._children; 
-                d._children = null; 
-            } 
+
+        vizRoot.each(d => {
+            if (d._children) {
+                d.children = d._children;
+                d._children = null;
+            }
         });
-        
-        collapseBelowDepth(vizRoot, newDepth); 
-        ctx.COLLAPSE_DEPTH = newDepth; 
+
+        collapseBelowDepth(vizRoot, newDepth);
+        ctx.COLLAPSE_DEPTH = newDepth;
         update(vizRoot);
     });
 }
 
 /* ---------------- INITIALIZE ---------------- */
+async function createTaxonomicTree() {
 
-function createTaxonomicTree() {
     setupTaxonomicSlider(levelNames, ctx.COLLAPSE_DEPTH);
 
     const containerWidth = document.getElementById('taxo-container').clientWidth;
-    console.log(containerWidth)
-
-    const numLevels = 7
-    const step = containerWidth / ((numLevels + 2 ) *2); // Equal spacing and margin for labels 
+    const numLevels = 7;
+    const step = containerWidth / ((numLevels + 2) * 2);
     for (let i = 0; i <= numLevels; i++) {
         levelRadius[i] = i * step;
     }
@@ -2354,29 +2384,21 @@ function createTaxonomicTree() {
 
     vizChart = svg.append("g")
         .attr("class", "tree-container")
-        .attr("transform", `translate(${containerWidth/2}, ${containerWidth/2})`)
+        .attr("transform", `translate(${containerWidth/2}, ${containerWidth/2})`);
 
     vizChart.append("g").attr("class", "link-extensions");
     vizChart.append("g").attr("class", "links");
     vizChart.append("g").attr("class", "nodes");
     vizChart.append("g").attr("class", "labels");
-    
 
     if (ctx.taxonomicData) {
         dataCache = ctx.taxonomicData;
         try {
-            createTreemap(ctx.taxonomicData);
+            await createTreemap(ctx.taxonomicData);
         } catch (error) {
             console.error("Error with taxonomic tree", error);
         }
     } else {
         console.log("No taxonomic data");
     }
-
 }
-
-
-/*/-------------END TAXONOMIC TREE--------------/*/
-
-
-
