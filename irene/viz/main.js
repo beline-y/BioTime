@@ -487,7 +487,6 @@ function updatePoints() {
       return `translate(${p[0]}, ${p[1]})`;
     });
 
-  // --- UPDATE LEGEND ---
   updateLegend(minDuration, maxDuration);
 }
 
@@ -503,7 +502,24 @@ function updateLegend(minVal, maxVal) {
         <span class="legend-min"></span>
         <span class="legend-max"></span>
       </div>
+
+      <div class="legend-title">Studies</div>
+      <div class="legend-items">
+        <div class="legend-item" id="legend-available">
+          <svg viewBox="-8 -8 16 16" aria-hidden="true"><path></path></svg>
+          <span>Details available</span>
+        </div>
+        <div class="legend-item" id="legend-unavailable">
+          <svg viewBox="-8 -8 16 16" aria-hidden="true"><path></path></svg>
+          <span>Details unavailable</span>
+        </div>
+      </div>
     `);
+    const circlePath = d3.symbol().type(d3.symbolCircle).size(70)();
+    const crossPath  = d3.symbol().type(d3.symbolCross).size(70)();
+
+    legend.select("#legend-available path").attr("d", circlePath);
+    legend.select("#legend-unavailable path").attr("d", crossPath);
   }
 
   legend.select(".legend-min").text(minVal);
@@ -1404,7 +1420,7 @@ function initPage3() {
         .attr("width", width)
         .attr("height", height)
         .attr("class", "map-svg-p3")
-        .style("background", "#030924") // Couleur fixe pour éviter les dégradés qui bougent
+        .style("background", "#29407b") // Couleur fixe pour éviter les dégradés qui bougent
         .style("border-radius", "18px");
 
     const gMain = ctx.svgDetail.append("g").attr("id", "zoom-group");
@@ -2239,4 +2255,5 @@ function createTaxonomicTree() {
 
 
 /*/-------------END TAXONOMIC TREE--------------/*/
+
 
