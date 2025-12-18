@@ -1203,7 +1203,7 @@ function createStudyTimeline(meta) {
   const width  = Math.floor((nodeEl.getBoundingClientRect().width));
   const height = 360;
 
-  const margin = { top: 28, right: 1, bottom: 26, left: 4 };
+  const margin = { top: 28, right: 1, bottom: 26, left: 40 };
 
   const svg = host.append("svg")
     .attr("width", width)
@@ -1334,27 +1334,6 @@ function drawStudyPageMap() {
         .attr("stroke", "#aaa")
         .attr("stroke-width", 0.5);
 
-    // Dessin des points
-    ctx.gPoints3 = g.append("g");
-    
-    const minDuration = d3.min(ctx.studies, d => d.duration);
-    const maxDuration = d3.max(ctx.studies, d => d.duration);
-    const colorScale = d3.scaleLinear().domain([minDuration, maxDuration]).range(["lightblue", "darkblue"]);
-
-    ctx.gPoints3.selectAll("circle")
-        .data(ctx.studies)
-        .enter()
-        .append("circle")
-        .attr("class", "study-dot-p3")
-        .attr("cx", d => ctx.projection3([d.lon, d.lat])[0])
-        .attr("cy", d => ctx.projection3([d.lon, d.lat])[1])
-        .attr("r", 3)
-        .attr("fill", d => colorScale(d.duration))
-        .attr("stroke", "#333")
-        .attr("stroke-width", 0.2)
-        .attr("id", d => "dot-" + d.study_id);
-}
-
 function populateStudySelector() {
     const selector = d3.select("#study-selector");
     
@@ -1422,7 +1401,7 @@ function initPage3() {
         .attr("width", width)
         .attr("height", height)
         .attr("class", "map-svg-p3")
-        .style("background", "#29407b") // Couleur fixe pour éviter les dégradés qui bougent
+        .style("background", "#6a7279ff")
         .style("border-radius", "18px");
 
     const gMain = ctx.svgDetail.append("g").attr("id", "zoom-group");
@@ -1447,7 +1426,7 @@ function initPage3() {
         gMain.attr("transform", event.transform);
         const k = event.transform.k;
         updateDetailedPointsPosition(k);
-        ctx.gDetail.selectAll("path").attr("stroke-width", 0.5 / k);
+        ctx.gDetail.selectAll("path").attr("stroke-width", 0.7 / k);
       });
 
     ctx.svgDetail.call(ctx.zoomDetail);
@@ -1634,7 +1613,7 @@ function renderStudyYear(measurements, selectedYear) {
     .attr("cy", d => ctx.projectionDetail([d.LONGITUDE, d.LATITUDE])[1])
     .attr("fill", "none")
     .attr("stroke", d => colorScaleDetail(d.ABUNDANCE))
-    .attr("stroke-width", 0.5 / k)
+    .attr("stroke-width", 0.7 / k)
     .attr("r", 2 / Math.sqrt(k))
     .on("mouseover", function(event, d) {
         let dateLabel = d.YEAR;
@@ -2403,5 +2382,6 @@ async function createTaxonomicTree() {
         console.log("No taxonomic data");
     }
 }
+
 
 
