@@ -2332,6 +2332,7 @@ function click(_, d) {
             <p>No study IDs found.</p>
         `);
     }
+    highlightPath(d);
 
     update(d);
 }
@@ -2402,4 +2403,5 @@ async function createTaxonomicTree() {
         console.log("No taxonomic data");
     }
 }
+
 
