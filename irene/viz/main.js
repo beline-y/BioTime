@@ -1333,7 +1333,7 @@ function drawStudyPageMap() {
         .attr("fill", "#e0dbe7ff") // Même couleur que page 1
         .attr("stroke", "#aaa")
         .attr("stroke-width", 0.5);
-
+                                }
 function populateStudySelector() {
     const selector = d3.select("#study-selector");
     
@@ -2382,6 +2382,7 @@ async function createTaxonomicTree() {
         console.log("No taxonomic data");
     }
 }
+
 
 
 
